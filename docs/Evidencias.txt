@@ -1,0 +1,64 @@
+PS C:\users\josuemr\Documents\TCC-Typst> get-item .\typst-x86_64-pc-windows-msvc.zip
+
+
+    Diretório: C:\users\josuemr\Documents\TCC-Typst
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        20/10/2026     21:37       22463684 typst-x86_64-pc-windows-msvc.zip
+
+
+PS C:\users\josuemr\Documents\TCC-Typst> get-item .\ferramentas\typst.exe
+
+
+    Diretório: C:\users\josuemr\Documents\TCC-Typst\ferramentas
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        17/07/2026     08:22       52487680 typst.exe
+
+
+PS C:\users\josuemr\Documents\TCC-Typst>
+PS C:\users\josuemr\Documents\TCC-Typst> .\ferramentas\typst.exe --help
+Typst 0.15.1 (9dfd3a08)
+
+Usage: typst.exe [OPTIONS] <COMMAND>
+
+Commands:
+  compile      Compiles an input file into a supported output format [aliases:
+               c]
+  watch        Watches an input file and recompiles on changes [aliases: w]
+  init         Initializes a new project from a template
+  eval         Evaluates a piece of Typst code, optionally in the context of a
+               document
+  fonts        Lists all discovered fonts in system and custom font paths
+  update       Self update the Typst CLI
+  completions  Generates shell completion scripts
+  info         Displays debugging information about Typst
+  help         Print this message or the help of the given subcommand(s)
+
+Options:
+      --color <COLOR>  Whether to use color. When set to `auto` if the terminal
+                       to supports it [default: auto] [possible values: auto,
+                       always, never]
+      --cert <CERT>    Path to a custom CA certificate to use when making
+                       network requests [env: TYPST_CERT=]
+  -h, --help           Print help
+  -V, --version        Print version
+
+Resources:
+  Tutorial:                 https://typst.app/docs/tutorial/
+  Reference documentation:  https://typst.app/docs/reference/
+  Templates & Packages:     https://typst.app/universe/
+  Forum for questions:      https://forum.typst.app/
+PS C:\users\josuemr\Documents\TCC-Typst> .\ferramentas\typst.exe --version
+typst 0.15.1 (9dfd3a08)
+PS C:\users\josuemr\Documents\TCC-Typst> .\ferramentas\typst.exe compile .\grupos\Grupo-01\teste.typ .\grupos\Grupo-01\saida\teste.pdf
+
+o PDF abre sem aviso de corrupção; (passou)
+o título e os dois parágrafos aparecem;(
+os acentos estão corretos;
+o arquivo foi criado na pasta saida;
+a saída do terminal não contém erro de compilação.

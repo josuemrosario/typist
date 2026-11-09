@@ -1,0 +1,1 @@
+Coloque aqui imagens exclusivas do Grupo 01. Uma imagem só aparece no PDF se um arquivo .typ fizer referência explícita a ela.
