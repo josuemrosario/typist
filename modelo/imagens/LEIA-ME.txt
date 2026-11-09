@@ -1,0 +1,21 @@
+Coloque nesta pasta as imagens usadas no trabalho:
+fotografias, desenhos, gráficos, esquemas, mapas etc.
+
+Formatos recomendados: PNG, JPG ou SVG.
+
+Para inserir uma figura no texto, use o comando abaixo no
+arquivo de conteúdo:
+
+  #figura(
+    "imagens/nome-da-imagem.png",
+    [Legenda da figura],
+    fonte: [Elaborada pelos autores.],
+  )
+
+Use sempre barra normal (/) no caminho, nunca barra invertida (\).
+
+A legenda é colocada acima da imagem e a fonte abaixo, ambas em
+fonte 10, conforme a seção 2.11 do manual.
+
+O caminho "imagens/..." é sempre contado a partir da pasta do
+grupo, mesmo que o comando esteja dentro de "02-textuais".

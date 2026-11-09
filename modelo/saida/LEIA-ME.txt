@@ -1,0 +1,14 @@
+Esta pasta recebe os PDFs gerados pelo arquivo "gerar-pdf.bat".
+
+Cada compilação cria uma versão nova, por exemplo:
+
+  TCC-grupo01-v001.pdf
+  TCC-grupo01-v002.pdf
+  TCC-grupo01-v003.pdf
+
+Não apague as versões anteriores: elas são o histórico de
+entregas do grupo. O número da versão é calculado a partir dos
+PDFs que já existem nesta pasta.
+
+O arquivo ".gerar-pdf.lock" existe apenas enquanto a compilação
+está em andamento.

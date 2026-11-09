@@ -1,0 +1,11 @@
+Esta pasta é opcional. Use-a para dados auxiliares do trabalho,
+como planilhas, arquivos CSV, medições ou textos de apoio.
+
+Os arquivos desta pasta não entram no PDF automaticamente.
+Para usá-los no texto, importe ou leia o arquivo no local
+adequado, por exemplo:
+
+  #import "../dados/medicoes.typ": medicoes
+
+Mantenha os dados organizados e com nomes sem espaços e sem
+acentos.
