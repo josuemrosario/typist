@@ -53,6 +53,7 @@ Ao avaliar requisitos, resolver dúvidas ou tomar decisões, usar esta prioridad
    - NBR 6023:2025 — Referências;
    - NBR 10520:2023 — Citações;
    - NBR 6024:2012 — Numeração progressiva das seções;
+   - NBR 6027:2012 — Sumário;
    - NBR 6028:2021 — Resumo, resenha e recensão;
    - NBR 6034:2004 — Índice;
    - NBR 15287:2025 — Projeto de pesquisa.
@@ -81,7 +82,7 @@ Antes de criar, alterar ou validar qualquer parte do template, consultar o manua
 | Estrutura do TCC | Manual, seções 5.1 a 5.4 (pp. 31-49); NBR 14724:2024 |
 | Capa, folha de rosto e folha de aprovação | Manual, seções 5.2.1, 5.2.3 e 5.2.5 (pp. 32-39) |
 | Resumo e abstract | Manual, seções 5.2.9 e 5.2.10 (pp. 41-42); NBR 6028:2021 |
-| Sumário | Manual, seção 5.2.15 (pp. 44-45); NBR 6027 (ausente em `docs/`) |
+| Sumário | Manual, seção 5.2.15 (pp. 44-45); NBR 6027:2012 |
 | Comparação monografia × artigo | Manual, Apêndice A (pp. 60-62) |
 | Artigo científico (somente se houver mudança formal de escopo) | Manual, capítulo 6 (pp. 50-55); NBR 6022 (ausente em `docs/`) |
 
@@ -92,7 +93,7 @@ Regras de consulta:
 - Se um documento não puder ser lido, informar a limitação e o impacto.
 - `docs/` é fonte de consulta: não alterar, mover nem renomear sem autorização.
 - Figuras do manual (capa, folha de rosto, folha de aprovação, sumário, abertura de artigo) são imagens. A comparação visual com o resultado do Typst é obrigatória e ainda está pendente.
-- Documentos ausentes conhecidos: NBR 6027, NBR 6022, NBR 12225 e normas IBGE de apresentação tabular. Não substituí-los por suposições.
+- Documentos ausentes conhecidos: NBR 6022, NBR 12225 e normas IBGE de apresentação tabular. Não substituí-los por suposições.
 
 ### 3.1 Resumo de consulta (não substitui o manual)
 
@@ -351,7 +352,7 @@ Não executar antes da confirmação.
 Levantamento de 09/11/2026, após a reinicialização do projeto:
 
 - **Definições anteriores removidas:** documento mestre, plano de estudo, pasta `analises/` e o `AGENTS.md` anterior.
-- **Documentação disponível:** manual SENAI-SP 2025 e sete normas ABNT em `docs/`.
+- **Documentação disponível:** manual SENAI-SP 2025 e oito normas ABNT em `docs/` (a NBR 6027 foi acrescentada em 12/11/2026).
 - **Compilador:** `ferramentas/typst.exe`, versão 0.15.1, funcional e fora do `PATH`.
 - **Template:** `modelo/` vazio; `administracao/verificar-ambiente.bat` espera `modelo\tcc.typ`.
 - **Grupos:** `Grupo-01` e `Grupo-02`, com conteúdo de teste.
