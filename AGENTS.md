@@ -2,7 +2,7 @@
 
 **Projeto:** ambiente de compilação em Typst para TCCs do ensino médio técnico do SENAI-SP
 **Público:** alunos do ensino médio técnico, organizados em grupos
-**Atualizado em:** 09/11/2026
+**Atualizado em:** 12/11/2026
 **Natureza:** instruções permanentes para agentes e futuras sessões
 
 > Este arquivo não substitui o Manual SENAI-SP nem as normas ABNT. Ele define como os agentes devem consultar a documentação, trabalhar na estrutura do projeto, compilar, testar, registrar e se comunicar. Em caso de divergência entre este arquivo e o manual, prevalece o manual.
@@ -25,7 +25,7 @@ O ambiente deve oferecer:
 
 **Escopo vigente:** TCC, tratado conforme o capítulo 5 do Manual SENAI-SP 2025 (trabalhos acadêmicos: TCC/monografia), com apoio do Apêndice A para as regras de formatação. O capítulo 6 (artigo científico) não deve ser aplicado por padrão. Se a coordenação do curso determinar que o TCC deve seguir o formato de artigo, isso precisa ser registrado como nova decisão antes de alterar o template, porque as regras mudam (fonte, espaçamento, estrutura, paginação e sumário).
 
-**O template institucional ainda não existe.** A pasta `modelo/` está vazia. Nenhum PDF, protótipo ou arquivo de teste existente deve ser tratado como template aprovado.
+**O template institucional existe em `modelo/`, mas não está validado.** Ele compila sem avisos e passou por medições no PDF v004, porém a comparação visual com todas as figuras do manual e o teste em outra máquina continuam pendentes (ver `docs/PENDENCIAS.md`). Nenhum PDF, protótipo ou arquivo de teste deve ser tratado como template aprovado enquanto essas pendências existirem.
 
 **Fora de escopo neste momento:**
 
@@ -35,7 +35,7 @@ O ambiente deve oferecer:
 - criar automação de produção (CI, servidor, banco de dados) antes de validar o template;
 - migrar todos os grupos antes de o template ser validado.
 
-**Meta operacional:** o professor cria um grupo por vez a partir da pasta-modelo. O repositório atual contém apenas `Grupo-01` e `Grupo-02`, ambos com conteúdo de teste; não presumir que representam grupos reais nem que a estrutura está validada.
+**Meta operacional:** o professor cria um grupo por vez a partir da pasta-modelo. O repositório atual tem `Grupo-Teste-Geral` (cópia atual do modelo) e `Grupo-01`/`Grupo-02` (grupos de teste anteriores ao template, com inconsistências herdadas). Nenhum deles representa grupo real; não presumir que a estrutura está validada.
 
 ---
 
@@ -50,12 +50,14 @@ Ao avaliar requisitos, resolver dúvidas ou tomar decisões, usar esta prioridad
 2. **Normas ABNT disponíveis em `docs/`**
    Complementam o manual, mas não substituem as exigências institucionais:
    - NBR 14724:2024 — Trabalhos acadêmicos;
+   - NBR 6022:2018 — Artigo em publicação periódica técnica e/ou científica (só para eventual mudança de escopo; ver seção 1);
    - NBR 6023:2025 — Referências;
    - NBR 10520:2023 — Citações;
    - NBR 6024:2012 — Numeração progressiva das seções;
    - NBR 6027:2012 — Sumário;
    - NBR 6028:2021 — Resumo, resenha e recensão;
    - NBR 6034:2004 — Índice;
+   - NBR 12225:2023 — Lombada (só se a instituição exigir encadernação com lombada);
    - NBR 15287:2025 — Projeto de pesquisa.
 
 3. **Este `AGENTS.md` e as decisões registradas no projeto**
@@ -64,7 +66,12 @@ Ao avaliar requisitos, resolver dúvidas ou tomar decisões, usar esta prioridad
 4. **Código, scripts, PDFs e demais artefatos**
    Mostram o estado real do projeto, mas não provam conformidade normativa.
 
-**Situação documental atual:** não existe documento mestre nem plano de estudo. Eles foram removidos na reinicialização do projeto em 09/11/2026. Até que um registro de decisões seja criado com autorização, as decisões devem ser descritas na resposta ao professor e mantidas como pendência explícita. Não recriar documentos mestres por conta própria.
+**Situação documental atual:** o documento mestre e o plano de estudo foram removidos na reinicialização de 09/11/2026 e não devem ser recriados. Em 12/11/2026, por autorização do professor, foram criados dois registros:
+
+- `docs/DECISOES.md` — decisões do projeto, com data, base normativa (documento, seção e página), evidência e status;
+- `docs/PENDENCIAS.md` — o que ainda falta fazer, com prioridade, responsável e status.
+
+Esses dois arquivos são o registro oficial do projeto. Consultá-los antes de propor mudanças. Alterá-los exige autorização (seção 9).
 
 **Regra obrigatória:** não substituir exigências do SENAI-SP por regras genéricas da ABNT. Um modelo chamado “ABNT” não é prova de conformidade institucional.
 
@@ -84,16 +91,17 @@ Antes de criar, alterar ou validar qualquer parte do template, consultar o manua
 | Resumo e abstract | Manual, seções 5.2.9 e 5.2.10 (pp. 41-42); NBR 6028:2021 |
 | Sumário | Manual, seção 5.2.15 (pp. 44-45); NBR 6027:2012 |
 | Comparação monografia × artigo | Manual, Apêndice A (pp. 60-62) |
-| Artigo científico (somente se houver mudança formal de escopo) | Manual, capítulo 6 (pp. 50-55); NBR 6022 (ausente em `docs/`) |
+| Artigo científico (somente se houver mudança formal de escopo) | Manual, capítulo 6 (pp. 50-55); NBR 6022:2018 |
+| Lombada (somente se a instituição exigir encadernação com lombada) | NBR 12225:2023 |
 
 Regras de consulta:
 
 - Citar documento, seção e página ao fundamentar uma conclusão normativa.
 - Não inventar regra para preencher lacuna. Registrar como pendência.
 - Se um documento não puder ser lido, informar a limitação e o impacto.
-- `docs/` é fonte de consulta: não alterar, mover nem renomear sem autorização.
+- `docs/` é fonte de consulta: não alterar, mover nem renomear sem autorização. Os PDFs são as fontes normativas; `docs/DECISOES.md` e `docs/PENDENCIAS.md` são registros do projeto, não fontes normativas.
 - Figuras do manual (capa, folha de rosto, folha de aprovação, sumário, abertura de artigo) são imagens. A comparação visual com o resultado do Typst é obrigatória e ainda está pendente.
-- Documentos ausentes conhecidos: NBR 6022, NBR 12225 e normas IBGE de apresentação tabular. Não substituí-los por suposições.
+- Documentos ausentes conhecidos: apenas as normas IBGE de apresentação tabular. Não substituí-las por suposições.
 
 ### 3.1 Resumo de consulta (não substitui o manual)
 
@@ -123,21 +131,26 @@ Se qualquer item desta tabela divergir do manual, o manual prevalece. A tabela s
 ```
 typist/
 ├── administracao/     verificar-ambiente.bat (diagnóstico; não compila)
-├── docs/              manual SENAI-SP e normas ABNT (somente consulta)
-├── ferramentas/       typst.exe (compilador compartilhado)
-├── modelo/            pasta-modelo do TCC (VAZIA — template ainda não criado)
+├── docs/              manual SENAI-SP, normas ABNT e registros do projeto
+│   ├── DECISOES.md    registro de decisões (D-01 a D-14)
+│   └── PENDENCIAS.md  o que ainda falta fazer (P-01 a P-18)
+├── ferramentas/       typst.exe e fontes/ (Arial compartilhada)
+├── modelo/            pasta-modelo do TCC
+│   ├── main.typ       ponto de entrada
+│   ├── tcc.typ        formatação centralizada
+│   ├── dados.typ      identificação do grupo
+│   ├── gerar-pdf.bat  compila e versiona o PDF
+│   ├── referencias.bib
+│   ├── 01-pre-textuais/
+│   ├── 02-textuais/
+│   ├── 03-pos-textuais/
+│   ├── dados/
+│   ├── imagens/
+│   └── saida/
 ├── grupos/
-│   ├── Grupo-01/      grupo de teste
-│   │   ├── main.typ
-│   │   ├── gerar-pdf.bat
-│   │   ├── referencias.bib
-│   │   ├── 01-pre-textuais/
-│   │   ├── 02-textuais/
-│   │   ├── 03-pos-textuais/
-│   │   ├── imagens/
-│   │   ├── dados/
-│   │   └── saida/     PDFs gerados
-│   └── Grupo-02/      grupo de teste
+│   ├── Grupo-01/      grupo de teste anterior ao template atual
+│   ├── Grupo-02/      grupo de teste anterior ao template atual
+│   └── Grupo-Teste-Geral/  cópia atual do modelo, com PDFs v001 a v004
 └── AGENTS.md
 ```
 
@@ -157,7 +170,7 @@ typist/
 - Regras de formatação pertencem ao template (capa, margens, fonte, espaçamento, títulos, paginação, sumário, citações, referências, figuras e tabelas).
 - Arquivos de conteúdo devem conter apenas texto do trabalho e marcação simples de seções.
 - Não espalhar `#set` / `#show` de formatação pelos arquivos dos grupos.
-- Enquanto o template não existir, não inventar um “padrão” por grupo e não declarar que um grupo está formatado corretamente.
+- O template existe em `modelo/tcc.typ`; não criar variações de formatação por grupo. Ajuste de formatação se faz no modelo e se propaga por nova cópia, não por edição local.
 
 ### 4.4 Fluxo do semestre
 
@@ -209,9 +222,9 @@ Regras:
 - Arial é fonte proprietária: embutir subconjunto no PDF é permitido pelo próprio arquivo (`fsType` 0x0008), mas a redistribuição dos arquivos de fonte depende de licenciamento. O professor assumiu a responsabilidade pela licença em 12/11/2026.
 - Não mover nem renomear `ferramentas/fontes/`; os grupos dependem dessa pasta compartilhada.
 
-### 5.4 Template (a criar)
+### 5.4 Template
 
-O template em `modelo/` deve centralizar, no mínimo:
+O template em `modelo/` centraliza:
 
 - configuração de página, margens, fonte, tamanhos, espaçamento, alinhamento e recuo;
 - títulos numerados conforme NBR 6024 e seções primárias em nova página;
@@ -221,7 +234,7 @@ O template em `modelo/` deve centralizar, no mínimo:
 - legendas e fontes de ilustrações e tabelas;
 - campos de identificação que o grupo preenche sem tocar em formatação.
 
-O template só pode ser considerado pronto após validação documentada contra o manual e comparação visual com suas figuras. Não criar “template definitivo” sem essa validação.
+O template ainda não pode ser considerado pronto: falta validação documentada contra o manual e comparação visual com suas figuras (P-01) e teste em outra máquina (P-10). Não criar “template definitivo” sem essa validação.
 
 ---
 
@@ -321,7 +334,7 @@ Pedir autorização explícita ao professor antes de:
 - limpar `saida/` ou remover PDFs;
 - alterar `docs/`;
 - alterar permissões, configurações ou histórico do Git;
-- criar documento de registro de decisões.
+- alterar `docs/DECISOES.md` (registro de decisões) ou `docs/PENDENCIAS.md` (lista de pendências), inclusive para marcar um item como concluído.
 
 Ao pedir autorização, explicar:
 
@@ -351,27 +364,28 @@ Não executar antes da confirmação.
 
 ## 11. Estado atual conhecido (verificar antes de agir)
 
-Levantamento de 09/11/2026, após a reinicialização do projeto:
+Levantamento de 12/11/2026, que substitui o de 09/11/2026. Conferir `docs/PENDENCIAS.md` antes de agir.
 
-- **Definições anteriores removidas:** documento mestre, plano de estudo, pasta `analises/` e o `AGENTS.md` anterior.
-- **Documentação disponível:** manual SENAI-SP 2025 e oito normas ABNT em `docs/` (a NBR 6027 foi acrescentada em 12/11/2026).
+- **Definições anteriores removidas:** documento mestre, plano de estudo, pasta `analises/` e o `AGENTS.md` anterior. Não recriar.
+- **Registros do projeto:** `docs/DECISOES.md` (D-01 a D-14) e `docs/PENDENCIAS.md` (P-01 a P-18), criados em 12/11/2026.
+- **Documentação disponível:** manual SENAI-SP 2025 e dez normas ABNT em `docs/` — NBR 14724:2024, NBR 6022:2018, NBR 6023:2025, NBR 10520:2023, NBR 6024:2012, NBR 6027:2012, NBR 6028:2021, NBR 6034:2004, NBR 12225:2023 e NBR 15287:2025. Ausentes: apenas as normas IBGE de apresentação tabular.
 - **Compilador:** `ferramentas/typst.exe`, versão 0.15.1, funcional e fora do `PATH`.
-- **Template:** `modelo/` vazio; `administracao/verificar-ambiente.bat` espera `modelo\tcc.typ`.
-- **Grupos:** `Grupo-01` e `Grupo-02`, com conteúdo de teste.
-- **PDFs:** artefatos de teste em `grupos/*/saida/`; não são referência normativa.
-- **Inconsistências herdadas:**
+- **Fontes:** `ferramentas/fontes/` com `arial.ttf`, `arialbd.ttf`, `ariali.ttf` e `arialbi.ttf` (3.494.124 bytes no total). O `gerar-pdf.bat` compila com `--font-path` e `--ignore-system-fonts` e aborta se a fonte faltar ou estiver inválida.
+- **Template:** `modelo/` completo (pré-textuais, textuais, pós-textuais, `tcc.typ`, `dados.typ`, `gerar-pdf.bat`, `LEIA-ME.txt`), compilando sem avisos; medidas conferidas no PDF v004.
+- **Grupos:** `Grupo-Teste-Geral` é a cópia atual do modelo, com PDFs v001 a v004 versionados. `Grupo-01` e `Grupo-02` são grupos de teste anteriores ao template atual, com inconsistências herdadas:
   - `Grupo-01/03-pos-textuais/referencias.typ` contém texto do Grupo 02;
   - `Grupo-02/saida/TCC-Grupo-01-v001.pdf` tem nome de Grupo 01 e conteúdo de Grupo 02;
-  - `main.typ` não usa `#bibliography`, então `referencias.bib` não é processado;
-  - `gerar-pdf.bat` tem nome de grupo fixo.
-- **Não testado:** template, formatação normativa, fontes em outras máquinas, dois grupos reais, referências automatizadas.
-- **Pendências críticas:** criar o template; escrever a instrução de cópia da pasta-modelo (inclui a edição manual das 3 linhas do `gerar-pdf.bat`); comparar visualmente com as figuras do manual. A portabilidade da Arial foi resolvida em 12/11/2026 com `ferramentas/fontes/` e `--font-path`.
+  - o `main.typ` deles não usa `#bibliography`, então `referencias.bib` não é processado.
+- **Diagnóstico:** `administracao/verificar-ambiente.bat` ainda aponta para `Grupo-01` e não verifica `ferramentas/fontes` (P-12).
+- **Não testado:** comparação visual completa com as figuras do manual (P-01); compilação em máquina de aluno (P-10); rede/UNC (P-11); dois grupos reais independentes (P-16); tipos de referência além de livro e página web (P-06).
+- **Pendências críticas:** P-01, P-03, P-10, P-15 e P-16, detalhadas em `docs/PENDENCIAS.md`.
 
 ---
 
 ## 12. Checklist antes de concluir uma tarefa
 
 - [ ] Consultei o manual e a norma aplicável à parte afetada?
+- [ ] Consultei `docs/DECISOES.md` e `docs/PENDENCIAS.md` antes de propor mudança?
 - [ ] Respeitei a hierarquia das fontes (SENAI-SP > ABNT > AGENTS.md > artefatos)?
 - [ ] Alterei apenas o que foi autorizado?
 - [ ] Preservei `docs/`, o template, os PDFs e o conteúdo dos grupos?
