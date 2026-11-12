@@ -36,6 +36,9 @@
   show figure.where(kind: image): set figure.caption(position: top)
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: "quadro"): set figure.caption(position: top)
+  // Notas de rodapé em espaço simples (manual, 2.3); o tamanho 10 é
+  // aplicado pelo helper "nota".
+  show footnote.entry: set par(leading: 0.43em, first-line-indent: 0pt)
 
   show heading: it => {
     let num = if it.numbering != none {
@@ -240,11 +243,16 @@
   above: 1em,
   below: 1em,
   {
-    set par(justify: false, leading: 0.43em, first-line-indent: 0pt)
+    set par(justify: true, leading: 0.43em, first-line-indent: 0pt)
     set text(size: 10pt)
     corpo
   },
 )
+
+// ---------- Nota de rodapé (manual, 2.1 e 2.3) ----------
+// A nota é impressa em fonte 10 e com espaçamento simples.
+// Use "#nota[texto]" no lugar de "#footnote[texto]".
+#let nota(corpo) = footnote(text(size: 10pt, corpo))
 
 // ---------- Figura (manual, 2.11) ----------
 // Legenda acima (tipo, número, travessão e título) e fonte abaixo,

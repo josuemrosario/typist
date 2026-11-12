@@ -127,6 +127,10 @@ Para inserir uma tabela ou um quadro com legenda e fonte, use:
 Para um quadro, acrescente "tipo: [Quadro]" ao final. O manual
 trata figuras, tabelas e quadros em seções diferentes (2.11 e 2.12).
 
+Na tabela, não use traços verticais nas laterais esquerda e direita
+(manual, 2.12.1). O quadro, ao contrário, é fechado e pode ter todas
+as bordas.
+
 ----------------------------------------------------------------
 6. CITAÇÕES E REFERÊNCIAS
 ----------------------------------------------------------------
@@ -144,6 +148,15 @@ Para citações diretas com mais de três linhas, use:
   #citacao-longa[
     Texto da citação...
   ]
+
+Para inserir uma nota de rodapé, use "#nota" no lugar de
+"#footnote":
+
+  Este é o texto.#nota[Conteúdo da nota de rodapé.]
+
+O template imprime a nota em fonte 10 e com espaçamento simples,
+como exige o manual (seções 2.1 e 2.3). Se você usar "#footnote"
+diretamente, a nota sairá com tamanho ligeiramente diferente.
 
 ----------------------------------------------------------------
 7. GERAR O PDF

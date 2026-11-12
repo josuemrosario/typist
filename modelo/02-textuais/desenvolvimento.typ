@@ -1,4 +1,4 @@
-#import "../tcc.typ": citacao-longa, figura, tabela
+#import "../tcc.typ": citacao-longa, figura, tabela, nota
 
 = Desenvolvimento
 
