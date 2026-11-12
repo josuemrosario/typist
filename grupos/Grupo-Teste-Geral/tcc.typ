@@ -202,14 +202,22 @@
   ]
 }
 
-// ---------- Sumário (manual, 5.2.15) ----------
+// ---------- Sumário (manual, 5.2.15; NBR 6027) ----------
+// O sumário repete o destaque usado no texto (manual, 2.4; NBR 6027, 6.2):
+// nível 1 maiúsculas e negrito, 2 negrito, 3 negrito e itálico,
+// 4 itálico e 5 sublinhado.
 #let sumario() = {
   titulo-sem-numero([SUMÁRIO])
   v(1.5em)
   show outline.entry: it => {
     let corpo = if it.level == 1 { upper(it.body()) } else { it.body() }
-    let peso = if it.level <= 2 { "bold" } else { "regular" }
-    let estilo = if it.level == 3 { "italic" } else { "normal" }
+    let peso = if it.level <= 3 { "bold" } else { "regular" }
+    let estilo = if it.level == 3 or it.level == 4 { "italic" } else { "normal" }
+    // Nível 5 recebe sublinhado, como no texto.
+    let destaque(conteudo) = {
+      let conteudo = text(weight: peso, style: estilo, conteudo)
+      if it.level == 5 { underline(conteudo) } else { conteudo }
+    }
     link(
       it.element.location(),
       {
@@ -218,8 +226,8 @@
           columns: (4em, 1fr, auto),
           column-gutter: 0.5em,
           align: (left, left, right),
-          text(weight: peso, style: estilo, it.prefix()),
-          text(weight: peso, style: estilo, corpo) + h(0.3em) + box(width: 1fr, it.fill),
+          destaque(it.prefix()),
+          destaque(corpo) + h(0.3em) + box(width: 1fr, it.fill),
           text(weight: peso, style: estilo, it.page()),
         )
       },
