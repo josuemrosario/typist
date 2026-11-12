@@ -47,6 +47,22 @@ if errorlevel 1 (
     exit /b 1
 )
 
+rem A fonte do trabalho fica em ferramentas\fontes. Sem ela o Typst
+rem compila com outra fonte e ainda assim informa sucesso.
+set "FONTES_DIR=%RAIZ_DIR%\ferramentas\fontes"
+if not exist "%FONTES_DIR%\arial.ttf" (
+    echo ERRO: a fonte Arial nao foi encontrada em "%FONTES_DIR%"
+    echo Verifique se a pasta ferramentas esta na raiz e se os arquivos
+    echo arial.ttf, arialbd.ttf, ariali.ttf e arialbi.ttf estao presentes.
+    exit /b 1
+)
+"%TYPST_EXE%" fonts --font-path "%FONTES_DIR%" --ignore-system-fonts 2>nul | findstr /b /c:"Arial" >nul
+if errorlevel 1 (
+    echo ERRO: o Typst nao conseguiu ler a fonte Arial de "%FONTES_DIR%"
+    echo O PDF sairia com outra fonte. Verifique os arquivos arial*.ttf.
+    exit /b 1
+)
+
 2>nul mkdir "%LOCK_DIR%"
 if errorlevel 1 (
     echo ERRO: outra compilacao pode estar em andamento ou existe um bloqueio antigo:
@@ -78,7 +94,9 @@ set "VERSAO=!VERSAO:~-3!"
 set "ARQUIVO_FINAL=%SAIDA_DIR%\%PREFIXO%!VERSAO!.pdf"
 set "ARQUIVO_TEMP=%SAIDA_DIR%\.__temporario_!RANDOM!_!RANDOM!.pdf"
 
-"%TYPST_EXE%" compile "%ENTRADA%" "%ARQUIVO_TEMP%"
+rem Usa apenas a fonte do projeto, para o PDF sair igual em qualquer
+rem computador (ver a verificacao da Arial acima).
+"%TYPST_EXE%" compile "%ENTRADA%" "%ARQUIVO_TEMP%" --font-path "%FONTES_DIR%" --ignore-system-fonts
 if errorlevel 1 (
     echo ERRO: compilacao falhou. Nenhuma versao final foi criada.
     del "%ARQUIVO_TEMP%" 2>nul

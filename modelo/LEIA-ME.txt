@@ -173,15 +173,39 @@ Cada compilação cria uma versão nova. Os PDFs anteriores não são
 apagados. Se a compilação falhar, nenhuma versão é criada.
 
 ----------------------------------------------------------------
-8. OBSERVAÇÕES IMPORTANTES
+8. FONTE (ARIAL)
+----------------------------------------------------------------
+
+O template usa Arial, como exige o manual (seção 2.1). A fonte não
+precisa estar instalada no computador: os arquivos ficam na pasta
+"ferramentas\fontes" do projeto:
+
+  arial.ttf     Arial normal
+  arialbd.ttf   Arial negrito
+  ariali.ttf    Arial itálico
+  arialbi.ttf   Arial negrito e itálico
+
+O "gerar-pdf.bat" usa essa pasta e ignora as fontes do sistema.
+Assim, todos os grupos geram o PDF com a mesma fonte, em qualquer
+computador.
+
+Se a pasta ou algum arquivo faltar, o "gerar-pdf.bat" para com uma
+mensagem de erro. Antes, o Typst gerava o PDF com outra fonte e
+ainda assim informava sucesso.
+
+A licença de uso dos arquivos de fonte é responsabilidade da
+instituição.
+
+----------------------------------------------------------------
+9. OBSERVAÇÕES IMPORTANTES
 ----------------------------------------------------------------
 
 - Não altere "tcc.typ": ele concentra a formatação exigida pelo
   manual.
 - Não apague PDFs antigos de "saida": eles são o histórico do
   grupo.
-- O computador precisa ter a fonte Arial instalada. O manual
-  exige Arial em todo o trabalho.
+- Não apague nem mova "ferramentas\fontes": sem ela o PDF não é
+  gerado.
 - Se aparecer a mensagem de que o compilador não foi encontrado,
   confira se a pasta do grupo está dentro de "grupos", ao lado
   da pasta "ferramentas".

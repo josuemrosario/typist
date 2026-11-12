@@ -203,9 +203,11 @@ Regras:
 
 ### 5.3 Fontes
 
-- O manual exige Arial no TCC. A máquina atual possui Arial instalada (verificado com `typst fonts`), mas isso não garante disponibilidade em outras máquinas.
-- Arial é fonte proprietária: não redistribuir arquivos de fonte sem verificar licenciamento.
-- A portabilidade de fontes para os computadores dos alunos é pendência e precisa ser testada antes de declarar o ambiente viável.
+- O manual exige Arial no TCC. Os arquivos de fonte ficam em `ferramentas/fontes/` (`arial.ttf`, `arialbd.ttf`, `ariali.ttf` e `arialbi.ttf`) e são usados via `--font-path` com `--ignore-system-fonts`.
+- Com isso o PDF sai com a mesma fonte em qualquer computador, sem depender da Arial instalada no sistema. Verificado em 12/11/2026: compilação sem fontes do sistema gerou PDF com ArialMT, Arial-BoldMT e Arial-BoldItalicMT.
+- O `gerar-pdf.bat` verifica a fonte antes de compilar e aborta quando ela não é encontrada; sem essa verificação o Typst gerava o PDF em Libertinus Serif e ainda informava sucesso.
+- Arial é fonte proprietária: embutir subconjunto no PDF é permitido pelo próprio arquivo (`fsType` 0x0008), mas a redistribuição dos arquivos de fonte depende de licenciamento. O professor assumiu a responsabilidade pela licença em 12/11/2026.
+- Não mover nem renomear `ferramentas/fontes/`; os grupos dependem dessa pasta compartilhada.
 
 ### 5.4 Template (a criar)
 
@@ -363,7 +365,7 @@ Levantamento de 09/11/2026, após a reinicialização do projeto:
   - `main.typ` não usa `#bibliography`, então `referencias.bib` não é processado;
   - `gerar-pdf.bat` tem nome de grupo fixo.
 - **Não testado:** template, formatação normativa, fontes em outras máquinas, dois grupos reais, referências automatizadas.
-- **Pendências críticas:** criar o template; escrever a instrução de cópia da pasta-modelo (inclui a edição manual das 3 linhas do `gerar-pdf.bat`); validar Arial nos computadores dos alunos; comparar visualmente com as figuras do manual.
+- **Pendências críticas:** criar o template; escrever a instrução de cópia da pasta-modelo (inclui a edição manual das 3 linhas do `gerar-pdf.bat`); comparar visualmente com as figuras do manual. A portabilidade da Arial foi resolvida em 12/11/2026 com `ferramentas/fontes/` e `--font-path`.
 
 ---
 
