@@ -1,16 +1,34 @@
 TESTE GERAL DO TYPST — GRUPO-TESTE-GERAL
 
-Este pacote é uma cópia independente do template experimental atual, preenchida com dados fictícios e conteúdo de demonstração. Ele não altera a pasta modelo nem os trabalhos dos grupos existentes.
+Este pacote é uma cópia independente do template atual, preenchida com dados fictícios e conteúdo de demonstração. Ele não altera a pasta modelo nem os trabalhos dos grupos existentes.
 
 COMO USAR
-1. Extraia a pasta Grupo-Teste-Geral para dentro da pasta grupos do projeto Typst.
-2. Confirme que a estrutura fica: typist\grupos\Grupo-Teste-Geral.
-3. Não mova a pasta ferramentas: o BAT procura o compilador dois níveis acima.
-4. Dê duplo clique em gerar-pdf.bat.
-5. O PDF deverá ser criado em saida com o nome TCC-Grupo-Teste-Geral-v001.pdf.
+1. A pasta já está no lugar certo: typist\grupos\Grupo-Teste-Geral.
+2. Não mova a pasta ferramentas: o BAT procura o compilador dois níveis acima.
+3. Dê duplo clique em gerar-pdf.bat.
+4. O PDF será criado em saida com a próxima versão livre, por exemplo TCC-Grupo-Teste-Geral-v003.pdf.
 
 O QUE FOI INCLUÍDO
 Capa, folha de rosto, folha de aprovação, resumo, abstract, sumário, títulos em níveis diferentes, parágrafos, lista, citação indireta, citação longa, duas referências bibliográficas, figura SVG, tabela, quadro, nota de rodapé, expressão matemática e conteúdo em arquivos separados.
 
+PDFs GERADOS
+- TCC-Grupo-Teste-Geral-v001.pdf: versão anterior, compilada em 09/11/2026 com o template daquele momento (nota de rodapé via #footnote).
+- TCC-Grupo-Teste-Geral-v002.pdf: versão atual, compilada em 12/11/2026 com o template corrigido (citação longa justificada e nota de rodapé em 10 pt com espaço simples).
+
+Não sobrescreva esses PDFs. Cada nova compilação gera uma versão seguinte.
+
+REGISTRO DO TESTE
+Data: 12/11/2026
+Ambiente: Windows 10.0.22621; Typst 0.15.1 (9dfd3a08), executado por ferramentas\typst.exe.
+Comando: gerar-pdf.bat, executado dentro desta pasta.
+Resultado observado: código de saída 0; PDF de 12 páginas.
+Conferido no PDF v002: papel A4 (595,28 x 841,89 pt); Arial incorporada; margens esquerda 2,98 cm e direita 2,00 cm; número de página a 1,998 cm do topo e 2,02 cm da direita; entrelinha do corpo entre 20,4 e 20,6 pt; sumário sem número e introdução numerada como 6; figura com legenda e fonte; Tabela 1 e Quadro 1 com numeração independente; citação longa justificada com recuo de 4 cm em fonte 10; nota de rodapé em fonte 10 com espaço simples.
+Status: Aprovado com ressalvas.
+
+RESSALVAS
+- A fonte Arial ainda não foi testada nos computadores dos alunos.
+- NBR 6027, NBR 6022, NBR 12225 e as normas IBGE de apresentação tabular não estão em docs/.
+- No sumário, o manual mostra os títulos de nível 2 em maiúsculas; o template usa negrito com maiúscula inicial. A divergência continua pendente de decisão do professor.
+
 IMPORTANTE
-O pacote usa o template atual sem prometer conformidade normativa. O teste ainda precisa ser compilado no Windows com o Typst do projeto e revisado visualmente. Os dados e as referências são fictícios e servem apenas para demonstração.
+O pacote usa o template atual e não é prova de conformidade normativa. Os dados, as referências e o conteúdo são fictícios e servem apenas para demonstração. Não use este grupo como trabalho real.
