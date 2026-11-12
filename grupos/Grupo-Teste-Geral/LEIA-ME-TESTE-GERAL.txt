@@ -1,0 +1,16 @@
+TESTE GERAL DO TYPST — GRUPO-TESTE-GERAL
+
+Este pacote é uma cópia independente do template experimental atual, preenchida com dados fictícios e conteúdo de demonstração. Ele não altera a pasta modelo nem os trabalhos dos grupos existentes.
+
+COMO USAR
+1. Extraia a pasta Grupo-Teste-Geral para dentro da pasta grupos do projeto Typst.
+2. Confirme que a estrutura fica: typist\grupos\Grupo-Teste-Geral.
+3. Não mova a pasta ferramentas: o BAT procura o compilador dois níveis acima.
+4. Dê duplo clique em gerar-pdf.bat.
+5. O PDF deverá ser criado em saida com o nome TCC-Grupo-Teste-Geral-v001.pdf.
+
+O QUE FOI INCLUÍDO
+Capa, folha de rosto, folha de aprovação, resumo, abstract, sumário, títulos em níveis diferentes, parágrafos, lista, citação indireta, citação longa, duas referências bibliográficas, figura SVG, tabela, quadro, nota de rodapé, expressão matemática e conteúdo em arquivos separados.
+
+IMPORTANTE
+O pacote usa o template atual sem prometer conformidade normativa. O teste ainda precisa ser compilado no Windows com o Typst do projeto e revisado visualmente. Os dados e as referências são fictícios e servem apenas para demonstração.
