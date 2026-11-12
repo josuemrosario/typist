@@ -136,7 +136,7 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 - **Por que importa:** o diagnóstico ainda aponta para `grupos/Grupo-01` e não verifica a pasta `ferramentas/fontes`. Um professor que rode o script pode receber “ambiente ok” sem a fonte que o `gerar-pdf.bat` exige.
 - **O que falta:** atualizar o script para verificar o compilador, a pasta de fontes, o template e um grupo existente; manter o formato de diagnóstico que não compila. Alterar script exige autorização (`AGENTS.md`, seção 9).
 - **Responsável:** equipe técnica, com autorização do professor.
-- **Status:** Aguardando autorização.
+- **Status:** Aguardando decisão (autorização para alterar o script).
 
 ### P-13 — Binário do Typst e fontes dentro do Git
 
