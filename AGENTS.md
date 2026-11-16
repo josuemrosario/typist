@@ -130,16 +130,16 @@ Se qualquer item desta tabela divergir do manual, o manual prevalece. A tabela s
 
 ```
 typist/
-├── administracao/     verificar-ambiente.bat (diagnóstico; não compila)
+├── administracao/     criar-grupo.bat e verificar-ambiente.bat (não compilam)
 ├── docs/              manual SENAI-SP, normas ABNT e registros do projeto
-│   ├── DECISOES.md    registro de decisões (D-01 a D-14)
-│   └── PENDENCIAS.md  o que ainda falta fazer (P-01 a P-18)
-├── ferramentas/       typst.exe e fontes/ (Arial compartilhada)
-├── modelo/            pasta-modelo do TCC
+│   ├── DECISOES.md    registro de decisões (D-01 a D-17)
+│   └── PENDENCIAS.md  o que ainda falta fazer (P-01 a P-19)
+├── ferramentas/       typst.exe, fontes/ (Arial) e template/ (versões)
+│   └── template/      tcc-v001.typ, tcc-v002.typ, ... (versões imutáveis)
+├── modelo/            pasta-modelo do TCC (não contém tcc.typ)
 │   ├── main.typ       ponto de entrada
-│   ├── tcc.typ        formatação centralizada
 │   ├── dados.typ      identificação do grupo
-│   ├── gerar-pdf.bat  compila e versiona o PDF
+│   ├── gerar-pdf.bat  escolhe a versão, compila e versiona o PDF
 │   ├── referencias.bib
 │   ├── 01-pre-textuais/
 │   ├── 02-textuais/
@@ -148,9 +148,7 @@ typist/
 │   ├── imagens/
 │   └── saida/
 ├── grupos/
-│   ├── Grupo-01/      grupo de teste anterior ao template atual
-│   ├── Grupo-02/      grupo de teste anterior ao template atual
-│   └── Grupo-Teste-Geral/  cópia atual do modelo, com PDFs v001 a v004
+│   └── Grupo-Teste-01/  único grupo de teste, criado por criar-grupo.bat
 └── AGENTS.md
 ```
 
@@ -163,23 +161,28 @@ typist/
 - Imagens do trabalho ficam em `imagens/` do próprio grupo; dados auxiliares em `dados/`; PDFs gerados em `saida/`.
 - Usar caminhos relativos. Não usar caminhos absolutos em `.typ`, `.bat` ou configurações.
 - Não duplicar o compilador nem a pasta `ferramentas/` dentro de grupos.
-- O nome da pasta do grupo deve ser único, sem espaços e sem acentos (exemplo: `grupo01`). A pasta é criada pelo professor a partir de uma cópia de `modelo/`.
+- O nome da pasta do grupo deve ser único, sem espaços, sem acentos, com até 40 caracteres e apenas letras, números, hífen e sublinhado (exemplo: `Grupo-01`). A pasta é criada por `administracao\criar-grupo.bat`, nunca por cópia manual.
+- O nome da pasta define o nome do grupo no título da janela e o prefixo dos PDFs (`TCC-<nome>-vNNN.pdf`). Renomear a pasta depois de compilar muda o prefixo; para trocar o nome, criar outro grupo.
+- O `tcc.typ` do grupo é gerado pelo `gerar-pdf.bat` a partir de `ferramentas/template/`. Ele não é fonte: não editar e não tratar como parte do conteúdo.
 
 ### 4.3 Separação entre template e conteúdo
 
 - Regras de formatação pertencem ao template (capa, margens, fonte, espaçamento, títulos, paginação, sumário, citações, referências, figuras e tabelas).
 - Arquivos de conteúdo devem conter apenas texto do trabalho e marcação simples de seções.
 - Não espalhar `#set` / `#show` de formatação pelos arquivos dos grupos.
-- O template existe em `modelo/tcc.typ`; não criar variações de formatação por grupo. Ajuste de formatação se faz no modelo e se propaga por nova cópia, não por edição local.
+- O template existe em `ferramentas/template/tcc-vNNN.typ`; não criar variações de formatação por grupo. Ajuste de formatação se faz publicando uma versão nova e recompilando o grupo, não por edição local.
+- Versão publicada do template é imutável: correção gera `tcc-v002.typ`, `tcc-v003.typ` etc., sem editar a anterior.
+- O `gerar-pdf.bat` copia a versão escolhida para dentro do grupo como `tcc.typ`, porque o Typst resolve caminhos a partir da pasta do `main.typ` e não aceita importar de fora sem `--root`. Essa cópia é gerada; a fonte da verdade é `ferramentas/template/`.
+- O grupo registra a escolha em `template-usado.txt` e em `saida/historico.txt`; a versão também vai nos metadados do PDF (`template-vNNN`), sem aparecer impressa na página.
 
 ### 4.4 Fluxo do semestre
 
-1. O professor copia `modelo/` para `grupos/<nome-do-grupo>`.
-2. O professor edita as 3 linhas do `gerar-pdf.bat` que contêm o nome do grupo (`title`, `PREFIXO` e a mensagem de `echo`).
-3. O professor ajusta os dados de identificação do grupo (quando o template permitir).
-4. Os alunos preenchem os arquivos `.typ` de cada parte.
-5. Os alunos executam `gerar-pdf.bat` dentro da pasta do grupo.
-6. O PDF é gravado em `saida/`, com número de versão sequencial.
+1. O professor executa `administracao\criar-grupo.bat` e digita o nome do grupo. O script cria `grupos/<nome-do-grupo>` com uma cópia de `modelo/`.
+2. O professor ajusta os dados de identificação do grupo em `dados.typ`.
+3. Os alunos preenchem os arquivos `.typ` de cada parte.
+4. Os alunos executam `gerar-pdf.bat` dentro da pasta do grupo.
+5. Na primeira compilação, o script pede a versão do template; nas seguintes, Enter mantém a versão usada antes e um número troca.
+6. O PDF é gravado em `saida/`, com número de versão sequencial, e a versão do template fica registrada em `template-usado.txt`, `saida/historico.txt` e nos metadados do PDF.
 7. O grupo revisa o PDF e corrige o conteúdo, repetindo a compilação.
 
 ---
@@ -195,15 +198,21 @@ typist/
 
 ### 5.2 `gerar-pdf.bat`
 
-Comportamento atual, verificado no arquivo do `Grupo-01`:
+Comportamento atual, verificado no grupo de teste em 16/11/2026:
 
 - Localiza a raiz do projeto a partir da própria pasta (`%~dp0..\..`) e usa `ferramentas\typst.exe`.
-- Verifica a existência do compilador e de `main.typ`; aborta com mensagem clara se faltarem.
+- Deriva o nome do grupo do nome da pasta e usa `TCC-<nome>-vNNN.pdf`; não há linhas para editar.
+- Verifica a existência do compilador, de `main.typ` e da fonte Arial; aborta com mensagem clara se faltarem.
 - Cria `saida\` se não existir.
-- Usa bloqueio por diretório `saida\.gerar-pdf.lock`; se o bloqueio existir, aborta.
-- Calcula a próxima versão a partir dos PDFs existentes: `TCC-Grupo-0X-vNNN.pdf`, com três dígitos, limite de 999.
+- Lê as versões de `ferramentas\template\tcc-v*.typ`, mostra o menu com a primeira linha de cada arquivo e pede a escolha.
+- `template-usado.txt` guarda a escolha do grupo. Enter (ou entrada vazia) mantém essa versão; digitar o número da lista troca. Na primeira compilação, o padrão é a versão de número mais alto.
+- Aceita o número da lista (`2`), o código (`v002`), `002` ou `2`; entrada inválida repete a pergunta até 5 vezes e depois aborta com código 1.
+- Adquire o bloqueio `saida\.gerar-pdf.lock` antes de gerar o `tcc.typ`; se o bloqueio existir, aborta.
+- Gera `tcc.typ` em arquivo temporário, confirma que o conteúdo do template está presente e só então substitui o arquivo do grupo; uma falha de cópia não deixa `tcc.typ` incompleto.
+- Compila com `--font-path`, `--ignore-system-fonts` e `--input "versao-template=vNNN"`, que grava a versão nos metadados do PDF.
+- Calcula a próxima versão a partir dos PDFs existentes: `TCC-<nome>-vNNN.pdf`, com três dígitos, limite de 999.
 - Compila para um arquivo temporário e só então move para o nome final; falha de compilação não consome versão.
-- Remove o bloqueio ao final, com sucesso ou erro.
+- Registra data, PDF, versão do template e versão do Typst em `saida/historico.txt`; remove o bloqueio ao final, com sucesso ou erro.
 
 Regras:
 
@@ -212,7 +221,8 @@ Regras:
 - Não remover `.gerar-pdf.lock` sem verificar se há compilação em andamento ou lock antigo.
 - Não compilar durante tarefas de auditoria ou leitura sem autorização.
 - Não presumir que a compilação em rede/UNC funciona. Testar em local e registrar limitações.
-- **Nome do grupo no BAT (decisão de 09/11/2026):** o nome está fixo em 3 linhas (`title`, `PREFIXO` e a mensagem de `echo`). Ao copiar a pasta, **o professor edita essas 3 linhas** com o nome do novo grupo. A pasta-modelo deve trazer instrução explícita para essa edição. Não automatizar a derivação do nome sem nova decisão do professor.
+- **Nome do grupo (decisão de 16/11/2026, D-16):** vem do nome da pasta e substitui a antiga edição manual de 3 linhas. Não adicionar de volta linhas “EDITAR” no BAT.
+- **`tcc.typ` do grupo:** é gerado, sobrescrito a cada compilação e mesmo assim versionado no Git (D-17). Não editá-lo; ao trocar de versão, commitar o `tcc.typ` junto com `template-usado.txt` para o repositório refletir a versão usada.
 
 ### 5.3 Fontes
 
@@ -224,7 +234,7 @@ Regras:
 
 ### 5.4 Template
 
-O template em `modelo/` centraliza:
+O template fica em `ferramentas/template/`, em versões imutáveis (`tcc-v001.typ`, `tcc-v002.typ`, ...), e centraliza:
 
 - configuração de página, margens, fonte, tamanhos, espaçamento, alinhamento e recuo;
 - títulos numerados conforme NBR 6024 e seções primárias em nova página;
@@ -233,6 +243,14 @@ O template em `modelo/` centraliza:
 - citações (curtas e longas) e lista de referências;
 - legendas e fontes de ilustrações e tabelas;
 - campos de identificação que o grupo preenche sem tocar em formatação.
+
+Regras do versionamento:
+
+- A primeira linha de cada `tcc-vNNN.typ` é lida pelo `gerar-pdf.bat` e aparece no menu, no formato `// vNNN | data | descricao`. Manter essa linha em ASCII, sem acentos.
+- Versão publicada não é editada. Corrigir formatação significa criar `tcc-vNNN+1.typ`; editar uma versão já usada quebra a rastreabilidade de quem compilou com ela.
+- `ferramentas/template/LEIA-ME.txt` descreve a política de versões.
+- A versão escolhida fica em `template-usado.txt`, em `saida/historico.txt` e nos metadados do PDF (`template-vNNN`); ela não é impressa na página.
+- O grupo não aponta para `ferramentas/template/` em tempo de compilação: o `gerar-pdf.bat` copia a versão escolhida para `tcc.typ` dentro do grupo, porque o Typst não importa de fora da pasta do `main.typ` sem `--root`, e o teste com `--root` mostrou que `image()` e `referencias.bib` passariam a ser resolvidos a partir do arquivo do template.
 
 O template ainda não pode ser considerado pronto: falta validação documentada contra o manual e comparação visual com suas figuras (P-01) e teste em outra máquina (P-10). Não criar “template definitivo” sem essa validação.
 
@@ -364,20 +382,20 @@ Não executar antes da confirmação.
 
 ## 11. Estado atual conhecido (verificar antes de agir)
 
-Levantamento de 12/11/2026, que substitui o de 09/11/2026. Conferir `docs/PENDENCIAS.md` antes de agir.
+Levantamento de 16/11/2026, que substitui o de 12/11/2026. Conferir `docs/PENDENCIAS.md` antes de agir.
 
 - **Definições anteriores removidas:** documento mestre, plano de estudo, pasta `analises/` e o `AGENTS.md` anterior. Não recriar.
-- **Registros do projeto:** `docs/DECISOES.md` (D-01 a D-14) e `docs/PENDENCIAS.md` (P-01 a P-18), criados em 12/11/2026.
+- **Registros do projeto:** `docs/DECISOES.md` (D-01 a D-17) e `docs/PENDENCIAS.md` (P-01 a P-19), atualizados em 16/11/2026.
 - **Documentação disponível:** manual SENAI-SP 2025 e dez normas ABNT em `docs/` — NBR 14724:2024, NBR 6022:2018, NBR 6023:2025, NBR 10520:2023, NBR 6024:2012, NBR 6027:2012, NBR 6028:2021, NBR 6034:2004, NBR 12225:2023 e NBR 15287:2025. Ausentes: apenas as normas IBGE de apresentação tabular.
 - **Compilador:** `ferramentas/typst.exe`, versão 0.15.1, funcional e fora do `PATH`.
 - **Fontes:** `ferramentas/fontes/` com `arial.ttf`, `arialbd.ttf`, `ariali.ttf` e `arialbi.ttf` (3.494.124 bytes no total). O `gerar-pdf.bat` compila com `--font-path` e `--ignore-system-fonts` e aborta se a fonte faltar ou estiver inválida.
-- **Template:** `modelo/` completo (pré-textuais, textuais, pós-textuais, `tcc.typ`, `dados.typ`, `gerar-pdf.bat`, `LEIA-ME.txt`), compilando sem avisos; medidas conferidas no PDF v004.
-- **Grupos:** `Grupo-Teste-Geral` é a cópia atual do modelo, com PDFs v001 a v004 versionados. `Grupo-01` e `Grupo-02` são grupos de teste anteriores ao template atual, com inconsistências herdadas:
-  - `Grupo-01/03-pos-textuais/referencias.typ` contém texto do Grupo 02;
-  - `Grupo-02/saida/TCC-Grupo-01-v001.pdf` tem nome de Grupo 01 e conteúdo de Grupo 02;
-  - o `main.typ` deles não usa `#bibliography`, então `referencias.bib` não é processado.
-- **Diagnóstico:** `administracao/verificar-ambiente.bat` ainda aponta para `Grupo-01` e não verifica `ferramentas/fontes` (P-12).
-- **Não testado:** comparação visual completa com as figuras do manual (P-01); compilação em máquina de aluno (P-10); rede/UNC (P-11); dois grupos reais independentes (P-16); tipos de referência além de livro e página web (P-06).
+- **Template versionado:** `ferramentas/template/tcc-v001.typ` (versão inicial) e `ferramentas/template/LEIA-ME.txt` (política de versões). `modelo/` não contém `tcc.typ`: ele é gerado na compilação, a partir da versão escolhida.
+- **Pasta-modelo:** `modelo/` completa (pré-textuais, textuais, pós-textuais, `dados.typ`, `gerar-pdf.bat`, `LEIA-ME.txt`), compilando sem avisos.
+- **Grupos:** apenas `grupos/Grupo-Teste-01`, criado por `administracao/criar-grupo.bat` em 16/11/2026, com PDF v001 gerado pelo template v001. `Grupo-01`, `Grupo-02` e `Grupo-Teste-Geral` foram removidos com autorização do professor; o conteúdo e os PDFs v001 a v004 continuam recuperáveis no commit `5e746e2`.
+- **Criação de grupo:** `administracao/criar-grupo.bat` pede o nome, valida (sem espaço, acento, ponto ou hífen inicial; até 40 caracteres; nomes reservados do Windows), recusa pasta existente e copia `modelo/` com `robocopy`.
+- **Diagnóstico:** `administracao/verificar-ambiente.bat` verifica compilador, os quatro arquivos de Arial, `ferramentas/template`, `modelo/` e cada grupo; não compila. Atualizado em 16/11/2026 (P-12).
+- **Versão no PDF:** a versão escolhida vai nos metadados (`template-vNNN`), em `template-usado.txt` e em `saida/historico.txt`; não é impressa na página.
+- **Não testado:** comparação visual completa com as figuras do manual (P-01); compilação em máquina de aluno (P-10); rede/UNC (P-11); dois grupos reais independentes (P-16); tipos de referência além de livro e página web (P-06); publicação de uma segunda versão real do template (P-19).
 - **Pendências críticas:** P-01, P-03, P-10, P-15 e P-16, detalhadas em `docs/PENDENCIAS.md`.
 
 ---
@@ -389,6 +407,7 @@ Levantamento de 12/11/2026, que substitui o de 09/11/2026. Conferir `docs/PENDEN
 - [ ] Respeitei a hierarquia das fontes (SENAI-SP > ABNT > AGENTS.md > artefatos)?
 - [ ] Alterei apenas o que foi autorizado?
 - [ ] Preservei `docs/`, o template, os PDFs e o conteúdo dos grupos?
+- [ ] Se a mudança foi no template, criei uma versão nova em `ferramentas/template/` em vez de editar uma versão publicada?
 - [ ] Testei de forma reproduzível e registrei a evidência?
 - [ ] Usei o status correto (Aprovado, Aprovado com ressalvas, Reprovado ou Pendente)?
 - [ ] Registrei problemas, limitações e pendências?

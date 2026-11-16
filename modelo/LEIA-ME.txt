@@ -2,47 +2,37 @@
 PASTA-MODELO DO TCC — Manual de Normalização SENAI-SP 2025
 ================================================================
 
-Esta pasta é o ponto de partida de cada grupo. Ela contém o
-template do TCC e os arquivos que os alunos vão preencher.
+Esta pasta é o ponto de partida de cada grupo. Ela contém os
+arquivos que os alunos vão preencher.
 
-Não edite esta pasta diretamente: copie-a para "grupos" e
-trabalhe na cópia.
-
-----------------------------------------------------------------
-1. COPIAR A PASTA
-----------------------------------------------------------------
-
-1. Copie a pasta "modelo" para dentro de "grupos".
-2. Renomeie a cópia com o nome do grupo, sem espaços e sem
-   acentos. Exemplo:
-
-   grupos\grupo01
-   grupos\grupo02
-
-O nome da pasta pode ser diferente do nome que aparece no PDF.
+Não edite esta pasta diretamente e não a copie "na mão": use o
+script "administracao\criar-grupo.bat", que cria a cópia já com o
+nome correto.
 
 ----------------------------------------------------------------
-2. EDITAR O ARQUIVO gerar-pdf.bat
+1. CRIAR A PASTA DO GRUPO
 ----------------------------------------------------------------
 
-Abra "gerar-pdf.bat" em um editor de texto (Bloco de Notas) e
-altere as 3 linhas marcadas com "EDITAR". Troque "Grupo-XX" pelo
-nome do grupo nas três linhas:
+1. Abra a pasta "administracao" e dê duplo clique em
+   "criar-grupo.bat".
+2. Digite o nome do grupo, sem espaços e sem acentos. Exemplos:
 
-  [1/3] title Geracao de PDF - Grupo-XX
-  [2/3] set "PREFIXO=TCC-Grupo-XX-v"
-  [3/3] echo === Geracao de PDF - Grupo-XX ===
+   Grupo-01
+   grupo_mecanica
+   ianes-3b
 
-Exemplo, para o grupo "grupo01":
+3. O script cria "grupos\<nome>" com uma cópia desta pasta.
 
-  title Geracao de PDF - grupo01
-  set "PREFIXO=TCC-grupo01-v"
-  echo === Geracao de PDF - grupo01 ===
+O nome digitado vira o nome da pasta e o prefixo dos PDFs:
 
-Não altere as outras linhas do arquivo.
+   grupos\Grupo-01\saida\TCC-Grupo-01-v001.pdf
+
+Não há nada para editar no "gerar-pdf.bat": ele lê o nome do grupo
+do nome da própria pasta. Se precisar trocar o nome do grupo,
+crie outro grupo com o nome novo.
 
 ----------------------------------------------------------------
-3. PREENCHER OS DADOS DO TRABALHO
+2. PREENCHER OS DADOS DO TRABALHO
 ----------------------------------------------------------------
 
 Abra "dados.typ" e substitua os textos entre aspas:
@@ -61,7 +51,7 @@ aspas. Exemplo:
   autores: ("ANA SILVA", "BRUNO SOUZA"),
 
 ----------------------------------------------------------------
-4. ESCREVER O CONTEÚDO
+3. ESCREVER O CONTEÚDO
 ----------------------------------------------------------------
 
 Os arquivos estão separados por parte do trabalho:
@@ -91,10 +81,10 @@ Use apenas texto e marcações simples:
   === Título de seção terciária
 
 Não coloque regras de formatação (#set, #show) nos arquivos de
-conteúdo. A formatação fica em "tcc.typ".
+conteúdo. A formatação vem do template, explicada na seção 6.
 
 ----------------------------------------------------------------
-5. IMAGENS
+4. IMAGENS
 ----------------------------------------------------------------
 
 Coloque as imagens do trabalho na pasta "imagens" do próprio
@@ -132,7 +122,7 @@ Na tabela, não use traços verticais nas laterais esquerda e direita
 as bordas.
 
 ----------------------------------------------------------------
-6. CITAÇÕES E REFERÊNCIAS
+5. CITAÇÕES E REFERÊNCIAS
 ----------------------------------------------------------------
 
 As referências ficam em "referencias.bib". Para citar uma obra no
@@ -159,18 +149,45 @@ como exige o manual (seções 2.1 e 2.3). Se você usar "#footnote"
 diretamente, a nota sairá com tamanho ligeiramente diferente.
 
 ----------------------------------------------------------------
+6. VERSÃO DO TEMPLATE (tcc.typ)
+----------------------------------------------------------------
+
+A formatação do TCC (margens, fonte, títulos, sumário, citações,
+legendas e referências) fica em um arquivo chamado "tcc.typ". Ele
+não pertence ao grupo: as versões publicadas ficam em
+"ferramentas\template", fora daqui.
+
+Na primeira compilação, o "gerar-pdf.bat" pergunta qual versão do
+template usar e copia a escolhida para dentro do grupo, como
+"tcc.typ". Nas compilações seguintes:
+
+  - Enter mantém a versão usada antes;
+  - digitar o número da lista troca a versão.
+
+A escolha fica registrada em "template-usado.txt" e a versão
+também vai nos metadados do PDF, sem aparecer impressa na página.
+
+Não edite o "tcc.typ" do grupo: ele é sobrescrito a cada
+compilação. Se a formatação estiver errada, avise o professor,
+que corrige o template e publica uma versão nova. Corrigir aqui
+não resolve, porque a próxima compilação desfaz a alteração.
+
+----------------------------------------------------------------
 7. GERAR O PDF
 ----------------------------------------------------------------
 
 Dê um duplo clique em "gerar-pdf.bat" dentro da pasta do grupo.
 O PDF será gravado em "saida" com um número de versão novo:
 
-  saida\TCC-grupo01-v001.pdf
-  saida\TCC-grupo01-v002.pdf
+  saida\TCC-Grupo-01-v001.pdf
+  saida\TCC-Grupo-01-v002.pdf
   ...
 
 Cada compilação cria uma versão nova. Os PDFs anteriores não são
 apagados. Se a compilação falhar, nenhuma versão é criada.
+
+O arquivo "saida\historico.txt" registra data, hora, nome do PDF,
+versão do template e versão do Typst de cada compilação.
 
 ----------------------------------------------------------------
 8. FONTE (ARIAL)
@@ -200,12 +217,11 @@ instituição.
 9. OBSERVAÇÕES IMPORTANTES
 ----------------------------------------------------------------
 
-- Não altere "tcc.typ": ele concentra a formatação exigida pelo
-  manual.
+- Não altere "tcc.typ": ele é gerado a cada compilação.
 - Não apague PDFs antigos de "saida": eles são o histórico do
   grupo.
-- Não apague nem mova "ferramentas\fontes": sem ela o PDF não é
-  gerado.
+- Não apague nem mova "ferramentas\fontes" nem
+  "ferramentas\template": sem elas o PDF não é gerado.
 - Se aparecer a mensagem de que o compilador não foi encontrado,
   confira se a pasta do grupo está dentro de "grupos", ao lado
   da pasta "ferramentas".

@@ -1,0 +1,68 @@
+VERSOES DO TEMPLATE DO TCC
+============================================================
+
+Esta pasta guarda as versoes publicadas do template. O grupo NAO
+aponta para esta pasta: o "gerar-pdf.bat" de cada grupo copia a
+versao escolhida para dentro do grupo, como "tcc.typ".
+
+Diferença entre esta pasta e a pasta-modelo:
+
+  ferramentas\template\      versoes do template (nao e copiada)
+  modelo\                    esqueleto do trabalho (e copiado)
+
+Se o template ficasse dentro de "modelo", cada copia levaria uma
+versao propria, que envelheceria sem ninguem perceber.
+
+------------------------------------------------------------
+ARQUIVOS
+------------------------------------------------------------
+
+  tcc-v001.typ   versao 001
+  tcc-v002.typ   versao 002 (quando existir)
+  ...
+
+A primeira linha de cada arquivo e lida pelo "gerar-pdf.bat" e
+aparece no menu de escolha. O formato e:
+
+  // v001 | 12/11/2026 | descricao curta em uma linha
+
+Mantenha essa linha em ASCII, sem acentos: o menu do Prompt de
+Comando do Windows nao exibe acentos corretamente.
+
+------------------------------------------------------------
+REGRA PRINCIPAL: VERSAO PUBLICADA NAO E EDITADA
+------------------------------------------------------------
+
+Corrigiu a formatacao? Crie "tcc-v002.typ" com a correcao e deixe
+a v001 como esta.
+
+Se a v001 for editada depois de algum grupo ja ter compilado com
+ela, dois PDFs marcados como "v001" podem ter formatacao
+diferente, e o registro deixa de valer. O numero da versao e o
+que garante a rastreabilidade.
+
+------------------------------------------------------------
+O QUE O GRUPO ESCOLHE
+------------------------------------------------------------
+
+Ao executar "gerar-pdf.bat", o aluno ve a lista de versoes e
+escolhe uma. A escolha fica gravada em:
+
+  grupos\<grupo>\template-usado.txt
+
+Na compilacao seguinte, o menu ja vem com essa versao como padrao;
+basta pressionar Enter para manter. O grupo pode trocar de versao
+quando quiser, sem afetar os outros grupos.
+
+Na primeira compilacao de um grupo, o padrao e a versao de numero
+mais alto. Publicar uma versao nova, portanto, muda o padrao de
+todos os grupos que ainda nao escolheram. Se isso nao for
+desejado, publique a versao com numero menor ou avise os grupos.
+
+A versao usada fica registrada em dois lugares:
+
+  metadados do PDF   palavra-chave "template-vNNN"
+  saida\historico.txt  data, PDF, versao do template e do Typst
+
+A versao NAO aparece impressa na pagina: imprimi-la seria
+conteudo estranho ao trabalho academico.

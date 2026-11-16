@@ -1,6 +1,6 @@
 # Pendências do projeto Typist
 
-**Atualizado em:** 12/11/2026
+**Atualizado em:** 16/11/2026
 **Objetivo:** reunir o que ainda falta para o ambiente do TCC ser considerado viável, com o motivo, o que exatamente falta, quem depende de quem e o status atual.
 
 Este documento é uma lista de trabalho, não uma declaração de conformidade. As decisões já tomadas estão em `docs/DECISOES.md`. A hierarquia das fontes continua sendo a de `AGENTS.md`, seção 2.
@@ -34,13 +34,14 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 | P-09 | Lombada (NBR 12225) | Baixa | Professor | Aguardando decisão |
 | P-10 | Teste em máquina de aluno | Alta | Professor + equipe | Pendente |
 | P-11 | Compilação em rede/UNC | Média | Equipe técnica | Pendente |
-| P-12 | `administracao/verificar-ambiente.bat` desatualizado | Média | Equipe técnica | Aguardando autorização |
+| P-12 | `administracao/verificar-ambiente.bat` desatualizado | Média | Equipe técnica | Concluída |
 | P-13 | Binário do Typst e fontes dentro do Git | Média | Professor | Aguardando decisão |
-| P-14 | Grupos legados `Grupo-01` e `Grupo-02` | Média | Professor | Aguardando decisão |
-| P-15 | Fluxo completo de cópia da pasta-modelo | Alta | Professor + equipe | Parcial |
+| P-14 | Grupos legados `Grupo-01` e `Grupo-02` | Média | Professor | Concluída |
+| P-15 | Fluxo completo de criação e compilação de grupo | Alta | Professor + equipe | Parcial |
 | P-16 | Dois grupos reais independentes | Alta | Professor + equipe | Pendente |
 | P-17 | Registro formal de testes | Baixa | Professor | Aguardando decisão |
 | P-18 | Licença das fontes por escrito | Média | Professor | Aguardando decisão |
+| P-19 | Segunda versão real do template e troca de versão em grupo real | Média | Equipe técnica | Pendente |
 
 ---
 
@@ -120,7 +121,7 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 ### P-10 — Teste em máquina de aluno
 
 - **Por que importa:** é a cobertura mínima do `AGENTS.md` (seção 6). O mecanismo de fonte foi resolvido com `ferramentas/fontes/` e `--ignore-system-fonts`, mas só foi testado nesta máquina.
-- **O que falta:** copiar o projeto (ou só `ferramentas/`, `modelo/` e um grupo) para um computador de aluno, executar `gerar-pdf.bat` e comparar o PDF com o v004: mesmas fontes incorporadas, mesmo número de páginas, mesmas quebras. Registrar versão do Windows, caminho usado e resultado.
+- **O que falta:** copiar o projeto (ou só `ferramentas/`, `modelo/` e um grupo) para um computador de aluno, executar `gerar-pdf.bat`, escolher a versão do template e comparar o PDF com o de referência (v004, recuperável no commit `5e746e2`, ou o v001 do `Grupo-Teste-01`): mesmas fontes incorporadas, mesmo número de páginas, mesmas quebras. Registrar versão do Windows, caminho usado e resultado.
 - **Responsável:** professor acompanha; equipe técnica registra.
 - **Status:** Pendente.
 
@@ -133,10 +134,11 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 ### P-12 — `administracao/verificar-ambiente.bat` desatualizado
 
-- **Por que importa:** o diagnóstico ainda aponta para `grupos/Grupo-01` e não verifica a pasta `ferramentas/fontes`. Um professor que rode o script pode receber “ambiente ok” sem a fonte que o `gerar-pdf.bat` exige.
-- **O que falta:** atualizar o script para verificar o compilador, a pasta de fontes, o template e um grupo existente; manter o formato de diagnóstico que não compila. Alterar script exige autorização (`AGENTS.md`, seção 9).
+- **Por que importa:** o diagnóstico apontava para `grupos/Grupo-01` e para `modelo/tcc.typ`, que não existem mais, e não verificava a pasta `ferramentas/fontes`. Um professor que rodasse o script podia receber “ambiente ok” sem a fonte que o `gerar-pdf.bat` exige.
+- **O que foi feito:** em 16/11/2026, com autorização do professor, o script foi reescrito. Ele verifica o compilador, os quatro arquivos de Arial, a leitura da fonte pelo Typst, as versões em `ferramentas/template`, os arquivos essenciais de `modelo/` e cada grupo existente (`main.typ`, `gerar-pdf.bat`, presença do `tcc.typ`, versão usada e quantidade de PDFs). Continua sendo diagnóstico: não compila e não altera nada.
+- **Evidência:** execução em 16/11/2026 com o ambiente atual: saída com `[OK]` em todos os itens, código 0. Teste negativo com um grupo vazio: código 1, com `[FALHA] main.typ ausente` e `[FALHA] gerar-pdf.bat ausente`.
 - **Responsável:** equipe técnica, com autorização do professor.
-- **Status:** Aguardando decisão (autorização para alterar o script).
+- **Status:** Concluída.
 
 ### P-13 — Binário do Typst e fontes dentro do Git
 
@@ -151,24 +153,32 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 ### P-14 — Grupos legados `Grupo-01` e `Grupo-02`
 
-- **Por que importa:** são conteúdo de teste anterior ao template e têm inconsistências herdadas: `Grupo-01/03-pos-textuais/referencias.typ` contém texto do Grupo 02; `Grupo-02/saida/TCC-Grupo-01-v001.pdf` tem nome de Grupo 01 e conteúdo de Grupo 02; o `main.typ` deles não usa `#bibliography`.
-- **O que falta:** decidir se esses grupos são migrados para o template atual, arquivados fora do repositório ou removidos. Nada será apagado sem autorização (`AGENTS.md`, seção 7).
-- **Responsável:** professor.
-- **Status:** Aguardando decisão.
+- **Por que importava:** eram conteúdo de teste anterior ao template e tinham inconsistências herdadas: `Grupo-01/03-pos-textuais/referencias.typ` continha texto do Grupo 02; `Grupo-02/saida/TCC-Grupo-01-v001.pdf` tinha nome de Grupo 01 e conteúdo de Grupo 02; o `main.typ` deles não usava `#bibliography`.
+- **O que foi feito:** em 16/11/2026, com autorização do professor, `Grupo-01`, `Grupo-02`, `Grupo-Teste-Geral` e o grupo criado por teste foram removidos. Sobrou apenas `grupos/Grupo-Teste-01`, criado pelo `administracao/criar-grupo.bat`.
+- **Evidência:** `grupos/` contém somente `Grupo-Teste-01`; o conteúdo e os PDFs v001 a v004 dos grupos antigos continuam recuperáveis no commit `5e746e2`.
+- **Responsável:** professor autorizou; equipe técnica executou.
+- **Status:** Concluída.
 
-### P-15 — Fluxo completo de cópia da pasta-modelo
+### P-15 — Fluxo completo de criação e compilação de grupo
 
-- **Por que importa:** é o passo que o professor executa no início de cada semestre: copiar `modelo/`, renomear, editar as 3 linhas do `gerar-pdf.bat` e compilar. Se algo quebrar aqui, quebra para todos os grupos.
-- **O que já existe:** instrução no `modelo/LEIA-ME.txt` (seções 1 e 2) e o `Grupo-Teste-Geral`, que é uma cópia funcional.
-- **O que falta:** executar o fluxo do zero, com um nome novo, seguindo apenas o `LEIA-ME`, e registrar onde houver dúvida ou passo não documentado.
+- **Por que importa:** é o passo que o professor executa no início de cada semestre: criar o grupo, preencher os dados e compilar. Se algo quebrar aqui, quebra para todos os grupos.
+- **O que já existe:** `administracao/criar-grupo.bat` (pede o nome, valida e copia `modelo/`); `modelo/LEIA-ME.txt` reescrito para o fluxo atual (seções 1, 6 e 7); `gerar-pdf.bat` com menu de versões; o grupo `Grupo-Teste-01`, criado e compilado pelo fluxo novo.
+- **O que falta:** o professor executar o fluxo do zero, com um nome novo e seguindo apenas o `LEIA-ME`, e registrar onde houver dúvida ou passo não documentado. Nesta sessão o fluxo foi executado pela equipe técnica, que conhece o mecanismo.
 - **Responsável:** professor testa; equipe técnica ajusta a instrução.
 - **Status:** Parcial.
 
 ### P-16 — Dois grupos reais independentes
 
 - **Por que importa:** a cobertura mínima do `AGENTS.md` (seção 6) exige dois grupos independentes, sem vazamento de conteúdo — foi justamente o problema herdado dos grupos antigos.
-- **O que falta:** criar dois grupos a partir do modelo com conteúdo diferente, compilar os dois e conferir que nenhum arquivo, imagem ou referência de um aparece no PDF do outro.
+- **O que falta:** criar dois grupos a partir do modelo com conteúdo diferente, compilar os dois e conferir que nenhum arquivo, imagem ou referência de um aparece no PDF do outro. Verificar também que cada grupo registra sua própria versão do template em `template-usado.txt`.
 - **Responsável:** professor, com apoio da equipe técnica.
+- **Status:** Pendente.
+
+### P-19 — Segunda versão real do template e troca de versão em grupo real
+
+- **Por que importa:** o menu de versões foi testado em área isolada, com uma `tcc-v002.typ` de teste que só mudava o cabeçalho. Falta provar o ciclo completo com uma correção real: publicar `tcc-v002.typ`, compilar um grupo nas duas versões e conferir que a versão registrada acompanha a escolha.
+- **O que falta:** quando houver a primeira correção de formatação, criar `ferramentas/template/tcc-v002.typ` (sem editar a v001), compilar `Grupo-Teste-01` nas duas versões e conferir `template-usado.txt`, `saida/historico.txt`, metadados dos PDFs e o cabeçalho do `tcc.typ` gerado.
+- **Responsável:** equipe técnica.
 - **Status:** Pendente.
 
 ---
@@ -177,8 +187,8 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 ### P-17 — Registro formal de testes
 
-- **Por que importa:** a seção 6 do `AGENTS.md` pede identificador, data, objetivo, ambiente, comando, resultado esperado e observado, evidências e status. Hoje o registro existe em texto corrido dentro de `grupos/Grupo-Teste-Geral/LEIA-ME-TESTE-GERAL.txt`.
-- **O que falta:** decidir se vale criar um `docs/TESTES.md` com um bloco por teste, ou se o `LEIA-ME` do grupo continua sendo o registro aceito. Enquanto não houver decisão, os testes continuam registrados no `LEIA-ME` do grupo.
+- **Por que importa:** a seção 6 do `AGENTS.md` pede identificador, data, objetivo, ambiente, comando, resultado esperado e observado, evidências e status. Hoje os testes de 16/11/2026 estão descritos nas decisões D-15 e D-16 e na conversa, sem um arquivo próprio de testes.
+- **O que falta:** decidir se vale criar um `docs/TESTES.md` com um bloco por teste. O antigo `LEIA-ME-TESTE-GERAL.txt`, que registrava os testes de 12/11/2026, foi removido junto com o `Grupo-Teste-Geral`; o conteúdo continua recuperável no commit `5e746e2`.
 - **Responsável:** professor.
 - **Status:** Aguardando decisão.
 
@@ -193,12 +203,14 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 ## 7. O que já está pronto (para não repetir)
 
-- Template em `modelo/`, compilando sem avisos no Typst 0.15.1, com capa, folha de rosto, folha de aprovação, resumo, abstract, sumário, títulos em 5 níveis, citação longa, notas, figuras, tabelas, quadros e referências por CSL ABNT.
-- Paginação, margens, entrelinha, fonte e posição do número conferidas por medição no PDF v004.
+- Template versionado em `ferramentas/template/tcc-v001.typ`, compilando sem avisos no Typst 0.15.1, com capa, folha de rosto, folha de aprovação, resumo, abstract, sumário, títulos em 5 níveis, citação longa, notas, figuras, tabelas, quadros e referências por CSL ABNT.
+- Menu de versões no `gerar-pdf.bat`: escolha por número, Enter mantendo a versão anterior, padrão na versão de número mais alto, versão registrada em `template-usado.txt`, `saida/historico.txt` e nos metadados do PDF.
+- Criação de grupo por `administracao/criar-grupo.bat`, com o nome da pasta definindo o prefixo dos PDFs.
+- Paginação, margens, entrelinha, fonte e posição do número conferidas por medição no PDF v004 (recuperável no commit `5e746e2`); o PDF v005, gerado pelo template v001 com o mesmo conteúdo, manteve 12 páginas, A4 de 595,2756 × 841,8898 pt e as mesmas fontes.
 - Fonte Arial embarcada, com verificação no `gerar-pdf.bat` e dois testes negativos aprovados.
-- `Grupo-Teste-Geral` versionado com PDFs v001 a v004, sem sobrescrita.
+- `grupos/Grupo-Teste-01` criado e compilado pelo fluxo novo, com `TCC-Grupo-Teste-01-v001.pdf` gerado pelo template v001.
 - Acervo de `docs/` com o manual SENAI-SP 2025 e dez normas ABNT (incluindo NBR 6022:2018 e NBR 12225:2023).
-- Registro de decisões em `docs/DECISOES.md` (D-01 a D-14).
+- Registro de decisões em `docs/DECISOES.md` (D-01 a D-17).
 
 ---
 
@@ -207,3 +219,4 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 | Data | Alteração |
 |---|---|
 | 12/11/2026 | Criação, com P-01 a P-18 |
+| 16/11/2026 | P-12 e P-14 concluídas; P-15 e P-17 atualizadas; inclusão de P-19 (segunda versão real do template) |

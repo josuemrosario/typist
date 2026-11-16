@@ -1,6 +1,7 @@
 # Registro de decisões — Projeto Typist
 
 **Criado em:** 12/11/2026
+**Atualizado em:** 16/11/2026
 **Criado por:** autorização do professor, registrada na conversa de 12/11/2026
 **Objetivo:** registrar, de forma verificável, as decisões já tomadas sobre o ambiente Typst do TCC, com a base normativa, a evidência disponível e o status de cada uma.
 
@@ -30,7 +31,7 @@
 | D-03 | 09/11/2026 | Página, margens, fonte, alinhamento e espaçamento | Vigente com ressalva |
 | D-04 | 09/11/2026 | Títulos: numeração progressiva em 5 níveis | Vigente |
 | D-05 | 09/11/2026 | Paginação: contagem na folha de rosto, número a partir do texto | Vigente |
-| D-06 | 09/11/2026 | Nome do grupo fixo em 3 linhas do `gerar-pdf.bat` | Vigente |
+| D-06 | 09/11/2026 | Nome do grupo fixo em 3 linhas do `gerar-pdf.bat` | Substituída por D-16 |
 | D-07 | 12/11/2026 | Citação longa e notas de rodapé | Vigente |
 | D-08 | 12/11/2026 | Sumário espelha o destaque do texto nos 5 níveis | Vigente com ressalva |
 | D-09 | 12/11/2026 | Divergência do manual: prevalece a seção 2.4 sobre a figura da p. 45 | Pendente de confirmação |
@@ -39,6 +40,9 @@
 | D-12 | 12/11/2026 | Licença dos arquivos de fonte é responsabilidade do professor | Vigente |
 | D-13 | 12/11/2026 | NBR 6022 e NBR 12225 incorporadas ao acervo de `docs/` | Vigente |
 | D-14 | 12/11/2026 | Criação deste registro e de `docs/PENDENCIAS.md` | Vigente |
+| D-15 | 16/11/2026 | Template versionado em `ferramentas/template/`, versão escolhida na compilação e registrada no PDF | Vigente |
+| D-16 | 16/11/2026 | Criação de grupo por `administracao/criar-grupo.bat`; nome do grupo vem da pasta | Vigente |
+| D-17 | 16/11/2026 | O `tcc.typ` gerado no grupo é versionado no Git | Vigente |
 
 ---
 
@@ -89,9 +93,9 @@
 
 - **Data:** 09/11/2026
 - **Decisão:** o nome do grupo não é derivado do nome da pasta nem automatizado. Ele aparece em 3 linhas marcadas com “EDITAR” no `gerar-pdf.bat` (`title`, `PREFIXO` e a mensagem de `echo`), que o professor altera ao copiar a pasta-modelo. Automatizar a derivação exige nova decisão.
-- **Base normativa:** decisão operacional do projeto, não normativa; consta em `AGENTS.md`, seção 5.2.
+- **Base normativa:** decisão operacional do projeto, não normativa; constava em `AGENTS.md`, seção 5.2.
 - **Evidência:** `modelo/gerar-pdf.bat` (linhas marcadas com “EDITAR”); `modelo/LEIA-ME.txt`, seção 2; diferença entre `modelo/gerar-pdf.bat` e `grupos/Grupo-Teste-Geral/gerar-pdf.bat` restrita a essas 3 linhas.
-- **Status:** Vigente.
+- **Status:** Substituída por D-16 em 16/11/2026. O nome do grupo passou a vir do nome da pasta, e as 3 linhas “EDITAR” foram removidas do BAT.
 
 ### D-07 — Citação longa e notas de rodapé
 
@@ -161,6 +165,34 @@
 - **Evidência:** este arquivo e `docs/PENDENCIAS.md`, no commit desta decisão; `AGENTS.md` atualizado na seção 2.
 - **Status:** Vigente.
 
+### D-15 — Template versionado em `ferramentas/template/`, versão escolhida na compilação e registrada no PDF
+
+- **Data:** 16/11/2026
+- **Decisão:** o template deixa de ser um único arquivo copiado para cada grupo e passa a existir em versões imutáveis em `ferramentas/template/tcc-vNNN.typ`. Ao compilar, o aluno vê o menu de versões e escolhe qual usar; Enter mantém a versão da compilação anterior e, na primeira compilação, o padrão é a versão de número mais alto. O `gerar-pdf.bat` copia a versão escolhida para `tcc.typ` dentro do grupo, porque o Typst resolve caminhos a partir da pasta do `main.typ` e recusa importar de fora sem `--root`. A versão usada fica registrada em três lugares: `template-usado.txt` (no grupo), `saida/historico.txt` (data, PDF, template e Typst) e nos metadados do PDF, pela palavra-chave `template-vNNN`; ela não é impressa na página.
+- **Base normativa:** decisão operacional do projeto, não normativa; registrada em `AGENTS.md`, seções 4.3 e 5.4. Não altera exigência do manual.
+- **Evidência:** `ferramentas/template/tcc-v001.typ` (cabeçalho `// v001 | 12/11/2026 | ...` e `set document(keywords: ("template-" + versao-template, "typist"))`); `ferramentas/template/LEIA-ME.txt`; `modelo/gerar-pdf.bat`; teste de 16/11/2026 no `grupo` de teste, em que o PDF saiu com `Keywords(template-v001, typist)`, `template-usado.txt` com `v001` e `historico.txt` com a linha da compilação. Testes de menu em área isolada com duas versões: escolha por número, Enter mantendo a anterior, troca de versão, entrada inválida repetindo a pergunta, código `v002` aceito, limite de 5 tentativas, versão removida avisando, pasta `template` ausente abortando e bloqueio existente abortando.
+- **Ressalva:** a equivalência de layout foi conferida no grupo de teste antigo comparando o PDF v004 (template anterior) com o v005 (template v001): 12 páginas, A4 de 595,2756 × 841,8898 pt e as mesmas fontes incorporadas nos dois. A comparação visual com as figuras do manual continua pendente (P-01), e o teste em outra máquina também (P-10).
+- **Observação sobre registros anteriores:** as referências a `modelo/tcc.typ` e ao PDF v004 nas decisões D-02, D-03, D-05, D-07, D-08 e D-10 descrevem o layout anterior a esta decisão. O arquivo corresponde hoje a `ferramentas/template/tcc-v001.typ`, e o v004 permanece recuperável no commit `5e746e2`.
+- **Status:** Vigente.
+
+### D-16 — Criação de grupo por `administracao/criar-grupo.bat`; nome do grupo vem da pasta
+
+- **Data:** 16/11/2026
+- **Decisão:** o grupo é criado por `administracao/criar-grupo.bat`, que pede o nome, valida (sem espaço, acento, ponto ou hífen inicial; até 40 caracteres; apenas letras, números, hífen e sublinhado; recusa nomes reservados do Windows) e copia `modelo/` para `grupos/<nome>`. O nome digitado é o nome da pasta, o título da janela de compilação e o prefixo dos PDFs (`TCC-<nome>-vNNN.pdf`). As 3 linhas “EDITAR” do `gerar-pdf.bat` foram removidas: o script deriva o nome da própria pasta. Esta decisão substitui D-06.
+- **Base normativa:** decisão operacional do projeto, não normativa; `AGENTS.md`, seções 4.2, 4.4 e 5.2.
+- **Evidência:** `administracao/criar-grupo.bat`; teste de 16/11/2026 com o nome `Grupo-Teste-01`, que criou a pasta com `main.typ`, `gerar-pdf.bat`, `dados.typ`, `referencias.bib` e as subpastas, sem `tcc.typ`; compilação no grupo gerou `saida/TCC-Grupo-Teste-01-v001.pdf`. Teste com nome inválido e com pasta existente recusado pelo próprio script. O `gerar-pdf.bat` usa `for %%A in ("%GRUPO_DIR:~0,-1%") do set "NOME_GRUPO=%%~nxA"`.
+- **Ressalva:** renomear a pasta depois de compilar muda o prefixo das versões seguintes; para trocar o nome, criar outro grupo. Não há teste em rede/UNC (P-11).
+- **Status:** Vigente.
+
+### D-17 — O `tcc.typ` gerado no grupo é versionado no Git
+
+- **Data:** 16/11/2026
+- **Decisão:** o `tcc.typ` gerado pelo `gerar-pdf.bat` dentro do grupo entra no Git, em vez de ser ignorado por `.gitignore`. A escolha foi do professor em 16/11/2026. Consequência aceita: ao trocar de versão do template, o arquivo aparece como modificado e deve ser commitado junto com `template-usado.txt`, para o repositório refletir a versão usada pelo grupo.
+- **Base normativa:** decisão operacional do projeto, não normativa; `AGENTS.md`, seção 5.2.
+- **Evidência:** resposta do professor em 16/11/2026 (“Versionar o tcc.typ”); `grupos/Grupo-Teste-01/tcc.typ` com a primeira linha `// GERADO pelo gerar-pdf.bat a partir de tcc-v001.typ - nao edite`.
+- **Ressalva:** o arquivo continua sendo sobrescrito a cada compilação; editá-lo não altera o PDF da próxima vez. O Git guarda o histórico das versões geradas, não substitui `ferramentas/template/` como fonte da verdade.
+- **Status:** Vigente.
+
 ---
 
 ## 4. Divergências e interpretações registradas
@@ -190,3 +222,4 @@ Não são decisões: são assuntos abertos, detalhados em `docs/PENDENCIAS.md`.
 | Data | Alteração | Responsável |
 |---|---|---|
 | 12/11/2026 | Criação, com D-01 a D-14 | Sessão de trabalho autorizada pelo professor |
+| 16/11/2026 | D-06 marcada como substituída; inclusão de D-15 a D-17 (template versionado, criação de grupo por BAT, `tcc.typ` versionado) | Sessão de trabalho autorizada pelo professor |

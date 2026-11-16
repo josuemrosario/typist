@@ -1,5 +1,9 @@
 // Ponto de entrada do TCC.
 // A ordem dos includes define a ordem das páginas do PDF.
+//
+// O tcc.typ desta pasta é gerado pelo gerar-pdf.bat, a partir da
+// versão escolhida em ferramentas/template. Não edite o arquivo
+// gerado: ele é sobrescrito a cada compilação.
 
 #import "dados.typ": dados
 #import "tcc.typ": *
