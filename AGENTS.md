@@ -232,7 +232,7 @@ Regras:
 - O manual exige Arial no TCC. Os arquivos de fonte ficam em `ferramentas/fontes/` (`arial.ttf`, `arialbd.ttf`, `ariali.ttf` e `arialbi.ttf`) e são usados via `--font-path` com `--ignore-system-fonts`.
 - Com isso o PDF sai com a mesma fonte em qualquer computador, sem depender da Arial instalada no sistema. Verificado em 12/11/2026: compilação sem fontes do sistema gerou PDF com ArialMT, Arial-BoldMT e Arial-BoldItalicMT.
 - O `gerar-pdf.bat` verifica a fonte antes de compilar e aborta quando ela não é encontrada; sem essa verificação o Typst gerava o PDF em Libertinus Serif e ainda informava sucesso.
-- Arial é fonte proprietária: embutir subconjunto no PDF é permitido pelo próprio arquivo (`fsType` 0x0008), mas a redistribuição dos arquivos de fonte depende de licenciamento. O professor assumiu a responsabilidade pela licença em 12/11/2026.
+- Arial é fonte proprietária: embutir subconjunto no PDF é permitido pelo próprio arquivo (`fsType` 0x0008), mas a redistribuição dos arquivos de fonte depende de licenciamento. O professor assumiu a responsabilidade pela licença em 12/11/2026 e decidiu, em 23/11/2026, que não haverá registro escrito dessa base por enquanto (D-12 e D-22).
 - Não mover nem renomear `ferramentas/fontes/`; os grupos dependem dessa pasta compartilhada.
 
 ### 5.4 Template

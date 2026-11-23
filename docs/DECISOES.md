@@ -47,6 +47,7 @@
 | D-19 | 23/11/2026 | Lombada não é oferecida pelo template | Vigente |
 | D-20 | 23/11/2026 | `typst.exe` e fontes Arial continuam versionados no Git | Vigente |
 | D-21 | 23/11/2026 | Registro formal de testes em `docs/TESTES.md` | Vigente |
+| D-22 | 23/11/2026 | Não há registro escrito da licença das fontes por enquanto | Vigente |
 
 ---
 
@@ -233,6 +234,14 @@
 - **Evidência:** `docs/TESTES.md`, criado nesta data com T-01 a T-06.
 - **Status:** Vigente.
 
+### D-22 — Não há registro escrito da licença das fontes por enquanto
+
+- **Data:** 23/11/2026
+- **Decisão:** o projeto não vai guardar, por enquanto, documento escrito sobre a base de uso dos arquivos de Arial em `ferramentas/fontes/`. A responsabilidade pela licença continua sendo do professor (D-12), e o projeto continua sem validar essa licença. Se o repositório for compartilhado fora da instituição ou publicado, a decisão precisa ser revista antes, porque Arial é fonte proprietária.
+- **Base normativa:** não normativa; licenciamento de fonte proprietária.
+- **Evidência:** resposta do professor em 23/11/2026 ("P-18 não haverá licença das fontes por escrito por enquanto").
+- **Status:** Vigente.
+
 ---
 
 ## 4. Divergências e interpretações registradas
@@ -264,3 +273,4 @@ Não são decisões: são assuntos abertos, detalhados em `docs/PENDENCIAS.md`.
 | 12/11/2026 | Criação, com D-01 a D-14 | Sessão de trabalho autorizada pelo professor |
 | 16/11/2026 | D-06 marcada como substituída; inclusão de D-15 a D-17 (template versionado, criação de grupo por BAT, `tcc.typ` versionado) | Sessão de trabalho autorizada pelo professor |
 | 23/11/2026 | D-09 confirmada como Vigente; inclusão de D-18 a D-21 (elementos opcionais na pasta-modelo, lombada não oferecida, binário e fontes no Git, registro de testes) | Sessão de trabalho autorizada pelo professor |
+| 23/11/2026 | Inclusão de D-22 (sem registro escrito da licença das fontes por enquanto) | Sessão de trabalho autorizada pelo professor |

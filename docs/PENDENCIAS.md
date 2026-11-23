@@ -40,7 +40,7 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 | P-15 | Fluxo completo de criação e compilação de grupo | Alta | Professor + equipe | Parcial |
 | P-16 | Dois grupos reais independentes | Alta | Professor + equipe | Pendente |
 | P-17 | Registro formal de testes | Baixa | Professor | Concluída |
-| P-18 | Licença das fontes por escrito | Média | Professor | Aguardando decisão |
+| P-18 | Licença das fontes por escrito | Média | Professor | Concluída |
 | P-19 | Segunda versão real do template e troca de versão em grupo real | Média | Equipe técnica | Pendente |
 | P-20 | Funções do template para os elementos opcionais | Média | Equipe técnica | Pendente |
 
@@ -147,7 +147,7 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 ### P-13 — Binário do Typst e fontes dentro do Git
 
 - **Por que importava:** o repositório carrega `ferramentas/typst.exe` (52 MB) e `ferramentas/fontes/` (3,3 MB). Isso funciona, mas engorda o histórico e, no caso das fontes, expõe arquivos proprietários se o repositório for publicado.
-- **O que foi decidido:** em 23/11/2026 o professor decidiu manter tudo no repositório (D-20), para que o aluno não precise instalar compilador nem fonte. A responsabilidade pela licença das fontes continua sendo do professor (D-12); o registro por escrito dessa base permanece em P-18.
+- **O que foi decidido:** em 23/11/2026 o professor decidiu manter tudo no repositório (D-20), para que o aluno não precise instalar compilador nem fonte. A responsabilidade pela licença das fontes continua sendo do professor (D-12), e ele decidiu, na mesma data, que não haverá registro escrito dessa base por enquanto (D-22).
 - **Responsável:** professor.
 - **Status:** Concluída.
 
@@ -206,10 +206,11 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 ### P-18 — Licença das fontes por escrito
 
-- **Por que importa:** o professor assumiu a responsabilidade pela licença (D-12), mas não há registro documental dessa autorização além do registro de decisões.
-- **O que falta:** se o repositório for compartilhado ou publicado, guardar por escrito a base do uso dos arquivos de Arial (licença institucional, contrato ou termo). O projeto não valida essa licença.
+- **Por que importa:** o professor assumiu a responsabilidade pela licença (D-12), mas não existe registro documental dessa autorização além do registro de decisões.
+- **O que foi decidido:** em 23/11/2026 o professor decidiu que **não haverá registro por escrito da licença das fontes por enquanto** (D-22). A responsabilidade continua sendo dele, como em D-12.
+- **Reabertura:** se o repositório for compartilhado fora da instituição ou publicado, a decisão precisa ser revista antes, porque os arquivos de Arial são proprietários.
 - **Responsável:** professor.
-- **Status:** Aguardando decisão.
+- **Status:** Concluída.
 
 ---
 
@@ -234,3 +235,4 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 | 12/11/2026 | Criação, com P-01 a P-18 |
 | 16/11/2026 | P-12 e P-14 concluídas; P-15 e P-17 atualizadas; inclusão de P-19 (segunda versão real do template) |
 | 23/11/2026 | P-02, P-09, P-13 e P-17 concluídas; inclusão de P-20 (funções do template para os elementos opcionais) |
+| 23/11/2026 | P-18 concluída por decisão do professor (não haverá registro escrito da licença das fontes por enquanto) |
