@@ -154,6 +154,80 @@ texto, use a chave do arquivo .bib com "@". Exemplo:
 A lista de referências é gerada automaticamente no fim do
 trabalho, em ordem alfabética, no padrão ABNT.
 
+Importante: só aparecem na lista as obras que forem citadas no
+texto. Uma entrada no .bib que não for citada não será impressa,
+e não gera aviso. Cite cada obra que quiser listar.
+
+Campos que funcionam bem (receitas verificadas):
+
+  Livro:
+    @book{chave,
+      author = {Sobrenome, Nome},
+      title = {Título do livro},
+      edition = {4},
+      address = {Petrópolis},
+      publisher = {Vozes},
+      year = {2025},
+    }
+
+  Parte de livro (capítulo):
+    @incollection{chave,
+      author = {Sobrenome, Nome},
+      title = {Título do capítulo},
+      booktitle = {Título da obra},
+      editor = {Sobrenome, Nome (org.)},
+      address = {São Paulo},
+      publisher = {Editora},
+      year = {2025},
+      pages = {10--20},
+    }
+
+  Artigo de periódico:
+    @article{chave,
+      author = {Sobrenome, Nome},
+      title = {Título do artigo},
+      journal = {Nome do periódico},
+      address = {São Paulo},
+      volume = {12},
+      number = {3},
+      pages = {10--20},
+      year = {2025},
+      month = {maio},
+    }
+
+  Trabalho acadêmico (TCC, dissertação, tese):
+    @thesis{chave,
+      author = {Sobrenome, Nome},
+      title = {Título},
+      type = {Dissertação (Mestrado em ...)},
+      publisher = {Instituição},    // use publisher, não institution
+      address = {Cidade},
+      year = {2025},
+      url = {https://...},          // opcional
+      urldate = {2025-01-01},       // opcional, AAAA-MM-DD
+    }
+
+  Documento online (site):
+    @misc{chave,
+      author = {Sobrenome, Nome},
+      title = {Título da página},
+      year = {2025},
+      url = {https://...},
+      urldate = {2025-01-01},       // obrigatório para online
+    }
+    Use sempre "url" e "urldate"; não use "howpublished" nem "note".
+
+Limitações conhecidas do gerador (não corrigíveis no template):
+  - Anais de evento e patente não saem no formato do manual: use
+    @misc com o texto já formatado no campo "title", ou registre
+    a referência manualmente com orientação do professor.
+  - A URL aparece entre < > (ex.: Disponível em: <https://...>).
+    O manual não usa os sinais; é uma limitação do estilo ABNT
+    embutido no Typst. Se a coordenação exigir sem os sinais,
+    a referência precisará ser escrita manualmente.
+  - A edição e a data de acesso de artigos podem precisar de
+    ajuste manual quando o manual exigir "ano" em vez de "v.".
+
 Para citações diretas com mais de três linhas, use:
 
   #citacao-longa[

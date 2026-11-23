@@ -1,5 +1,5 @@
-// GERADO pelo gerar-pdf.bat a partir de tcc-v001.typ - nao edite
-// v001 | 12/11/2026 | versao inicial: equivalente ao modelo de 12/11/2026
+// GERADO pelo gerar-pdf.bat a partir de tcc-v002.typ - nao edite
+// v002 | 23/11/2026 | correcoes de P-01 (legenda/fonte de ilustracoes e tabelas alinhadas e em negrito) e P-03 (folha de aprovacao: titulacao antes do nome)
 // Template do TCC — Manual SENAI-SP 2025 (capítulo 5).
 // Este arquivo concentra a formatação. É uma versão publicada: não edite.
 // Correções geram uma nova versão (tcc-v002.typ) em ferramentas/template.
@@ -46,7 +46,23 @@
   set par(justify: true, leading: 1em, first-line-indent: 1.25cm)
   set heading(numbering: "1.1.1.1.1")
   set figure.caption(separator: [ – ])
-  show figure.caption: set text(size: 10pt)
+  show figure.caption: it => {
+    let num = if it.numbering != none {
+      numbering(it.numbering, ..it.counter.at(it.location()))
+    } else {
+      none
+    }
+    block(
+      width: 100%,
+      above: 0.5em,
+      below: 0.5em,
+      align(left, text(size: 10pt)[
+        #if num != none [*#it.supplement #num*]
+        #it.separator
+        #it.body
+      ]),
+    )
+  }
   show figure.where(kind: image): set figure.caption(position: top)
   show figure.where(kind: table): set figure.caption(position: top)
   show figure.where(kind: "quadro"): set figure.caption(position: top)
@@ -193,8 +209,8 @@
   #for examinador in d.banca [
     #block(inset: (left: 8cm))[
       #line(length: 100%)
-      #align(center, text(size: 12pt)[#examinador.nome])
-      #align(center, text(size: 12pt)[#examinador.titulo — #examinador.instituicao])
+      #align(center, text(size: 12pt)[#examinador.at("titulo", default: "") #examinador.nome])
+      #align(center, text(size: 12pt)[#examinador.instituicao])
     ]
     #v(0.8cm)
   ]
@@ -280,18 +296,24 @@
 // Legenda acima (tipo, número, travessão e título) e fonte abaixo,
 // ambas em fonte 10. A fonte faz parte do bloco da figura para não
 // se separar dela na quebra de página.
-#let figura(caminho, legenda, fonte: none, largura: 100%) = figure(
-  stack(
-    align(center, image("/" + caminho, width: largura)),
-    if fonte != none {
-      v(0.5em)
-      align(center, text(size: 10pt)[Fonte: #fonte])
-    },
+#let figura(caminho, legenda, fonte: none, largura: 100%) = align(
+  center,
+  block(
+    width: largura,
+    figure(
+      block(width: 100%, {
+        align(center, image("/" + caminho, width: 100%))
+        if fonte != none {
+          v(0.5em)
+          align(left, text(size: 10pt)[*Fonte:* #fonte])
+        }
+      }),
+      caption: legenda,
+      kind: image,
+      supplement: [Figura],
+      numbering: "1",
+    ),
   ),
-  caption: legenda,
-  kind: image,
-  supplement: [Figura],
-  numbering: "1",
 )
 
 // ---------- Tabela e quadro (manual, 2.12) ----------
@@ -300,13 +322,13 @@
 #let tabela(corpo, legenda, fonte: none, tipo: [Tabela]) = {
   let chave = if tipo == [Tabela] { table } else { "quadro" }
   figure(
-    stack(
-      corpo,
+    block(width: 100%, {
+      corpo
       if fonte != none {
         v(0.5em)
-        align(center, text(size: 10pt)[Fonte: #fonte])
-      },
-    ),
+        align(left, text(size: 10pt)[*Fonte:* #fonte])
+      }
+    }),
     caption: legenda,
     kind: chave,
     supplement: tipo,

@@ -12,7 +12,7 @@
 - **Status possíveis:** Aprovado, Aprovado com ressalva, Reprovado, Pendente.
 - Este arquivo **não substitui a evidência**: o PDF, a captura, o hash ou o log é que comprovam o resultado. Quando a evidência não está no repositório, isso é dito no próprio teste.
 - Teste sem artefato verificável fica **Pendente**, mesmo que a execução pareça ter dado certo (`AGENTS.md`, seção 8).
-- Este registro não declara conformidade do template com o manual. A comparação visual completa com as figuras do manual continua pendente (P-01).
+- Este registro não declara conformidade do template com o manual. A comparação visual com as figuras do manual avançou para as figuras pré-textuais (P-01, T-08); as figuras 2 e 4 permanecem pendentes.
 
 ## 2. Ambiente de referência
 
@@ -34,6 +34,10 @@
 | T-04 | 16/11/2026 | Equivalência de layout: PDF v004 (template anterior) × v005 (template v001) | Aprovado com ressalva |
 | T-05 | 23/11/2026 | Pasta-modelo com os includes opcionais comentados não altera o PDF | Aprovado |
 | T-06 | 23/11/2026 | Pasta-modelo com todos os elementos opcionais ativos | Aprovado com ressalva |
+| T-07 | 23/11/2026 | Dois grupos independentes, sem vazamento de conteúdo (P-16) | Aprovado com ressalva |
+| T-08 | 23/11/2026 | Comparação visual com as figuras do manual (P-01) | Aprovado com ressalva |
+| T-09 | 23/11/2026 | Referências: tipos usados pelos alunos (P-06) | Aprovado com ressalva |
+| T-10 | 23/11/2026 | Folha de aprovação e publicação da v002 (P-03, P-19) | Aprovado com ressalva |
 
 ---
 
@@ -130,12 +134,76 @@
 
 ---
 
+### T-07 — Dois grupos independentes, sem vazamento de conteúdo (P-16)
+
+- **Data:** 23/11/2026.
+- **Objetivo:** verificar que grupos criados a partir da pasta-modelo não compartilham conteúdo, versão do template ou PDF, e que o compilador não vaza dados entre grupos.
+- **Ambiente:** Windows 11; typst 0.15.1; cópia isolada do projeto em `%TEMP%\opencode\p16` (sem `.git`).
+- **Entradas:** dois grupos criados por `administracao/criar-grupo.bat` (`Grupo-Alfa` e `Grupo-Beta`), com `dados.typ` distintos e marcadores exclusivos no `02-textuais/introducao.typ` (`ALFA-9F3K` e `BETA-7Q2M`).
+- **Comando:**
+  ```
+  echo Grupo-Alfa | administracao\criar-grupo.bat
+  echo Grupo-Beta  | administracao\criar-grupo.bat
+  echo. | grupos\Grupo-Alfa\gerar-pdf.bat
+  echo. | grupos\Grupo-Beta\gerar-pdf.bat
+  ```
+- **Resultado esperado:** dois PDFs distintos, sem texto de um grupo no outro; `template-usado.txt` e `saida/historico.txt` corretos por grupo.
+- **Resultado observado:** compilação sem avisos, código 0, nos dois grupos. Extração de texto dos PDFs (via `pdftext-any.py`) confirmou ausência total de vazamento: nenhum dos 11 marcadores do Grupo Alfa aparece no PDF do Grupo Beta e vice-versa. PDFs com hashes distintos (`55F70CA9858354421218652B5E185E2324DF7391C9C14F2C947D91369817344A` e `58AA74DC32F4F41D417B31251ACB62F5D42180A35B98E1329842C260A7D48EB4`).
+- **Evidência:** `%TEMP%\opencode\p16\alfa.txt` e `%TEMP%\opencode\p16\beta.txt` (textos extraídos); `saida/TCC-Grupo-Alfa-v001.pdf` e `saida/TCC-Grupo-Beta-v001.pdf` na área isolada.
+- **Limitações:** teste executado pela equipe técnica, em área isolada, com v001 apenas; não cobre troca de versão entre grupos (P-19).
+- **Status:** Aprovado com ressalva.
+
+---
+
+### T-08 — Comparação visual com as figuras do manual (P-01)
+
+- **Data:** 23/11/2026.
+- **Objetivo:** comparar o PDF gerado pelo modelo com as figuras 1, 3, 5 e 6 do manual, registrando divergências.
+- **Ambiente:** Windows 11; typst 0.15.1; renderização do manual via `%TEMP%\opencode\render-manual.ps1` (API `Windows.Data.Pdf`).
+- **Entradas:** PDF do modelo (`%TEMP%\opencode\cmp-modelo\out.pdf`, 10 páginas) e páginas 39, 42, 44, 46, 47 e 50 do manual.
+- **Resultado esperado:** identificar divergências entre o template e as figuras, fundamentando cada uma no texto normativo.
+- **Resultado observado:** quatro divergências, todas nas figuras do manual (não no template): (1) capa, segunda linha em itálico na figura × maiúsculas/negrito exigidas pela seção 5.2.1; (2) folha de rosto com ponto final em Orientador/Coorientador na figura × seção 5.2.3 sem exigência; (3) folha de aprovação sem "Aprovado em:" na figura × seção 5.2.5 com data de aprovação; (4) sumário com níveis secundários em maiúsculas sem negrito e entradas pós-textuais na coluna dos indicativos × seções 2.4 e 5.2.15. Uma divergência real do template (fonte centralizada em vez de acompanhar as margens da ilustração, seção 2.11) foi corrigida na v002 (D-24).
+- **Evidência:** `%TEMP%\opencode\manual-png\pag-39.png`, `pag-42.png`, `pag-44.png`, `pag-46.png`, `pag-47.png`, `pag-50.png` e `%TEMP%\opencode\cmp-modelo\png\pag-01..pag-10.png`.
+- **Limitações:** figuras 2 (diagrama estrutural) e 4 (lombada) não comparadas; a figura 4 está fora de escopo por D-19.
+- **Status:** Aprovado com ressalva.
+
+---
+
+### T-09 — Referências: tipos usados pelos alunos (P-06)
+
+- **Data:** 23/11/2026.
+- **Objetivo:** testar os tipos de referência mais usados e comparar com os exemplos da seção 4 do manual.
+- **Ambiente:** Windows 11; typst 0.15.1; CSL `associacao-brasileira-de-normas-tecnicas`.
+- **Entradas:** três arquivos `.bib` em `%TEMP%\opencode\p06\` (refs.bib, refs2.bib, refs3.bib) com livro, capítulo, artigo, tese, anais, patente, site e legislação; PDFs compilados (`out.pdf`, `out2.pdf`, `out3.pdf`).
+- **Resultado esperado:** cada tipo sai conforme o exemplo correspondente do manual.
+- **Resultado observado:** livro conforme (4.1); artigo conforme, exceto local e "ano" (4.3); capítulo conforme, com ressalva de capitalização de "(org.)" (4.2); tese só com `publisher` (4.4); site só com `url`/`urldate`, com URL entre < > (4.5); anais sem o título do anais (4.6); patente sem número e com pontuação sobrando (4.7); legislação plausível (4.9).
+- **Evidência:** `%TEMP%\opencode\p06\png\pag-02.png` (três compilações).
+- **Limitações:** receitas documentadas em `modelo/LEIA-ME.txt`; anais e patente não suportados pelo CSL (limitação registrada).
+- **Status:** Aprovado com ressalva.
+
+---
+
+### T-10 — Folha de aprovação e publicação da v002 (P-03, P-19)
+
+- **Data:** 23/11/2026.
+- **Objetivo:** validar a v002 do template (correções de P-01 e P-03) e a folha de aprovação.
+- **Ambiente:** Windows 11; typst 0.15.1; `%TEMP%\opencode\cmp-v002\` com `tcc-v002.typ` copiado como `tcc.typ`.
+- **Entradas:** `modelo/` completo compilado com a v002; `dados.typ` padrão.
+- **Comando:**
+  ```
+  ferramentas\typst.exe compile <copia>\main.typ <copia>\out.pdf --root <copia> --font-path ferramentas\fontes --ignore-system-fonts --input "versao-template=v002"
+  ```
+- **Resultado esperado:** compilação sem avisos; folha de aprovação com título antes do nome e instituição em linha própria; legendas e fontes de ilustrações/tabelas alinhadas e com rótulo em negrito.
+- **Resultado observado:** compilação sem avisos, código 0, 10 páginas. Renderização de `pag-03.png` confirmou a ordem título, nome, instituição. A v002 foi publicada em `ferramentas/template/tcc-v002.typ` sem alterar a v001.
+- **Evidência:** `%TEMP%\opencode\cmp-v002\out.pdf` e `%TEMP%\opencode\cmp-v002\png\`.
+- **Limitações:** validação visual completa em máquina de aluno pendente (P-10).
+- **Status:** Aprovado com ressalva.
+
+---
+
 ## 5. Testes que faltam (não são testes aprovados)
 
-- Comparação visual com as figuras do manual (P-01).
 - Compilação em máquina de aluno (P-10) e em rede/UNC (P-11).
-- Dois grupos reais independentes (P-16).
-- Ciclo de versão do template com uma correção real (P-19).
 - Listas de ilustrações e de tabelas com figuras, tabelas e quadros no documento (ver limitação de T-06).
 
 ## 6. Histórico deste documento
@@ -143,3 +211,4 @@
 | Data | Alteração |
 |---|---|
 | 23/11/2026 | Criação, com T-01 a T-06 |
+| 23/11/2026 | Inclusão de T-07 a T-10 (dois grupos independentes, comparação visual com as figuras, referências por tipo, folha de aprovação e v002) | Sessão de trabalho autorizada pelo professor |

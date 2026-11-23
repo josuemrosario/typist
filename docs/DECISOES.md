@@ -48,6 +48,8 @@
 | D-20 | 23/11/2026 | `typst.exe` e fontes Arial continuam versionados no Git | Vigente |
 | D-21 | 23/11/2026 | Registro formal de testes em `docs/TESTES.md` | Vigente |
 | D-22 | 23/11/2026 | Não há registro escrito da licença das fontes por enquanto | Vigente |
+| D-23 | 23/11/2026 | Comparação visual com as figuras do manual (P-01) concluída para as figuras pré-textuais | Vigente com ressalva |
+| D-24 | 23/11/2026 | Publicação do template v002 (correções de P-01 e P-03) | Vigente com ressalva |
 
 ---
 
@@ -244,6 +246,35 @@
 
 ---
 
+### D-23 — Comparação visual com as figuras do manual (P-01) concluída para as figuras pré-textuais
+
+- **Data:** 23/11/2026
+- **Decisão:** as figuras 3 (capa), 5 (folha de rosto), 6 (folha de aprovação) e 1 (ilustração) do manual foram comparadas visualmente com o PDF gerado pelo modelo (v001). O template segue o texto normativo em todos os pontos verificados; as divergências estão nas próprias figuras do manual, que contradizem a seção 2.4 e o item 2.11. Quatro divergências documentadas:
+  1. Capa (fig. 3): a figura mostra a segunda linha (campus/unidade) em negrito e itálico com maiúsculas mistas; o texto da seção 5.2.1 exige que "todas as informações" sejam em maiúsculas, negrito e centralizadas. Vale a seção 5.2.1 (template mantido).
+  2. Folha de rosto (fig. 5): a figura termina as linhas "Orientador:" e "Coorientador:" com ponto final; a seção 5.2.3 não exige o ponto. Vale a seção 5.2.3 (template mantido, sem ponto).
+  3. Folha de aprovação (fig. 6): a figura omite o campo "Aprovado em:"; a seção 5.2.5 exige a data de aprovação. Vale a seção 5.2.5 (template mantido, com a data).
+  4. Sumário (fig. da p. 45): a figura mostra os níveis secundários em maiúsculas sem negrito e as entradas pós-textuais na coluna dos indicativos; a seção 2.4 exige nível secundário em negrito com iniciais maiúsculas, e a seção 5.2.15 exige os títulos alinhados pela margem do título do indicativo mais extenso, inclusive os pós-textuais. Vale a seção 2.4 / 5.2.15 (template mantido; D-09 reafirmada).
+  Além disso, a seção 2.11 exige que legenda, fonte e notas "acompanhem as margens da ilustração"; o template (v001) centralizava a fonte, divergindo. Corrigido na v002.
+- **Base normativa:** Manual SENAI-SP 2025, 2.4 (p. 5), 2.11 (pp. 8-9), 5.2.1 (pp. 32-34), 5.2.3 (pp. 36-37), 5.2.5 (pp. 38-39), 5.2.15 (pp. 44-45).
+- **Evidência:** renderizações em `%TEMP%\opencode\cmp-modelo\png\` (pag-01 a pag-10) e `%TEMP%\opencode\manual-png\` (pag-39, pag-42, pag-44, pag-46, pag-47, pag-50); comparação visual registrada nesta sessão.
+- **Status:** Vigente com ressalva (figuras 2 e 4 do manual não comparadas: figura 2 é diagrama estrutural e figura 4 é exemplo de lombada, fora de escopo por D-19).
+
+---
+
+### D-24 — Publicação do template v002 (correções de P-01 e P-03)
+
+- **Data:** 23/11/2026
+- **Decisão:** criada a versão `ferramentas/template/tcc-v002.typ`, sem editar a v001, com três correções validadas em `%TEMP%\opencode\cmp-v002\out.pdf`:
+  1. Legenda e fonte de ilustrações e tabelas: alinhadas à esquerda, acompanhando as margens da ilustração (manual, 2.11 e 2.12), com o rótulo ("Figura n", "Tabela n", "Quadro n") e a palavra "Fonte:" em negrito.
+  2. A fonte da ilustração passa a ser impressa em negrito ("Fonte:") e alinhada à esquerda, dentro do bloco da ilustração (manual, 2.11).
+  3. Folha de aprovação: o nome do examinador passa a ser precedido do título (Prof. Dr., Profa. Me.) e a instituição passa a ser impressa em linha própria, em ordem título, nome, instituição (manual, 5.2.5 f).
+  A v001 permanece imutável e disponível no menu do `gerar-pdf.bat`.
+- **Base normativa:** Manual SENAI-SP 2025, 2.11 (pp. 8-9), 2.12 (pp. 9-10), 5.2.5 (pp. 38-39).
+- **Evidência:** compilação de `%TEMP%\opencode\cmp-v002\out.pdf` (10 páginas, sem avisos) e renderização de `pag-03.png` (folha de aprovação) e `pag-02.png` (figura).
+- **Status:** Vigente com ressalva (validação visual completa da v002 em máquina de aluno pendente, P-10).
+
+---
+
 ## 4. Divergências e interpretações registradas
 
 | # | Origem | Divergência | Interpretação adotada | Status |
@@ -252,6 +283,9 @@
 | 2 | Manual, 2.8 (p. 7) × prática comum em Word | Contagem começa na folha de rosto, não na capa | Vale o manual (D-05) | Vigente |
 | 3 | NBR 6024:2012, 4.1 j) | A norma exige hierarquia tipográfica, mas deixa livres os recursos de destaque | Adotados maiúsculas, negrito, itálico e sublinhado (D-04) | Vigente |
 | 4 | NBR 6027:2012, 5.2 | Títulos do sumário alinhados pelo indicativo mais extenso | Coluna fixa de 4 em; ressalva com 10+ seções primárias (D-08) | Vigente com ressalva |
+| 5 | Manual, 2.11 (pp. 8-9) × template v001 | A fonte e a legenda de ilustrações/tabelas devem acompanhar as margens da ilustração; a v001 centralizava a fonte | Corrigido na v002 (D-24) | Vigente |
+| 6 | Manual, 5.2.5 (pp. 38-39) × figura 6 | A figura omite a data de aprovação, que o texto exige | Vale o texto; template mantém "Aprovado em:" | Vigente |
+| 7 | Manual, 2.4 (p. 5) × figura da p. 45 | Reafirmação de D-09 para as figuras pré-textuais: prevalece a seção 2.4 sobre a figura | Vale a seção 2.4 (D-09, D-23) | Vigente |
 
 ---
 
@@ -261,7 +295,7 @@ Não são decisões: são assuntos abertos, detalhados em `docs/PENDENCIAS.md`.
 
 - Normas IBGE de apresentação tabular não estão em `docs/`; a formatação de tabelas segue o manual e a prática já adotada, sem base normativa própria.
 - O template não tem funções próprias para os elementos opcionais: errata, glossário e as listas de ilustrações e de tabelas ainda têm ressalvas de formatação (D-18 e P-20).
-- O template não foi comparado visualmente com todas as figuras do manual.
+- O template não foi comparado visualmente com todas as figuras do manual (figuras 2 e 4 ainda pendentes; figuras 1, 3, 5 e 6 comparadas em D-23).
 - O ambiente só foi testado nesta máquina.
 
 ---
@@ -274,3 +308,4 @@ Não são decisões: são assuntos abertos, detalhados em `docs/PENDENCIAS.md`.
 | 16/11/2026 | D-06 marcada como substituída; inclusão de D-15 a D-17 (template versionado, criação de grupo por BAT, `tcc.typ` versionado) | Sessão de trabalho autorizada pelo professor |
 | 23/11/2026 | D-09 confirmada como Vigente; inclusão de D-18 a D-21 (elementos opcionais na pasta-modelo, lombada não oferecida, binário e fontes no Git, registro de testes) | Sessão de trabalho autorizada pelo professor |
 | 23/11/2026 | Inclusão de D-22 (sem registro escrito da licença das fontes por enquanto) | Sessão de trabalho autorizada pelo professor |
+| 23/11/2026 | Inclusão de D-23 (P-01 concluído para figuras pré-textuais) e D-24 (publicação da v002); atualização de PENDENCIAS.md e TESTES.md | Sessão de trabalho autorizada pelo professor |

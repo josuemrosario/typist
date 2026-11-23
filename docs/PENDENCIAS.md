@@ -52,9 +52,10 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 - **Por que importa:** o `AGENTS.md` (seção 3) exige comparar o resultado do Typst com as figuras do manual; a figura é a única referência de aparência. Medição de margem e entrelinha não substitui isso.
 - **O que já existe:** conferência de medidas no PDF v004 (A4, margens, entrelinha, posição do número, fontes) e leitura das figuras de capa, folha de rosto, folha de aprovação e sumário em sessões anteriores.
-- **O que falta:** comparação lado a lado documentada, figura por figura, com o PDF gerado, registrando divergências e o que foi ajustado. As figuras são imagens dentro do PDF do manual e precisam ser renderizadas para leitura.
+- **O que foi feito (23/11/2026):** renderização das figuras 1, 3, 5 e 6 do manual (mancha gráfica) e comparação lado a lado com o PDF do modelo (v001), em `%TEMP%\opencode\cmp-modelo\png\`. Resultado: o template segue o texto normativo nos quatro casos; quatro divergências identificadas nas próprias figuras do manual (capa em itálico, ponto final em Orientador/Coorientador, ausência de "Aprovado em:", sumário com níveis secundários em maiúsculas sem negrito) — registradas em D-23. Uma divergência real do template (fonte centralizada, quando a seção 2.11 exige acompanhamento das margens da ilustração) foi corrigida na v002 (D-24).
+- **O que falta:** comparação das figuras 2 (diagrama estrutural do trabalho) e 4 (exemplo de lombada). A figura 4 está fora de escopo por D-19 (lombada não oferecida). A figura 2 é ilustrativa e não impõe layout.
 - **Responsável:** equipe técnica.
-- **Status:** Parcial.
+- **Status:** Concluída com ressalva.
 
 ### P-02 — Elementos pré-textuais e pós-textuais opcionais
 
@@ -69,9 +70,10 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 - **Por que importa:** é elemento obrigatório e depende de banca, nota, data e assinaturas; erro aqui aparece na versão final.
 - **O que já existe:** `modelo/01-pre-textuais/folha-de-aprovacao.typ` com campos de banca e texto de aprovação.
-- **O que falta:** conferir contra o manual, 5.2.5 (pp. 37-39) e a figura correspondente; verificar se o espaço para assinaturas e a ordem dos campos coincidem; testar com nomes longos de orientador e de membros.
+- **O que foi feito (23/11/2026):** confronto com o manual, 5.2.5 (pp. 38-39), e com a figura 6; confirmado que o manual exige a data de aprovação (seção 5.2.5, item g), que a figura omite. O layout (recuo de 8 cm, espaço simples, alinhamento do meio da mancha para a direita) já estava conforme. Corrigida a ordem dos campos do examinador (título antes do nome, instituição em linha própria) na v002 (D-24).
+- **O que falta:** testar com nomes longos de orientador e membros da banca (P-10).
 - **Responsável:** equipe técnica.
-- **Status:** Parcial.
+- **Status:** Concluída com ressalva.
 
 ### P-04 — Resumo e abstract: limites e formato
 
@@ -92,7 +94,17 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 - **Por que importa:** o estilo CSL resolve a maioria dos casos, mas o manual (seção 4, pp. 21-30) tem exemplos próprios; divergência de destaque e pontuação é erro frequente em TCC.
 - **O que já existe:** bibliografia com CSL `associacao-brasileira-de-normas-tecnicas`, testada com livro e página web no grupo de teste.
-- **O que falta:** testar os tipos que os alunos realmente usam (livro, capítulo, artigo de periódico, trabalho acadêmico, norma técnica, site, vídeo) e comparar cada um com o exemplo correspondente do manual; se o CSL divergir, registrar a divergência e decidir entre ajuste local ou correção manual orientada.
+- **O que foi feito (23/11/2026):** teste comparativo dos tipos livro, capítulo, artigo de periódico, trabalho acadêmico, anais de evento, patente, documento online e legislação, em `%TEMP%\opencode\p06\` (refs.bib, refs2.bib, refs3.bib). Resultado:
+  - livro: conforme ao exemplo do manual (4.1).
+  - artigo de periódico: conforme, exceto local e "ano" em vez de "v." (4.3).
+  - capítulo (incollection): conforme, com ressalva da capitalização de "(org.)" (4.2).
+  - trabalho acadêmico: só sai corretamente com `publisher` (não `institution`/`school`); a ordem dos campos difere do manual (4.4).
+  - documento online: só sai com `url`/`urldate`; a URL aparece entre < > (4.5).
+  - anais de evento: o título do anais não é impresso (4.6).
+  - patente: o número não é impresso e sobra pontuação (4.7).
+  - legislação: plausível, com ressalva.
+  Receitas e limitações documentadas em `modelo/LEIA-ME.txt` (seção 5). A entrada de site do `modelo/referencias.bib` foi corrigida para `url`/`urldate`.
+- **O que falta:** decidir se anais e patente merecem helper próprio ou orientação de preenchimento manual; validar em TCC real.
 - **Responsável:** equipe técnica.
 - **Status:** Parcial.
 
@@ -174,16 +186,18 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 ### P-16 — Dois grupos reais independentes
 
 - **Por que importa:** a cobertura mínima do `AGENTS.md` (seção 6) exige dois grupos independentes, sem vazamento de conteúdo — foi justamente o problema herdado dos grupos antigos.
-- **O que falta:** criar dois grupos a partir do modelo com conteúdo diferente, compilar os dois e conferir que nenhum arquivo, imagem ou referência de um aparece no PDF do outro. Verificar também que cada grupo registra sua própria versão do template em `template-usado.txt`.
+- **O que foi feito (23/11/2026):** em `%TEMP%\opencode\p16\`, dois grupos (`Grupo-Alfa` e `Grupo-Beta`) foram criados por `criar-grupo.bat`, receberam dados e textos distintos (marcadores `ALFA-9F3K` e `BETA-7Q2M`) e foram compilados com `gerar-pdf.bat` (v001). Extração de texto dos dois PDFs confirmou ausência total de vazamento: nenhum marcador, nome, título ou unidade do Grupo Alfa aparece no PDF do Grupo Beta, e vice-versa. PDFs com hashes distintos (55F70C... e 58AA74...), `template-usado.txt` e `saida/historico.txt` corretos por grupo. Evidência registrada como teste T-07 em `docs/TESTES.md`.
+- **O que falta:** repetir em máquina de aluno (P-10).
 - **Responsável:** professor, com apoio da equipe técnica.
-- **Status:** Pendente.
+- **Status:** Concluída com ressalva.
 
 ### P-19 — Segunda versão real do template e troca de versão em grupo real
 
 - **Por que importa:** o menu de versões foi testado em área isolada, com uma `tcc-v002.typ` de teste que só mudava o cabeçalho. Falta provar o ciclo completo com uma correção real: publicar `tcc-v002.typ`, compilar um grupo nas duas versões e conferir que a versão registrada acompanha a escolha.
-- **O que falta:** quando houver a primeira correção de formatação, criar `ferramentas/template/tcc-v002.typ` (sem editar a v001), compilar `Grupo-Teste-01` nas duas versões e conferir `template-usado.txt`, `saida/historico.txt`, metadados dos PDFs e o cabeçalho do `tcc.typ` gerado.
+- **O que já existe:** o menu de versões foi testado em área isolada, com uma `tcc-v002.typ` de teste que só mudava o cabeçalho.
+- **O que foi feito (23/11/2026):** publicada a `ferramentas/template/tcc-v002.typ` com correções reais (D-24) e validada em `%TEMP%\opencode\cmp-v002\out.pdf`. Em `grupos/Grupo-Teste-01`, compilado nas duas versões: v001 (16/11/2026) e v002 (23/11/2026). Verificado: `template-usado.txt` (v002), `saida/historico.txt` (duas linhas, v001 e v002), cabeçalho do `tcc.typ` gerado ("GERADO ... a partir de tcc-v002.typ"), metadados do PDF (template-v002 presente) e preservação do PDF v001.
 - **Responsável:** equipe técnica.
-- **Status:** Pendente.
+- **Status:** Concluída.
 
 ### P-20 — Funções do template para os elementos opcionais
 
