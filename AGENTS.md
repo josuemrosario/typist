@@ -71,7 +71,9 @@ Ao avaliar requisitos, resolver dúvidas ou tomar decisões, usar esta prioridad
 - `docs/DECISOES.md` — decisões do projeto, com data, base normativa (documento, seção e página), evidência e status;
 - `docs/PENDENCIAS.md` — o que ainda falta fazer, com prioridade, responsável e status.
 
-Esses dois arquivos são o registro oficial do projeto. Consultá-los antes de propor mudanças. Alterá-los exige autorização (seção 9).
+Em 23/11/2026, também por autorização do professor, foi criado `docs/TESTES.md` — registro de testes, um bloco por teste, com ambiente, comando, resultado esperado e observado, evidência e status.
+
+Esses três arquivos são o registro oficial do projeto. Consultá-los antes de propor mudanças. Alterá-los exige autorização (seção 9).
 
 **Regra obrigatória:** não substituir exigências do SENAI-SP por regras genéricas da ABNT. Um modelo chamado “ABNT” não é prova de conformidade institucional.
 
@@ -132,8 +134,9 @@ Se qualquer item desta tabela divergir do manual, o manual prevalece. A tabela s
 typist/
 ├── administracao/     criar-grupo.bat e verificar-ambiente.bat (não compilam)
 ├── docs/              manual SENAI-SP, normas ABNT e registros do projeto
-│   ├── DECISOES.md    registro de decisões (D-01 a D-17)
-│   └── PENDENCIAS.md  o que ainda falta fazer (P-01 a P-19)
+│   ├── DECISOES.md    registro de decisões (D-01 a D-21)
+│   ├── PENDENCIAS.md  o que ainda falta fazer (P-01 a P-20)
+│   └── TESTES.md      registro de testes (T-01 a T-06)
 ├── ferramentas/       typst.exe, fontes/ (Arial) e template/ (versões)
 │   └── template/      tcc-v001.typ, tcc-v002.typ, ... (versões imutáveis)
 ├── modelo/            pasta-modelo do TCC (não contém tcc.typ)
@@ -179,7 +182,7 @@ typist/
 
 1. O professor executa `administracao\criar-grupo.bat` e digita o nome do grupo. O script cria `grupos/<nome-do-grupo>` com uma cópia de `modelo/`.
 2. O professor ajusta os dados de identificação do grupo em `dados.typ`.
-3. Os alunos preenchem os arquivos `.typ` de cada parte.
+3. Os alunos preenchem os arquivos `.typ` de cada parte. Os elementos opcionais (dedicatória, agradecimentos, epígrafe, errata, listas, glossário, apêndice, anexo, índice) já existem na pasta do grupo: para usar um deles, o aluno apaga o `//` do `#include` correspondente em `main.typ` e preenche o arquivo.
 4. Os alunos executam `gerar-pdf.bat` dentro da pasta do grupo.
 5. Na primeira compilação, o script pede a versão do template; nas seguintes, Enter mantém a versão usada antes e um número troca.
 6. O PDF é gravado em `saida/`, com número de versão sequencial, e a versão do template fica registrada em `template-usado.txt`, `saida/historico.txt` e nos metadados do PDF.
@@ -382,21 +385,22 @@ Não executar antes da confirmação.
 
 ## 11. Estado atual conhecido (verificar antes de agir)
 
-Levantamento de 16/11/2026, que substitui o de 12/11/2026. Conferir `docs/PENDENCIAS.md` antes de agir.
+Levantamento de 23/11/2026, que substitui o de 16/11/2026. Conferir `docs/PENDENCIAS.md` antes de agir.
 
 - **Definições anteriores removidas:** documento mestre, plano de estudo, pasta `analises/` e o `AGENTS.md` anterior. Não recriar.
-- **Registros do projeto:** `docs/DECISOES.md` (D-01 a D-17) e `docs/PENDENCIAS.md` (P-01 a P-19), atualizados em 16/11/2026.
+- **Registros do projeto:** `docs/DECISOES.md` (D-01 a D-21), `docs/PENDENCIAS.md` (P-01 a P-20) e `docs/TESTES.md` (T-01 a T-06), atualizados em 23/11/2026.
 - **Documentação disponível:** manual SENAI-SP 2025 e dez normas ABNT em `docs/` — NBR 14724:2024, NBR 6022:2018, NBR 6023:2025, NBR 10520:2023, NBR 6024:2012, NBR 6027:2012, NBR 6028:2021, NBR 6034:2004, NBR 12225:2023 e NBR 15287:2025. Ausentes: apenas as normas IBGE de apresentação tabular.
 - **Compilador:** `ferramentas/typst.exe`, versão 0.15.1, funcional e fora do `PATH`.
 - **Fontes:** `ferramentas/fontes/` com `arial.ttf`, `arialbd.ttf`, `ariali.ttf` e `arialbi.ttf` (3.494.124 bytes no total). O `gerar-pdf.bat` compila com `--font-path` e `--ignore-system-fonts` e aborta se a fonte faltar ou estiver inválida.
 - **Template versionado:** `ferramentas/template/tcc-v001.typ` (versão inicial) e `ferramentas/template/LEIA-ME.txt` (política de versões). `modelo/` não contém `tcc.typ`: ele é gerado na compilação, a partir da versão escolhida.
 - **Pasta-modelo:** `modelo/` completa (pré-textuais, textuais, pós-textuais, `dados.typ`, `gerar-pdf.bat`, `LEIA-ME.txt`), compilando sem avisos.
-- **Grupos:** apenas `grupos/Grupo-Teste-01`, criado por `administracao/criar-grupo.bat` em 16/11/2026, com PDF v001 gerado pelo template v001. `Grupo-01`, `Grupo-02` e `Grupo-Teste-Geral` foram removidos com autorização do professor; o conteúdo e os PDFs v001 a v004 continuam recuperáveis no commit `5e746e2`.
+- **Elementos opcionais:** 12 arquivos prontos em `modelo/01-pre-textuais/` (errata, dedicatória, agradecimentos, epígrafe, listas de ilustrações, de tabelas, de abreviaturas e siglas, de símbolos) e em `modelo/03-pos-textuais/` (glossário, apêndice, anexo, índice), com o `#include` comentado em `main.typ`; ativar é apagar o `//` (D-18). Três ressalvas de formatação continuam abertas em P-20.
+- **Grupos:** `grupos/Grupo-Teste-01`, criado por `administracao/criar-grupo.bat` em 16/11/2026, com PDF v001 gerado pelo template v001. `Grupo-01`, `Grupo-02` e `Grupo-Teste-Geral` foram removidos com autorização do professor; o conteúdo e os PDFs v001 a v004 continuam recuperáveis no commit `5e746e2`. Existe também `grupos/grupojosue/`, criado pela mesma via, ainda sem `tcc.typ` e sem PDF em `saida/`, e não versionado no momento deste levantamento.
 - **Criação de grupo:** `administracao/criar-grupo.bat` pede o nome, valida (sem espaço, acento, ponto ou hífen inicial; até 40 caracteres; nomes reservados do Windows), recusa pasta existente e copia `modelo/` com `robocopy`.
 - **Diagnóstico:** `administracao/verificar-ambiente.bat` verifica compilador, os quatro arquivos de Arial, `ferramentas/template`, `modelo/` e cada grupo; não compila. Atualizado em 16/11/2026 (P-12).
 - **Versão no PDF:** a versão escolhida vai nos metadados (`template-vNNN`), em `template-usado.txt` e em `saida/historico.txt`; não é impressa na página.
-- **Não testado:** comparação visual completa com as figuras do manual (P-01); compilação em máquina de aluno (P-10); rede/UNC (P-11); dois grupos reais independentes (P-16); tipos de referência além de livro e página web (P-06); publicação de uma segunda versão real do template (P-19).
-- **Pendências críticas:** P-01, P-03, P-10, P-15 e P-16, detalhadas em `docs/PENDENCIAS.md`.
+- **Não testado:** comparação visual completa com as figuras do manual (P-01); compilação em máquina de aluno (P-10); rede/UNC (P-11); dois grupos reais independentes (P-16); tipos de referência além de livro e página web (P-06); publicação de uma segunda versão real do template (P-19); listas de ilustrações e de tabelas com figuras, tabelas e quadros no documento (T-06, limitação registrada).
+- **Pendências críticas:** P-01, P-03, P-10, P-15, P-16 e P-20, detalhadas em `docs/PENDENCIAS.md`.
 
 ---
 

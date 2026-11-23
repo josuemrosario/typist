@@ -1,6 +1,6 @@
 # Pendências do projeto Typist
 
-**Atualizado em:** 16/11/2026
+**Atualizado em:** 23/11/2026
 **Objetivo:** reunir o que ainda falta para o ambiente do TCC ser considerado viável, com o motivo, o que exatamente falta, quem depende de quem e o status atual.
 
 Este documento é uma lista de trabalho, não uma declaração de conformidade. As decisões já tomadas estão em `docs/DECISOES.md`. A hierarquia das fontes continua sendo a de `AGENTS.md`, seção 2.
@@ -24,24 +24,25 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 | ID | Pendência | Prioridade | Responsável | Status |
 |---|---|---|---|---|
 | P-01 | Comparação visual com as figuras do manual | Alta | Equipe técnica | Parcial |
-| P-02 | Elementos pré-textuais e pós-textuais opcionais | Média | Professor + equipe | Aguardando decisão |
+| P-02 | Elementos pré-textuais e pós-textuais opcionais | Média | Professor + equipe | Concluída |
 | P-03 | Folha de aprovação: campos e layout | Alta | Equipe técnica | Parcial |
 | P-04 | Resumo e abstract: limites e formato | Baixa | Equipe técnica | Parcial |
 | P-05 | Sumário com 10 ou mais seções primárias | Média | Equipe técnica | Pendente |
 | P-06 | Referências: tipos usados pelos alunos | Alta | Equipe técnica | Parcial |
 | P-07 | Citações: conferência das regras do manual | Média | Equipe técnica | Parcial |
 | P-08 | Normas IBGE de apresentação tabular | Média | Professor | Bloqueado |
-| P-09 | Lombada (NBR 12225) | Baixa | Professor | Aguardando decisão |
+| P-09 | Lombada (NBR 12225) | Baixa | Professor | Concluída |
 | P-10 | Teste em máquina de aluno | Alta | Professor + equipe | Pendente |
 | P-11 | Compilação em rede/UNC | Média | Equipe técnica | Pendente |
 | P-12 | `administracao/verificar-ambiente.bat` desatualizado | Média | Equipe técnica | Concluída |
-| P-13 | Binário do Typst e fontes dentro do Git | Média | Professor | Aguardando decisão |
+| P-13 | Binário do Typst e fontes dentro do Git | Média | Professor | Concluída |
 | P-14 | Grupos legados `Grupo-01` e `Grupo-02` | Média | Professor | Concluída |
 | P-15 | Fluxo completo de criação e compilação de grupo | Alta | Professor + equipe | Parcial |
 | P-16 | Dois grupos reais independentes | Alta | Professor + equipe | Pendente |
-| P-17 | Registro formal de testes | Baixa | Professor | Aguardando decisão |
+| P-17 | Registro formal de testes | Baixa | Professor | Concluída |
 | P-18 | Licença das fontes por escrito | Média | Professor | Aguardando decisão |
 | P-19 | Segunda versão real do template e troca de versão em grupo real | Média | Equipe técnica | Pendente |
+| P-20 | Funções do template para os elementos opcionais | Média | Equipe técnica | Pendente |
 
 ---
 
@@ -57,10 +58,12 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 ### P-02 — Elementos pré-textuais e pós-textuais opcionais
 
-- **Por que importa:** o template cobre capa, folha de rosto, folha de aprovação, resumo, abstract, sumário, introdução, desenvolvimento, conclusão e referências. Dedicatória, agradecimentos, epígrafe, errata, listas de ilustrações/tabelas/abreviaturas, glossário, apêndice, anexo e índice não têm arquivo pronto.
-- **O que falta:** confirmar no manual (capítulo 5, seções 5.2 e 5.3) quais desses elementos são previstos para o TCC do SENAI-SP, quais são obrigatórios e como devem ser formatados; depois decidir se a pasta-modelo traz arquivos prontos (mesmo que vazios) ou apenas instrução no `LEIA-ME`.
-- **Responsável:** professor decide; equipe implementa.
-- **Status:** Aguardando decisão.
+- **Por que importa:** o template cobria capa, folha de rosto, folha de aprovação, resumo, abstract, sumário, introdução, desenvolvimento, conclusão e referências. Dedicatória, agradecimentos, epígrafe, errata, listas de ilustrações/tabelas/abreviaturas/símbolos, glossário, apêndice, anexo e índice não tinham arquivo pronto, e o aluno corria o risco de inventar formatação.
+- **O que foi feito:** em 23/11/2026, com autorização do professor (D-18), a pasta-modelo recebeu 12 arquivos opcionais, na ordem do manual, e o `main.typ` ganhou o `#include` de cada um comentado: `errata.typ`, `dedicatoria.typ`, `agradecimentos.typ`, `epigrafe.typ`, `lista-de-ilustracoes.typ`, `lista-de-tabelas.typ`, `lista-de-abreviaturas-e-siglas.typ`, `lista-de-simbolos.typ` em `01-pre-textuais/`; `glossario.typ`, `apendice.typ`, `anexo.typ`, `indice.typ` em `03-pos-textuais/`. Para usar um elemento, o grupo apaga o `//` do include correspondente.
+- **Evidência:** os 12 arquivos e o `main.typ` novo; testes T-05 e T-06 de `docs/TESTES.md` (pasta-modelo sem opcionais com o mesmo PDF de antes; todos os opcionais ativos compilando sem avisos em 22 páginas).
+- **O que falta:** as ressalvas de formatação (travessão nas listas de ilustrações e de tabelas, recuo do glossário, tabela da errata, posição da dedicatória e da epígrafe fora do template) dependem de funções novas no template — ver P-20.
+- **Responsável:** professor decidiu; equipe técnica implementou.
+- **Status:** Concluída.
 
 ### P-03 — Folha de aprovação: campos e layout
 
@@ -109,10 +112,11 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 ### P-09 — Lombada (NBR 12225)
 
-- **Por que importa:** a NBR 12225:2023 foi incorporada a `docs/` (D-13), mas o template não gera lombada, e não há decisão de oferecê-la. A lombada só é necessária se a instituição exigir encadernação com essa apresentação.
-- **O que falta:** decidir se o TCC do SENAI-SP precisa de lombada; se precisar, criar um arquivo separado (a lombada não faz parte do PDF do trabalho, e sim da capa dura).
+- **Por que importava:** a NBR 12225:2023 foi incorporada a `docs/` (D-13), mas o template não gera lombada. A lombada só é necessária se a instituição exigir encadernação com essa apresentação.
+- **O que foi decidido:** em 23/11/2026 o professor decidiu não oferecer lombada (D-19). O template continua sem função de lombada, e a norma fica apenas no acervo de consulta.
+- **Reabertura:** se a instituição passar a exigir encadernação com lombada, a decisão precisa ser revista antes de qualquer implementação.
 - **Responsável:** professor.
-- **Status:** Aguardando decisão.
+- **Status:** Concluída.
 
 ---
 
@@ -142,10 +146,10 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 ### P-13 — Binário do Typst e fontes dentro do Git
 
-- **Por que importa:** o repositório carrega `ferramentas/typst.exe` (52 MB) e `ferramentas/fontes/` (3,3 MB). Isso funciona, mas engorda o histórico e, no caso das fontes, expõe arquivos proprietários se o repositório for publicado.
-- **O que falta:** decidir se o binário continua versionado (é o que garante que o aluno não precise instalar nada) e se as fontes continuam no Git ou passam a ser distribuídas por outro meio.
+- **Por que importava:** o repositório carrega `ferramentas/typst.exe` (52 MB) e `ferramentas/fontes/` (3,3 MB). Isso funciona, mas engorda o histórico e, no caso das fontes, expõe arquivos proprietários se o repositório for publicado.
+- **O que foi decidido:** em 23/11/2026 o professor decidiu manter tudo no repositório (D-20), para que o aluno não precise instalar compilador nem fonte. A responsabilidade pela licença das fontes continua sendo do professor (D-12); o registro por escrito dessa base permanece em P-18.
 - **Responsável:** professor.
-- **Status:** Aguardando decisão.
+- **Status:** Concluída.
 
 ---
 
@@ -181,16 +185,24 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 - **Responsável:** equipe técnica.
 - **Status:** Pendente.
 
+### P-20 — Funções do template para os elementos opcionais
+
+- **Por que importa:** os arquivos opcionais criados em D-18 usam recursos genéricos do Typst, e três pontos não ficam como o manual pede: (1) a lista de ilustrações e a de tabelas saem sem o travessão entre o número e a legenda (o manual pede "Figura 1 – Título"); (2) o glossário sai com o recuo de primeira linha do corpo do texto, e o manual pede sem recuo; (3) a tabela da errata não tem formatação definida. Além disso, a posição da dedicatória e da epígrafe está resolvida dentro do arquivo de conteúdo, e não no template, o que contraria a separação entre template e conteúdo (D-02).
+- **O que falta:** publicar uma versão nova do template (sem editar a v001) com funções próprias — por exemplo `lista-de-ilustracoes()`, `lista-de-tabelas()`, `errata()`, `dedicatoria()`, `epigrafe()`, `glossario()` — que concentrem essa formatação, e ajustar os arquivos de `modelo/` para usá-las. Como isso cria uma versão real e uma troca de versão em grupo, o trabalho deve cobrir também P-19.
+- **Responsável:** equipe técnica, com autorização do professor.
+- **Status:** Pendente.
+
 ---
 
 ## 6. Documentação e registro
 
 ### P-17 — Registro formal de testes
 
-- **Por que importa:** a seção 6 do `AGENTS.md` pede identificador, data, objetivo, ambiente, comando, resultado esperado e observado, evidências e status. Hoje os testes de 16/11/2026 estão descritos nas decisões D-15 e D-16 e na conversa, sem um arquivo próprio de testes.
-- **O que falta:** decidir se vale criar um `docs/TESTES.md` com um bloco por teste. O antigo `LEIA-ME-TESTE-GERAL.txt`, que registrava os testes de 12/11/2026, foi removido junto com o `Grupo-Teste-Geral`; o conteúdo continua recuperável no commit `5e746e2`.
-- **Responsável:** professor.
-- **Status:** Aguardando decisão.
+- **Por que importa:** a seção 6 do `AGENTS.md` pede identificador, data, objetivo, ambiente, comando, resultado esperado e observado, evidências e status.
+- **O que foi feito:** em 23/11/2026, com autorização do professor (D-21), foi criado `docs/TESTES.md` com os testes T-01 a T-06, incluindo os de 16/11/2026 que só existiam nas decisões D-15 e D-16. Cada teste informa quando a evidência não está no repositório.
+- **Evidência:** `docs/TESTES.md`.
+- **Responsável:** professor decidiu; equipe técnica registrou.
+- **Status:** Concluída.
 
 ### P-18 — Licença das fontes por escrito
 
@@ -210,7 +222,8 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 - Fonte Arial embarcada, com verificação no `gerar-pdf.bat` e dois testes negativos aprovados.
 - `grupos/Grupo-Teste-01` criado e compilado pelo fluxo novo, com `TCC-Grupo-Teste-01-v001.pdf` gerado pelo template v001.
 - Acervo de `docs/` com o manual SENAI-SP 2025 e dez normas ABNT (incluindo NBR 6022:2018 e NBR 12225:2023).
-- Registro de decisões em `docs/DECISOES.md` (D-01 a D-17).
+- Arquivos dos elementos opcionais na pasta-modelo (errata, dedicatória, agradecimentos, epígrafe, listas de ilustrações/tabelas/abreviaturas/símbolos, glossário, apêndice, anexo, índice), com o `#include` comentado em `main.typ` e ativação de uma linha só (D-18).
+- Registro de decisões em `docs/DECISOES.md` (D-01 a D-21) e registro de testes em `docs/TESTES.md` (T-01 a T-06).
 
 ---
 
@@ -220,3 +233,4 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 |---|---|
 | 12/11/2026 | Criação, com P-01 a P-18 |
 | 16/11/2026 | P-12 e P-14 concluídas; P-15 e P-17 atualizadas; inclusão de P-19 (segunda versão real do template) |
+| 23/11/2026 | P-02, P-09, P-13 e P-17 concluídas; inclusão de P-20 (funções do template para os elementos opcionais) |

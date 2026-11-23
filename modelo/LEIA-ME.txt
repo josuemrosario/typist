@@ -69,6 +69,27 @@ Os arquivos estão separados por parte do trabalho:
 
   03-pos-textuais\referencias.typ
 
+Os elementos opcionais já têm arquivo pronto:
+
+  01-pre-textuais\errata.typ
+  01-pre-textuais\dedicatoria.typ
+  01-pre-textuais\agradecimentos.typ
+  01-pre-textuais\epigrafe.typ
+  01-pre-textuais\lista-de-ilustracoes.typ
+  01-pre-textuais\lista-de-tabelas.typ
+  01-pre-textuais\lista-de-abreviaturas-e-siglas.typ
+  01-pre-textuais\lista-de-simbolos.typ
+  03-pos-textuais\glossario.typ
+  03-pos-textuais\apendice.typ
+  03-pos-textuais\anexo.typ
+  03-pos-textuais\indice.typ
+
+Cada um desses arquivos traz, em comentário, o que escrever e a
+seção do manual que trata do elemento. Para usar um deles, abra
+"main.typ" e apague o "//" do início da linha "#include"
+correspondente. Cada elemento opcional já começa em página nova, e
+os pós-textuais entram sozinhos no sumário.
+
 A ordem em que os arquivos aparecem no PDF é definida pelos
 "#include" do arquivo "main.typ". Se criar um novo arquivo de
 conteúdo, coloque-o na pasta adequada e acrescente o "#include"

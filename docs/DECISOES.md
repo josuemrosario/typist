@@ -1,7 +1,7 @@
 # Registro de decisões — Projeto Typist
 
 **Criado em:** 12/11/2026
-**Atualizado em:** 16/11/2026
+**Atualizado em:** 23/11/2026
 **Criado por:** autorização do professor, registrada na conversa de 12/11/2026
 **Objetivo:** registrar, de forma verificável, as decisões já tomadas sobre o ambiente Typst do TCC, com a base normativa, a evidência disponível e o status de cada uma.
 
@@ -34,7 +34,7 @@
 | D-06 | 09/11/2026 | Nome do grupo fixo em 3 linhas do `gerar-pdf.bat` | Substituída por D-16 |
 | D-07 | 12/11/2026 | Citação longa e notas de rodapé | Vigente |
 | D-08 | 12/11/2026 | Sumário espelha o destaque do texto nos 5 níveis | Vigente com ressalva |
-| D-09 | 12/11/2026 | Divergência do manual: prevalece a seção 2.4 sobre a figura da p. 45 | Pendente de confirmação |
+| D-09 | 12/11/2026 | Divergência do manual: prevalece a seção 2.4 sobre a figura da p. 45 | Vigente |
 | D-10 | 12/11/2026 | Referências pelo CSL ABNT | Vigente |
 | D-11 | 12/11/2026 | Fonte Arial embarcada em `ferramentas/fontes/` | Vigente |
 | D-12 | 12/11/2026 | Licença dos arquivos de fonte é responsabilidade do professor | Vigente |
@@ -43,6 +43,10 @@
 | D-15 | 16/11/2026 | Template versionado em `ferramentas/template/`, versão escolhida na compilação e registrada no PDF | Vigente |
 | D-16 | 16/11/2026 | Criação de grupo por `administracao/criar-grupo.bat`; nome do grupo vem da pasta | Vigente |
 | D-17 | 16/11/2026 | O `tcc.typ` gerado no grupo é versionado no Git | Vigente |
+| D-18 | 23/11/2026 | Arquivos dos elementos opcionais na pasta-modelo, com include comentado | Vigente com ressalva |
+| D-19 | 23/11/2026 | Lombada não é oferecida pelo template | Vigente |
+| D-20 | 23/11/2026 | `typst.exe` e fontes Arial continuam versionados no Git | Vigente |
+| D-21 | 23/11/2026 | Registro formal de testes em `docs/TESTES.md` | Vigente |
 
 ---
 
@@ -120,7 +124,7 @@
 - **Decisão:** o manual descreve na seção 2.4 (p. 5) que o sumário repete o destaque do texto; a figura de exemplo do sumário (p. 45) mostra os níveis 3, 4 e 5 sem esse espelhamento. O projeto segue a **seção 2.4** e trata a figura como inconsistência interna do próprio manual. Não há, no material disponível, errata ou outra passagem que resolva a contradição.
 - **Base normativa:** Manual, 2.4 (p. 5) e 5.2.15 (pp. 44-45); NBR 6027:2012, 6.2.
 - **Evidência:** commit `0f29875`; comparação registrada na conversa de 12/11/2026.
-- **Status:** Pendente de confirmação — depende de validação da coordenação do curso, já que o manual se contradiz. Enquanto não houver confirmação, vale a seção 2.4.
+- **Status:** Vigente — confirmado pelo professor em 23/11/2026, que decidiu manter o que diz a NBR 6027 (o espelhamento do destaque no sumário). A figura da p. 45 continua registrada como inconsistência interna do manual.
 
 ### D-10 — Referências pelo CSL ABNT
 
@@ -193,13 +197,49 @@
 - **Ressalva:** o arquivo continua sendo sobrescrito a cada compilação; editá-lo não altera o PDF da próxima vez. O Git guarda o histórico das versões geradas, não substitui `ferramentas/template/` como fonte da verdade.
 - **Status:** Vigente.
 
+### D-18 — Arquivos dos elementos opcionais na pasta-modelo, com include comentado
+
+- **Data:** 23/11/2026
+- **Decisão:** a pasta-modelo passa a trazer um arquivo `.typ` para cada elemento opcional previsto no manual, em vez de deixar o aluno criar o arquivo e escolher a formatação:
+  - pré-textuais: `errata.typ`, `dedicatoria.typ`, `agradecimentos.typ`, `epigrafe.typ`, `lista-de-ilustracoes.typ`, `lista-de-tabelas.typ`, `lista-de-abreviaturas-e-siglas.typ`, `lista-de-simbolos.typ`;
+  - pós-textuais: `glossario.typ`, `apendice.typ`, `anexo.typ`, `indice.typ`.
+  Os arquivos já vêm com o título (ou com a estrutura do elemento) e instruções em comentário, e o `main.typ` traz o `#include` de cada um comentado, na posição correta. Para usar um elemento, o grupo apaga o `//` do início da linha — não é preciso criar arquivo nem mexer em formatação. Cada arquivo opcional começa com `#pagebreak()`, porque todo elemento começa em página nova, de modo que ativar um include é uma alteração de uma linha só. Elementos pré-textuais usam `titulo-sem-numero` e não entram no sumário; os pós-textuais usam `heading` de nível 1 sem numeração, porque o manual manda alinhar também os elementos pós-textuais no sumário.
+- **Base normativa:** Manual, 2.5 (p. 6) — títulos sem indicativo numérico centralizados e com a formatação das seções primárias; 2.6 (p. 6) — elementos sem título (dedicatória e epígrafe), com o texto do meio da mancha gráfica à margem direita, na parte inferior; 5.2.4 (p. 38), 5.2.6 a 5.2.8 (pp. 40-41), 5.2.11 a 5.2.14 (pp. 42-44), 5.2.15 (p. 44), 5.4 e lista dos elementos pós-textuais (p. 46), 5.4.2 a 5.4.4 (pp. 47-48); NBR 6034:2004 para o índice.
+- **Evidência:** os 12 arquivos em `modelo/01-pre-textuais` e `modelo/03-pos-textuais`; `modelo/main.typ` com os includes comentados; testes T-05 e T-06 de `docs/TESTES.md` (23/11/2026): a pasta-modelo sem os opcionais ativos gera o mesmo PDF de antes (10 páginas, imagens idênticas às do commit `847f1c6`) e, com todos os opcionais ativos, compila sem avisos em 22 páginas, com os títulos centralizados, dedicatória e epígrafe na parte inferior e os elementos pós-textuais listados no sumário.
+- **Ressalvas:** (1) a lista de ilustrações e a de tabelas saem sem o travessão entre o número e a legenda (o manual pede "Figura 1 – Título"); (2) o glossário sai com o recuo de primeira linha do corpo do texto, e o manual pede sem recuo; (3) a tabela da errata não tem função própria no template; (4) a posição da dedicatória e da epígrafe está resolvida dentro do arquivo de conteúdo, e não no template. Os quatro pontos dependem de funções novas no template e estão registrados em P-20.
+- **Status:** Vigente com ressalva.
+
+### D-19 — Lombada não é oferecida pelo template
+
+- **Data:** 23/11/2026
+- **Decisão:** o projeto não oferece lombada. O template não gera arquivo de lombada, e a NBR 12225:2023 continua no acervo de `docs/` apenas como referência. Se a instituição passar a exigir encadernação com lombada, a decisão precisa ser revista antes de qualquer implementação, porque a lombada não faz parte do PDF do trabalho (ela pertence à capa dura) e depende de dados que o template não tem, como a espessura do papel.
+- **Base normativa:** Manual, 5.2.2 (p. 35) — lombada condicionada à necessidade de encadernação; NBR 12225:2023.
+- **Evidência:** resposta do professor em 23/11/2026 ("P-09 Não oferecer"); `ferramentas/template/tcc-v001.typ` sem qualquer função de lombada.
+- **Status:** Vigente.
+
+### D-20 — `typst.exe` e fontes Arial continuam versionados no Git
+
+- **Data:** 23/11/2026
+- **Decisão:** o repositório continua com o binário `ferramentas/typst.exe` (52 MB) e com os quatro arquivos de Arial em `ferramentas/fontes/` (3,3 MB). O tamanho do repositório e a licença das fontes são aceitos como consequência, para que o aluno não precise instalar compilador nem fonte. A responsabilidade pela licença continua sendo do professor (D-12).
+- **Base normativa:** decisão operacional do projeto, não normativa; `AGENTS.md`, seções 5.1, 5.3 e 11.
+- **Evidência:** resposta do professor em 23/11/2026 ("P-13 manter tudo"); os arquivos estão versionados desde os commits de 12/11/2026.
+- **Status:** Vigente.
+
+### D-21 — Registro formal de testes em `docs/TESTES.md`
+
+- **Data:** 23/11/2026
+- **Decisão:** os testes passam a ser registrados em `docs/TESTES.md`, um bloco por teste, com identificador, data, objetivo, ambiente, comando, resultado esperado e observado, evidência e status. O registro complementa `docs/DECISOES.md` e `docs/PENDENCIAS.md`; não substitui o PDF, o log ou a captura que comprovam o resultado. Teste sem artefato verificável fica com status Pendente.
+- **Base normativa:** `AGENTS.md`, seções 6 e 8.
+- **Evidência:** `docs/TESTES.md`, criado nesta data com T-01 a T-06.
+- **Status:** Vigente.
+
 ---
 
 ## 4. Divergências e interpretações registradas
 
 | # | Origem | Divergência | Interpretação adotada | Status |
 |---|---|---|---|---|
-| 1 | Manual, 2.4 (p. 5) × figura da p. 45 | A seção manda o sumário repetir o destaque do texto; a figura mostra níveis 3 a 5 sem espelhamento | Vale a seção 2.4 (D-09) | Pendente de confirmação |
+| 1 | Manual, 2.4 (p. 5) × figura da p. 45 | A seção manda o sumário repetir o destaque do texto; a figura mostra níveis 3 a 5 sem espelhamento | Vale a seção 2.4 (D-09) | Vigente |
 | 2 | Manual, 2.8 (p. 7) × prática comum em Word | Contagem começa na folha de rosto, não na capa | Vale o manual (D-05) | Vigente |
 | 3 | NBR 6024:2012, 4.1 j) | A norma exige hierarquia tipográfica, mas deixa livres os recursos de destaque | Adotados maiúsculas, negrito, itálico e sublinhado (D-04) | Vigente |
 | 4 | NBR 6027:2012, 5.2 | Títulos do sumário alinhados pelo indicativo mais extenso | Coluna fixa de 4 em; ressalva com 10+ seções primárias (D-08) | Vigente com ressalva |
@@ -211,7 +251,7 @@
 Não são decisões: são assuntos abertos, detalhados em `docs/PENDENCIAS.md`.
 
 - Normas IBGE de apresentação tabular não estão em `docs/`; a formatação de tabelas segue o manual e a prática já adotada, sem base normativa própria.
-- Lombada (NBR 12225:2023) não é gerada pelo template, e não há decisão de oferecê-la.
+- O template não tem funções próprias para os elementos opcionais: errata, glossário e as listas de ilustrações e de tabelas ainda têm ressalvas de formatação (D-18 e P-20).
 - O template não foi comparado visualmente com todas as figuras do manual.
 - O ambiente só foi testado nesta máquina.
 
@@ -223,3 +263,4 @@ Não são decisões: são assuntos abertos, detalhados em `docs/PENDENCIAS.md`.
 |---|---|---|
 | 12/11/2026 | Criação, com D-01 a D-14 | Sessão de trabalho autorizada pelo professor |
 | 16/11/2026 | D-06 marcada como substituída; inclusão de D-15 a D-17 (template versionado, criação de grupo por BAT, `tcc.typ` versionado) | Sessão de trabalho autorizada pelo professor |
+| 23/11/2026 | D-09 confirmada como Vigente; inclusão de D-18 a D-21 (elementos opcionais na pasta-modelo, lombada não oferecida, binário e fontes no Git, registro de testes) | Sessão de trabalho autorizada pelo professor |
