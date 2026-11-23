@@ -39,6 +39,7 @@
 | T-09 | 23/11/2026 | Referências: tipos usados pelos alunos (P-06) | Aprovado com ressalva |
 | T-10 | 23/11/2026 | Folha de aprovação e publicação da v002 (P-03, P-19) | Aprovado com ressalva |
 | T-11 | 23/11/2026 | Helpers de referência manual (anais e patente) na v003 (P-06) | Aprovado com ressalva |
+| T-12 | 23/11/2026 | Helpers dos elementos opcionais na v004 (P-20) | Aprovado com ressalva |
 
 ---
 
@@ -212,6 +213,20 @@
 - **Resultado observado:** compilação sem avisos, código 0, 2 páginas. Extração de texto confirmou o formato esperado (autor, título, "In:", container, local, data, "Disponível em:", "Acesso em:" para anais; "Depositante:", "Procurador:", "BR n.", "Depósito:", "Concessão:" para patente). Validação da v003 em `%TEMP%\opencode\cmp-v003\out.pdf` (10 páginas, sem avisos).
 - **Evidência:** `%TEMP%\opencode\p06c\out.pdf` e `%TEMP%\opencode\p06c\texto.txt`.
 - **Limitações:** as entradas manuais aparecem após a lista gerada; o autor é responsável pela ordem alfabética. Validação em TCC real pendente.
+- **Status:** Aprovado com ressalva.
+
+---
+
+### T-12 — Helpers dos elementos opcionais na v004 (P-20)
+
+- **Data:** 23/11/2026.
+- **Objetivo:** validar os helpers `lista-de-ilustracoes()`, `lista-de-tabelas()`, `glossario()`, `errata()`, `dedicatoria()` e `epigrafe()` adicionados na v004.
+- **Ambiente:** Windows 11; typst 0.15.1; `%TEMP%\opencode\cmp-v004b\` com `tcc-v004.typ` copiado como `tcc.typ` e todos os `#include` opcionais descomentados.
+- **Entradas:** modelo completo com errata, dedicatória, epígrafe, listas de ilustrações e tabelas, glossário, apêndice e anexo.
+- **Resultado esperado:** compilação sem avisos; lista de ilustrações com travessão ("Figura 1 – Título"); glossário sem recuo de primeira linha; dedicatória e epígrafe na parte inferior da página.
+- **Resultado observado:** compilação sem avisos, código 0, 23 páginas. Extração de texto confirmou "Figura 1 – Laboratório de Ensaios" na lista de ilustrações e "Ativo: unidade básica de manutenção" sem recuo no glossário. Validação da v004 em `%TEMP%\opencode\cmp-v004\out.pdf` (10 páginas, sem avisos).
+- **Evidência:** `%TEMP%\opencode\cmp-v004b\out.pdf` e `%TEMP%\opencode\cmp-v004b\texto.txt`.
+- **Limitações:** validação visual em TCC real pendente; abreviaturas, símbolos, apêndice, anexo e índice usam `titulo-sem-numero`/`heading`, que já funcionam.
 - **Status:** Aprovado com ressalva.
 
 ---

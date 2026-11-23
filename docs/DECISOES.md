@@ -51,6 +51,7 @@
 | D-23 | 23/11/2026 | Comparação visual com as figuras do manual (P-01) concluída para as figuras pré-textuais | Vigente com ressalva |
 | D-24 | 23/11/2026 | Publicação do template v002 (correções de P-01 e P-03) | Vigente com ressalva |
 | D-25 | 23/11/2026 | Helpers para referências manuais (anais e patente) na v003 | Vigente com ressalva |
+| D-26 | 23/11/2026 | Helpers para os elementos opcionais na v004 (P-20) | Vigente com ressalva |
 
 ---
 
@@ -283,6 +284,16 @@
 - **Base normativa:** Manual SENAI-SP 2025, 4.6 (anais de evento) e 4.7 (patentes).
 - **Evidência:** compilação de `%TEMP%\opencode\p06c\out.pdf` (2 páginas, sem avisos) e extração de texto confirmando o formato; validação da v003 em `%TEMP%\opencode\cmp-v003\out.pdf` (10 páginas, sem avisos).
 - **Status:** Vigente com ressalva (validação em TCC real pendente).
+
+---
+
+### D-26 — Helpers para os elementos opcionais na v004 (P-20)
+
+- **Data:** 23/11/2026
+- **Decisão:** criada a versão `ferramentas/template/tcc-v004.typ`, sem editar a v003, adicionando os helpers `lista-de-ilustracoes()`, `lista-de-tabelas()`, `glossario()`, `errata()`, `dedicatoria()` e `epigrafe()`. Os arquivos opcionais de `modelo/` foram reescritos para usá-los, movendo a formatação (travessão nas listas, recuo do glossário, tabela da errata, posicionamento da dedicatória e da epígrafe) do conteúdo para o template (D-02). Validado em `%TEMP%\opencode\cmp-v004b\out.pdf` (23 páginas, sem avisos, com todos os opcionais ativos).
+- **Base normativa:** Manual SENAI-SP 2025, 2.6 (títulos sem indicativo), 5.2.4 (errata), 5.2.6 (dedicatória), 5.2.8 (epígrafe), 5.2.11 (lista de ilustrações), 5.2.12 (lista de tabelas), 5.4.2 (glossário).
+- **Evidência:** compilação de `%TEMP%\opencode\cmp-v004b\out.pdf` e extração de texto confirmando "Figura 1 – Laboratório de Ensaios" na lista de ilustrações e "Ativo: ..." sem recuo no glossário.
+- **Status:** Vigente com ressalva (validação visual em TCC real pendente).
 
 ---
 

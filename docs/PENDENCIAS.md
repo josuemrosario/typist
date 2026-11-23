@@ -42,7 +42,7 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 | P-17 | Registro formal de testes | Baixa | Professor | Concluída |
 | P-18 | Licença das fontes por escrito | Média | Professor | Concluída |
 | P-19 | Segunda versão real do template e troca de versão em grupo real | Média | Equipe técnica | Pendente |
-| P-20 | Funções do template para os elementos opcionais | Média | Equipe técnica | Pendente |
+| P-20 | Funções do template para os elementos opcionais | Média | Equipe técnica | Concluída com ressalva |
 
 ---
 
@@ -203,9 +203,10 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 ### P-20 — Funções do template para os elementos opcionais
 
 - **Por que importa:** os arquivos opcionais criados em D-18 usam recursos genéricos do Typst, e três pontos não ficam como o manual pede: (1) a lista de ilustrações e a de tabelas saem sem o travessão entre o número e a legenda (o manual pede "Figura 1 – Título"); (2) o glossário sai com o recuo de primeira linha do corpo do texto, e o manual pede sem recuo; (3) a tabela da errata não tem formatação definida. Além disso, a posição da dedicatória e da epígrafe está resolvida dentro do arquivo de conteúdo, e não no template, o que contraria a separação entre template e conteúdo (D-02).
-- **O que falta:** publicar uma versão nova do template (sem editar a v001) com funções próprias — por exemplo `lista-de-ilustracoes()`, `lista-de-tabelas()`, `errata()`, `dedicatoria()`, `epigrafe()`, `glossario()` — que concentrem essa formatação, e ajustar os arquivos de `modelo/` para usá-las. Como isso cria uma versão real e uma troca de versão em grupo, o trabalho deve cobrir também P-19.
+- **O que foi feito (23/11/2026):** publicada a v004 do template com helpers `lista-de-ilustracoes()`, `lista-de-tabelas()`, `glossario()`, `errata()`, `dedicatoria()` e `epigrafe()`. Os arquivos opcionais de `modelo/` foram reescritos para usá-los: a lista de ilustrações e a de tabelas agora inserem o travessão entre o número e a legenda; o glossário sai sem recuo de primeira linha; a errata tem tabela com colunas definidas; a dedicatória e a epígrafe têm o posicionamento centralizado no template. Validado em `%TEMP%\opencode\cmp-v004b\out.pdf` (23 páginas, sem avisos, com todos os opcionais ativos).
+- **O que falta:** validar em TCC real; as ressalvas sobre abreviaturas, símbolos, apêndice, anexo e índice continuam valendo (eles usam `titulo-sem-numero`/`heading`, que já funcionam).
 - **Responsável:** equipe técnica, com autorização do professor.
-- **Status:** Pendente.
+- **Status:** Concluída com ressalva.
 
 ---
 

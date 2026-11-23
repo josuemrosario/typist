@@ -1,3 +1,5 @@
+#import "../tcc.typ": epigrafe
+
 // EPÍGRAFE — elemento sem título e sem indicativo numérico
 // (manual, 2.6 e 5.2.8). É uma citação relacionada ao conteúdo do
 // trabalho, seguida da indicação de autoria; a referência completa
@@ -5,12 +7,7 @@
 // meio da mancha gráfica até a margem direita.
 // Para ativar, remova o "//" do #include correspondente em main.typ.
 
-#pagebreak()
-#block(height: 100%)[
-  #v(1fr)
-  #block(inset: (left: 8cm))[
-    Escreva aqui a citação que abre o trabalho.
-
-    — SOBRENOME, ano
-  ]
-]
+#epigrafe(
+  [Escreva aqui a citação que abre o trabalho.],
+  autor: [SOBRENOME, ano],
+)
