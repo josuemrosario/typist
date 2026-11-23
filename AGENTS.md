@@ -389,7 +389,7 @@ Levantamento de 23/11/2026, que substitui o de 16/11/2026. Conferir `docs/PENDEN
 
 - **Definições anteriores removidas:** documento mestre, plano de estudo, pasta `analises/` e o `AGENTS.md` anterior. Não recriar.
 - **Registros do projeto:** `docs/DECISOES.md` (D-01 a D-21), `docs/PENDENCIAS.md` (P-01 a P-20) e `docs/TESTES.md` (T-01 a T-06), atualizados em 23/11/2026.
-- **Documentação disponível:** manual SENAI-SP 2025 e dez normas ABNT em `docs/` — NBR 14724:2024, NBR 6022:2018, NBR 6023:2025, NBR 10520:2023, NBR 6024:2012, NBR 6027:2012, NBR 6028:2021, NBR 6034:2004, NBR 12225:2023 e NBR 15287:2025. Ausentes: apenas as normas IBGE de apresentação tabular.
+- **Documentação disponível:** manual SENAI-SP 2025 e as onze normas ABNT em `docs/` — NBR 14724:2024, NBR 6022:2018, NBR 6023:2025, NBR 10520:2023, NBR 6024:2012, NBR 6027:2012, NBR 6028:2021, NBR 6034:2004, NBR 12225:2023, NBR 15287:2025 e as normas IBGE de apresentação tabular (`docs/IBGE Normas de apresentacao tabular.pdf`). Ausentes: nenhuma.
 - **Compilador:** `ferramentas/typst.exe`, versão 0.15.1, funcional e fora do `PATH`.
 - **Fontes:** `ferramentas/fontes/` com `arial.ttf`, `arialbd.ttf`, `ariali.ttf` e `arialbi.ttf` (3.494.124 bytes no total). O `gerar-pdf.bat` compila com `--font-path` e `--ignore-system-fonts` e aborta se a fonte faltar ou estiver inválida.
 - **Template versionado:** `ferramentas/template/tcc-v001.typ` (versão inicial) e `tcc-v002.typ` (correções de P-01 e P-03, publicada em 23/11/2026); `ferramentas/template/LEIA-ME.txt` (política de versões). `modelo/` não contém `tcc.typ`: ele é gerado na compilação, a partir da versão escolhida.

@@ -30,7 +30,7 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 | P-05 | Sumário com 10 ou mais seções primárias | Média | Equipe técnica | Pendente |
 | P-06 | Referências: tipos usados pelos alunos | Alta | Equipe técnica | Parcial |
 | P-07 | Citações: conferência das regras do manual | Média | Equipe técnica | Parcial |
-| P-08 | Normas IBGE de apresentação tabular | Média | Professor | Bloqueado |
+| P-08 | Normas IBGE de apresentação tabular | Média | Professor | Concluída com ressalva |
 | P-09 | Lombada (NBR 12225) | Baixa | Professor | Concluída |
 | P-10 | Teste em máquina de aluno | Alta | Professor + equipe | Pendente |
 | P-11 | Compilação em rede/UNC | Média | Equipe técnica | Pendente |
@@ -117,10 +117,11 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 ### P-08 — Normas IBGE de apresentação tabular
 
-- **Por que importa:** o manual cobra formatação de tabelas conforme as normas IBGE, e elas não estão em `docs/`; sem elas, a formatação de tabelas não tem base normativa própria no projeto.
-- **O que falta:** obter as normas IBGE de apresentação tabular e incluí-las em `docs/`, como foi feito com a NBR 6022 e a NBR 12225.
-- **Responsável:** professor.
-- **Status:** Bloqueado.
+- **Por que importava:** o manual cobra formatação de tabelas conforme as normas IBGE, e elas não estavam em `docs/`; sem elas, a formatação de tabelas não tinha base normativa própria no projeto.
+- **O que foi feito:** o professor incluiu `docs/IBGE Normas de apresentacao tabular.pdf` (1.878.366 bytes) no acervo, como foi feito com a NBR 6022 e a NBR 12225 (D-13).
+- **O que falta:** conferir se as exigências de tabelas do template (2.12) estão em conformidade com essa norma e registrar a comparação; se houver divergência, abrir pendência de ajuste de formatação.
+- **Responsável:** equipe técnica.
+- **Status:** Concluída com ressalva.
 
 ### P-09 — Lombada (NBR 12225)
 
@@ -236,7 +237,7 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 - Paginação, margens, entrelinha, fonte e posição do número conferidas por medição no PDF v004 (recuperável no commit `5e746e2`); o PDF v005, gerado pelo template v001 com o mesmo conteúdo, manteve 12 páginas, A4 de 595,2756 × 841,8898 pt e as mesmas fontes.
 - Fonte Arial embarcada, com verificação no `gerar-pdf.bat` e dois testes negativos aprovados.
 - `grupos/Grupo-Teste-01` criado e compilado pelo fluxo novo, com `TCC-Grupo-Teste-01-v001.pdf` gerado pelo template v001.
-- Acervo de `docs/` com o manual SENAI-SP 2025 e dez normas ABNT (incluindo NBR 6022:2018 e NBR 12225:2023).
+- Acervo de `docs/` com o manual SENAI-SP 2025 e as onze normas (ABNT + IBGE de apresentação tabular).
 - Arquivos dos elementos opcionais na pasta-modelo (errata, dedicatória, agradecimentos, epígrafe, listas de ilustrações/tabelas/abreviaturas/símbolos, glossário, apêndice, anexo, índice), com o `#include` comentado em `main.typ` e ativação de uma linha só (D-18).
 - Registro de decisões em `docs/DECISOES.md` (D-01 a D-21) e registro de testes em `docs/TESTES.md` (T-01 a T-06).
 

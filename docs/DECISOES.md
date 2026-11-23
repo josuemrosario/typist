@@ -293,7 +293,7 @@
 
 Não são decisões: são assuntos abertos, detalhados em `docs/PENDENCIAS.md`.
 
-- Normas IBGE de apresentação tabular não estão em `docs/`; a formatação de tabelas segue o manual e a prática já adotada, sem base normativa própria.
+- Acervo de `docs/` completo: manual SENAI-SP 2025 e as onze normas (ABNT + IBGE de apresentação tabular). A formatação de tabelas (2.12) deve ser conferida contra a norma IBGE recém-incluída.
 - O template não tem funções próprias para os elementos opcionais: errata, glossário e as listas de ilustrações e de tabelas ainda têm ressalvas de formatação (D-18 e P-20).
 - O template não foi comparado visualmente com todas as figuras do manual (figuras 2 e 4 ainda pendentes; figuras 1, 3, 5 e 6 comparadas em D-23).
 - O ambiente só foi testado nesta máquina.
