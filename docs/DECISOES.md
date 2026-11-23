@@ -50,6 +50,7 @@
 | D-22 | 23/11/2026 | Não há registro escrito da licença das fontes por enquanto | Vigente |
 | D-23 | 23/11/2026 | Comparação visual com as figuras do manual (P-01) concluída para as figuras pré-textuais | Vigente com ressalva |
 | D-24 | 23/11/2026 | Publicação do template v002 (correções de P-01 e P-03) | Vigente com ressalva |
+| D-25 | 23/11/2026 | Helpers para referências manuais (anais e patente) na v003 | Vigente com ressalva |
 
 ---
 
@@ -272,6 +273,16 @@
 - **Base normativa:** Manual SENAI-SP 2025, 2.11 (pp. 8-9), 2.12 (pp. 9-10), 5.2.5 (pp. 38-39).
 - **Evidência:** compilação de `%TEMP%\opencode\cmp-v002\out.pdf` (10 páginas, sem avisos) e renderização de `pag-03.png` (folha de aprovação) e `pag-02.png` (figura).
 - **Status:** Vigente com ressalva (validação visual completa da v002 em máquina de aluno pendente, P-10).
+
+---
+
+### D-25 — Helpers para referências manuais (anais e patente) na v003
+
+- **Data:** 23/11/2026
+- **Decisão:** criada a versão `ferramentas/template/tcc-v003.typ`, sem editar a v002, adicionando três helpers para referências que o CSL ABNT do Typst não formata no padrão do manual: `anais()`, `patente()` e `referencia-manual()`. O sobrenome deve ser colocado em negrito pelo autor da entrada (como no .bib). As entradas manuais aparecem após a lista gerada e o autor é responsável por mantê-las em ordem alfabética. O `modelo/03-pos-textuais/referencias.typ` e o `modelo/LEIA-ME.txt` (seção 5.1) documentam o uso.
+- **Base normativa:** Manual SENAI-SP 2025, 4.6 (anais de evento) e 4.7 (patentes).
+- **Evidência:** compilação de `%TEMP%\opencode\p06c\out.pdf` (2 páginas, sem avisos) e extração de texto confirmando o formato; validação da v003 em `%TEMP%\opencode\cmp-v003\out.pdf` (10 páginas, sem avisos).
+- **Status:** Vigente com ressalva (validação em TCC real pendente).
 
 ---
 

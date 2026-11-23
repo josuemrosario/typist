@@ -38,6 +38,7 @@
 | T-08 | 23/11/2026 | Comparação visual com as figuras do manual (P-01) | Aprovado com ressalva |
 | T-09 | 23/11/2026 | Referências: tipos usados pelos alunos (P-06) | Aprovado com ressalva |
 | T-10 | 23/11/2026 | Folha de aprovação e publicação da v002 (P-03, P-19) | Aprovado com ressalva |
+| T-11 | 23/11/2026 | Helpers de referência manual (anais e patente) na v003 (P-06) | Aprovado com ressalva |
 
 ---
 
@@ -197,6 +198,20 @@
 - **Resultado observado:** compilação sem avisos, código 0, 10 páginas. Renderização de `pag-03.png` confirmou a ordem título, nome, instituição. A v002 foi publicada em `ferramentas/template/tcc-v002.typ` sem alterar a v001.
 - **Evidência:** `%TEMP%\opencode\cmp-v002\out.pdf` e `%TEMP%\opencode\cmp-v002\png\`.
 - **Limitações:** validação visual completa em máquina de aluno pendente (P-10).
+- **Status:** Aprovado com ressalva.
+
+---
+
+### T-11 — Helpers de referência manual (anais e patente) na v003 (P-06)
+
+- **Data:** 23/11/2026.
+- **Objetivo:** validar os helpers `anais()`, `patente()` e `referencia-manual()` adicionados na v003.
+- **Ambiente:** Windows 11; typst 0.15.1; `%TEMP%\opencode\p06c\` com `tcc-v003.typ` copiado como `tcc.typ`.
+- **Entradas:** documento de teste com uma entrada de anais e uma de patente formatadas com os helpers.
+- **Resultado esperado:** compilação sem avisos; referências formatadas conforme os exemplos do manual (4.6 e 4.7).
+- **Resultado observado:** compilação sem avisos, código 0, 2 páginas. Extração de texto confirmou o formato esperado (autor, título, "In:", container, local, data, "Disponível em:", "Acesso em:" para anais; "Depositante:", "Procurador:", "BR n.", "Depósito:", "Concessão:" para patente). Validação da v003 em `%TEMP%\opencode\cmp-v003\out.pdf` (10 páginas, sem avisos).
+- **Evidência:** `%TEMP%\opencode\p06c\out.pdf` e `%TEMP%\opencode\p06c\texto.txt`.
+- **Limitações:** as entradas manuais aparecem após a lista gerada; o autor é responsável pela ordem alfabética. Validação em TCC real pendente.
 - **Status:** Aprovado com ressalva.
 
 ---

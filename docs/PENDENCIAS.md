@@ -28,7 +28,7 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 | P-03 | Folha de aprovação: campos e layout | Alta | Equipe técnica | Parcial |
 | P-04 | Resumo e abstract: limites e formato | Baixa | Equipe técnica | Parcial |
 | P-05 | Sumário com 10 ou mais seções primárias | Média | Equipe técnica | Pendente |
-| P-06 | Referências: tipos usados pelos alunos | Alta | Equipe técnica | Parcial |
+| P-06 | Referências: tipos usados pelos alunos | Alta | Equipe técnica | Concluída com ressalva |
 | P-07 | Citações: conferência das regras do manual | Média | Equipe técnica | Parcial |
 | P-08 | Normas IBGE de apresentação tabular | Média | Professor | Concluída com ressalva |
 | P-09 | Lombada (NBR 12225) | Baixa | Professor | Concluída |
@@ -100,13 +100,13 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
   - capítulo (incollection): conforme, com ressalva da capitalização de "(org.)" (4.2).
   - trabalho acadêmico: só sai corretamente com `publisher` (não `institution`/`school`); a ordem dos campos difere do manual (4.4).
   - documento online: só sai com `url`/`urldate`; a URL aparece entre < > (4.5).
-  - anais de evento: o título do anais não é impresso (4.6).
-  - patente: o número não é impresso e sobra pontuação (4.7).
+  - anais de evento: o título do anais não é impresso pelo CSL; resolvido com o helper `anais()` na v003 (D-25).
+  - patente: o número não é impresso e sobra pontuação pelo CSL; resolvido com o helper `patente()` na v003 (D-25).
   - legislação: plausível, com ressalva.
   Receitas e limitações documentadas em `modelo/LEIA-ME.txt` (seção 5). A entrada de site do `modelo/referencias.bib` foi corrigida para `url`/`urldate`.
-- **O que falta:** decidir se anais e patente merecem helper próprio ou orientação de preenchimento manual; validar em TCC real.
+- **O que falta:** validar os helpers em TCC real (ordem alfabética manual).
 - **Responsável:** equipe técnica.
-- **Status:** Parcial.
+- **Status:** Concluída com ressalva.
 
 ### P-07 — Citações: conferência das regras do manual
 
@@ -231,7 +231,7 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 ## 7. O que já está pronto (para não repetir)
 
-- Template versionado em `ferramentas/template/tcc-v001.typ`, compilando sem avisos no Typst 0.15.1, com capa, folha de rosto, folha de aprovação, resumo, abstract, sumário, títulos em 5 níveis, citação longa, notas, figuras, tabelas, quadros e referências por CSL ABNT.
+- Template versionado em `ferramentas/template/tcc-v001.typ` (v001), `tcc-v002.typ` (correções de P-01 e P-03) e `tcc-v003.typ` (helpers `anais`, `patente`, `referencia-manual` para P-06), compilando sem avisos no Typst 0.15.1.
 - Menu de versões no `gerar-pdf.bat`: escolha por número, Enter mantendo a versão anterior, padrão na versão de número mais alto, versão registrada em `template-usado.txt`, `saida/historico.txt` e nos metadados do PDF.
 - Criação de grupo por `administracao/criar-grupo.bat`, com o nome da pasta definindo o prefixo dos PDFs.
 - Paginação, margens, entrelinha, fonte e posição do número conferidas por medição no PDF v004 (recuperável no commit `5e746e2`); o PDF v005, gerado pelo template v001 com o mesmo conteúdo, manteve 12 páginas, A4 de 595,2756 × 841,8898 pt e as mesmas fontes.

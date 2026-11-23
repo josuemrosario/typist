@@ -243,6 +243,38 @@ O template imprime a nota em fonte 10 e com espaçamento simples,
 como exige o manual (seções 2.1 e 2.3). Se você usar "#footnote"
 diretamente, a nota sairá com tamanho ligeiramente diferente.
 
+5.1 Referências que o gerador não formata (anais e patente)
+
+O gerador automático (CSL ABNT do Typst) não formata anais de
+evento nem patente no padrão do manual. Para esses casos, use os
+helpers do template, chamados depois de #referencias(...). Coloque
+o sobrenome em negrito, como nas referências do .bib:
+
+  #anais(
+    [*CID, Rodrigo*],
+    [Deus: argumentos da impossibilidade e da incompatibilidade],
+    [*CARVALHO, Mário Augusto Queiroz* et al. Blog investigação filosófica],
+    [Rio de Janeiro],
+    [23 abr. 2011],
+    url: [http://...],
+    acesso: [23 ago. 2011],
+  )
+
+  #patente(
+    [*BERTAZZOLI, Rodnei* et al.],
+    [Eletrodos de difusão gasosa ...],
+    [Universidade Estadual de Campinas],
+    [BR n. PI0600460-1A],
+    [27 jan. 2006],
+    procurador: [Maria Cristina Valim Lourenço Gomes],
+    concessao: [25 mar. 2008],
+  )
+
+  #referencia-manual([*SILVA, João*. Um livro qualquer. São Paulo: Editora, 2025.])
+
+As entradas manuais aparecem depois da lista gerada. Você é
+responsável por mantê-las na ordem alfabética.
+
 ----------------------------------------------------------------
 6. VERSÃO DO TEMPLATE (tcc.typ)
 ----------------------------------------------------------------
