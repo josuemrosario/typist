@@ -52,6 +52,8 @@
 | D-24 | 23/11/2026 | Publicação do template v002 (correções de P-01 e P-03) | Vigente com ressalva |
 | D-25 | 23/11/2026 | Helpers para referências manuais (anais e patente) na v003 | Vigente com ressalva |
 | D-26 | 23/11/2026 | Helpers para os elementos opcionais na v004 (P-20) | Vigente com ressalva |
+| D-27 | 26/11/2026 | Publicação do template v005 (P-04, P-05 e P-07) | Vigente com ressalva |
+| D-28 | 26/11/2026 | Sistema de chamada autor-data no ambiente | Vigente |
 
 ---
 
@@ -297,6 +299,32 @@
 
 ---
 
+### D-27 — Publicação do template v005 (P-04, P-05 e P-07)
+
+- **Data:** 26/11/2026
+- **Decisão:** criada a versão `ferramentas/template/tcc-v005.typ`, sem editar a v004, com cinco correções validadas:
+  1. Sumário: a coluna do indicativo passou de 4em para 5,5em, porque o indicativo `11.1.1.1.1` mede 52,72 pt e encostava no título (NBR 6027; manual, 5.2.15).
+  2. Resumo e abstract: o template conta as palavras e interrompe a compilação, com mensagem, acima de 500 palavras (manual, 5.2.9, item h; 5.2.10).
+  3. Parágrafos: o recuo de 1,25 cm passou a valer também para o primeiro parágrafo depois de um título (manual, 2.3).
+  4. Citações: normalização do espaço duplo que o CSL ABNT inseria antes da página (manual, 3.2 e 3.5.1).
+  5. Notas de rodapé: fonte 10, espaço simples e segunda linha alinhada sob a primeira palavra da nota (manual, 2.7).
+  A orientação de uso foi para o `modelo/LEIA-ME.txt` (seções 3 e 5.2) e para os comentários de `resumo.typ` e `abstract.typ`.
+- **Base normativa:** Manual SENAI-SP 2025, 2.3 (p. 4), 2.7 (pp. 6-7), 3.1 a 3.5 (pp. 12-20), 5.2.9 e 5.2.10 (pp. 41-42), 5.2.15 (pp. 44-45); NBR 6027:2012.
+- **Evidência:** compilações de `%TEMP%\opencode\p05\out-v005b.pdf` (17 páginas, sem avisos), `%TEMP%\opencode\p04\` (499 e 500 palavras compilam; 501 falha), `%TEMP%\opencode\p07\out3.pdf`, `%TEMP%\opencode\cmp-v005\out3.pdf` (modelo, 10 páginas) e `%TEMP%\opencode\cmp-v004b\out-v005.pdf` (todos os opcionais ativos, 23 páginas).
+- **Status:** Vigente com ressalva (validação em TCC real pendente).
+
+---
+
+### D-28 — Sistema de chamada autor-data no ambiente
+
+- **Data:** 26/11/2026
+- **Decisão:** o ambiente adota o sistema autor-data em todo o trabalho e não oferece o sistema numérico. O gerador (CSL ABNT do Typst) formata `(Sobrenome, ano)` e `Sobrenome (ano)`, com `et al.` a partir de quatro autores. O aluno digita o "apud" e a página quando necessário, conforme a orientação do `modelo/LEIA-ME.txt` (seção 5.2).
+- **Base normativa:** Manual SENAI-SP 2025, 3.5 (p. 16), 3.5.1 (pp. 16-19) e 3.5.2 (pp. 19-20); NBR 10520:2023. O manual permite autor-data ou numérico, mas exige um único sistema em todo o trabalho e veda o numérico quando há notas de rodapé (3.5.2, alínea c); como o template usa notas, autor-data é a escolha coerente.
+- **Evidência:** teste T-15 (`docs/TESTES.md`) com 2, 3 e 4 autores, página, autor no texto, citação longa e nota.
+- **Status:** Vigente.
+
+---
+
 ## 4. Divergências e interpretações registradas
 
 | # | Origem | Divergência | Interpretação adotada | Status |
@@ -331,3 +359,5 @@ Não são decisões: são assuntos abertos, detalhados em `docs/PENDENCIAS.md`.
 | 23/11/2026 | D-09 confirmada como Vigente; inclusão de D-18 a D-21 (elementos opcionais na pasta-modelo, lombada não oferecida, binário e fontes no Git, registro de testes) | Sessão de trabalho autorizada pelo professor |
 | 23/11/2026 | Inclusão de D-22 (sem registro escrito da licença das fontes por enquanto) | Sessão de trabalho autorizada pelo professor |
 | 23/11/2026 | Inclusão de D-23 (P-01 concluído para figuras pré-textuais) e D-24 (publicação da v002); atualização de PENDENCIAS.md e TESTES.md | Sessão de trabalho autorizada pelo professor |
+| 23/11/2026 | Inclusão de D-25 (helpers de referência manual na v003) e D-26 (helpers dos elementos opcionais na v004) | Sessão de trabalho autorizada pelo professor |
+| 26/11/2026 | Inclusão de D-27 (publicação da v005: sumário, contagem de palavras, recuo, citação e nota) e D-28 (sistema autor-data); atualização de PENDENCIAS.md e TESTES.md | Sessão de trabalho autorizada pelo professor |

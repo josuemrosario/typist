@@ -104,6 +104,12 @@ Use apenas texto e marcações simples:
 Não coloque regras de formatação (#set, #show) nos arquivos de
 conteúdo. A formatação vem do template, explicada na seção 6.
 
+Antes de gerar o PDF, confira o resumo e o abstract: o manual exige
+de 150 a 500 palavras, em parágrafo único e sem recuo (seções 5.2.9
+e 5.2.10). O template conta as palavras e interrompe a compilação
+com uma mensagem quando o texto passa de 500. O mínimo de 150 não é
+verificado automaticamente; confira você mesmo.
+
 ----------------------------------------------------------------
 4. IMAGENS
 ----------------------------------------------------------------
@@ -218,9 +224,8 @@ Campos que funcionam bem (receitas verificadas):
     Use sempre "url" e "urldate"; não use "howpublished" nem "note".
 
 Limitações conhecidas do gerador (não corrigíveis no template):
-  - Anais de evento e patente não saem no formato do manual: use
-    @misc com o texto já formatado no campo "title", ou registre
-    a referência manualmente com orientação do professor.
+  - Anais de evento e patente não saem no formato do manual pelo
+    gerador: use os helpers #anais e #patente da seção 5.1.
   - A URL aparece entre < > (ex.: Disponível em: <https://...>).
     O manual não usa os sinais; é uma limitação do estilo ABNT
     embutido no Typst. Se a coordenação exigir sem os sinais,
@@ -228,20 +233,9 @@ Limitações conhecidas do gerador (não corrigíveis no template):
   - A edição e a data de acesso de artigos podem precisar de
     ajuste manual quando o manual exigir "ano" em vez de "v.".
 
-Para citações diretas com mais de três linhas, use:
-
-  #citacao-longa[
-    Texto da citação...
-  ]
-
-Para inserir uma nota de rodapé, use "#nota" no lugar de
-"#footnote":
-
-  Este é o texto.#nota[Conteúdo da nota de rodapé.]
-
-O template imprime a nota em fonte 10 e com espaçamento simples,
-como exige o manual (seções 2.1 e 2.3). Se você usar "#footnote"
-diretamente, a nota sairá com tamanho ligeiramente diferente.
+Para citações diretas com mais de três linhas, use "#citacao-longa";
+para as notas de rodapé, use "#nota" no lugar de "#footnote". As
+formas de citação estão na seção 5.2.
 
 5.1 Referências que o gerador não formata (anais e patente)
 
@@ -274,6 +268,59 @@ o sobrenome em negrito, como nas referências do .bib:
 
 As entradas manuais aparecem depois da lista gerada. Você é
 responsável por mantê-las na ordem alfabética.
+
+5.2 Como citar no texto (sistema autor-data)
+
+O template usa o sistema autor-data, como o manual (seção 3.5.1).
+A citação é gerada a partir da chave do arquivo .bib:
+
+  @exemplo2025                          ->  (Sobrenome, 2025)
+  #cite(<exemplo2025>, form: "prose")   ->  Sobrenome (2025)
+
+Use a segunda forma quando o autor fizer parte da frase:
+
+  Segundo Luck (2010), a escola é uma organização complexa.
+
+Página: escreva o "p." dentro dos colchetes, porque o gerador
+imprime apenas o que você digitar:
+
+  @exemplo2025[p. 15]                   ->  (Sobrenome, 2025, p. 15)
+
+Autores: com dois ou três autores, os sobrenomes saem separados por
+ponto e vírgula; com quatro ou mais, sai o primeiro autor seguido
+de "et al." (manual, 3.5.1):
+
+  (Silva; Souza, 2025)
+  (Silva et al., 2025)
+
+Citação direta com mais de três linhas: use #citacao-longa, que
+aplica recuo de 4 cm, fonte 10, espaço simples e nenhuma aspa
+(manual, 3.2). Indique a autoria e a página antes ou depois do
+bloco:
+
+  Segundo Luck (2010, p. 15):
+
+  #citacao-longa[
+    Texto da citação...
+  ]
+
+Citação de citação: escreva o "apud" no próprio texto, na ordem do
+manual (3.4):
+
+  (Freire, 1994, p. 13 apud Streck; Redin; Zitkoski, 2017, p. 25)
+
+Supressão, acréscimo e ênfase: digite [...] para supressão, [texto]
+para acréscimo e use *negrito* ou _itálico_ para ênfase (manual,
+3.1).
+
+O sistema numérico (manual, 3.5.2) não é usado neste ambiente: o
+template adota autor-data em todo o trabalho, e o manual não
+permite misturar os dois sistemas.
+
+Notas de rodapé: use #nota[...]. A nota sai em fonte 10, espaço
+simples e com a segunda linha alinhada sob a primeira palavra
+(manual, 2.7). Se você usar "#footnote" diretamente, a nota também
+sai formatada, mas prefira "#nota", que é o recurso documentado.
 
 ----------------------------------------------------------------
 6. VERSÃO DO TEMPLATE (tcc.typ)

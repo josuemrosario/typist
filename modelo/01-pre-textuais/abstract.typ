@@ -1,7 +1,8 @@
 #import "../tcc.typ": bloco-resumo
 
 // Abstract: mesmo conteúdo do resumo, em inglês, em um único parágrafo
-// (manual, 5.2.10).
+// e com as mesmas características (manual, 5.2.10), inclusive o limite
+// de 500 palavras, verificado pelo template na compilação.
 #bloco-resumo(
   [ABSTRACT],
   [

@@ -1,6 +1,6 @@
 # Pendências do projeto Typist
 
-**Atualizado em:** 23/11/2026
+**Atualizado em:** 26/11/2026
 **Objetivo:** reunir o que ainda falta para o ambiente do TCC ser considerado viável, com o motivo, o que exatamente falta, quem depende de quem e o status atual.
 
 Este documento é uma lista de trabalho, não uma declaração de conformidade. As decisões já tomadas estão em `docs/DECISOES.md`. A hierarquia das fontes continua sendo a de `AGENTS.md`, seção 2.
@@ -23,13 +23,13 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 
 | ID | Pendência | Prioridade | Responsável | Status |
 |---|---|---|---|---|
-| P-01 | Comparação visual com as figuras do manual | Alta | Equipe técnica | Parcial |
+| P-01 | Comparação visual com as figuras do manual | Alta | Equipe técnica | Concluída com ressalva |
 | P-02 | Elementos pré-textuais e pós-textuais opcionais | Média | Professor + equipe | Concluída |
-| P-03 | Folha de aprovação: campos e layout | Alta | Equipe técnica | Parcial |
-| P-04 | Resumo e abstract: limites e formato | Baixa | Equipe técnica | Parcial |
-| P-05 | Sumário com 10 ou mais seções primárias | Média | Equipe técnica | Pendente |
+| P-03 | Folha de aprovação: campos e layout | Alta | Equipe técnica | Concluída com ressalva |
+| P-04 | Resumo e abstract: limites e formato | Baixa | Equipe técnica | Concluída com ressalva |
+| P-05 | Sumário com 10 ou mais seções primárias | Média | Equipe técnica | Concluída com ressalva |
 | P-06 | Referências: tipos usados pelos alunos | Alta | Equipe técnica | Concluída com ressalva |
-| P-07 | Citações: conferência das regras do manual | Média | Equipe técnica | Parcial |
+| P-07 | Citações: conferência das regras do manual | Média | Equipe técnica | Concluída com ressalva |
 | P-08 | Normas IBGE de apresentação tabular | Média | Professor | Concluída com ressalva |
 | P-09 | Lombada (NBR 12225) | Baixa | Professor | Concluída |
 | P-10 | Teste em máquina de aluno | Alta | Professor + equipe | Pendente |
@@ -38,10 +38,10 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 | P-13 | Binário do Typst e fontes dentro do Git | Média | Professor | Concluída |
 | P-14 | Grupos legados `Grupo-01` e `Grupo-02` | Média | Professor | Concluída |
 | P-15 | Fluxo completo de criação e compilação de grupo | Alta | Professor + equipe | Parcial |
-| P-16 | Dois grupos reais independentes | Alta | Professor + equipe | Pendente |
+| P-16 | Dois grupos reais independentes | Alta | Professor + equipe | Concluída com ressalva |
 | P-17 | Registro formal de testes | Baixa | Professor | Concluída |
 | P-18 | Licença das fontes por escrito | Média | Professor | Concluída |
-| P-19 | Segunda versão real do template e troca de versão em grupo real | Média | Equipe técnica | Pendente |
+| P-19 | Segunda versão real do template e troca de versão em grupo real | Média | Equipe técnica | Concluída |
 | P-20 | Funções do template para os elementos opcionais | Média | Equipe técnica | Concluída com ressalva |
 
 ---
@@ -78,17 +78,21 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 ### P-04 — Resumo e abstract: limites e formato
 
 - **Por que importa:** o manual (5.2.9 e 5.2.10, pp. 41-42) fixa 150 a 500 palavras, parágrafo único e sem recuo; fora disso o trabalho é corrigido.
-- **O que já existe:** `#resumo` e `#abstract` no template, com palavras-chave.
-- **O que falta:** conferir o formato no PDF v004 e definir como avisar o aluno quando o texto passar de 500 palavras (aviso automático é possível no Typst, mas ainda não existe).
+- **O que já existe:** `bloco-resumo` no template, usado por `resumo.typ` e `abstract.typ`, com palavras-chave.
+- **O que foi feito (26/11/2026):** conferência do formato no PDF: parágrafo único, sem recuo de primeira linha, fonte 12, espaçamento 1,5 e "Palavras-chave:" em negrito, conforme 5.2.9. A v005 passou a contar as palavras do resumo e do abstract e a interromper a compilação, com mensagem clara, quando o texto passa de 500 palavras (manual, 5.2.9, item h; 5.2.10 manda aplicar as mesmas características). O mínimo de 150 palavras não é verificado automaticamente. A orientação ficou no `modelo/LEIA-ME.txt` (seção 3) e nos comentários de `resumo.typ` e `abstract.typ`.
+- **O que falta:** validar em TCC real; decidir se o mínimo de 150 palavras também deve ser verificado (hoje não é).
+- **Evidência:** teste T-14 (`docs/TESTES.md`): 499 e 500 palavras compilam; 501 falha com a mensagem do limite.
 - **Responsável:** equipe técnica.
-- **Status:** Parcial.
+- **Status:** Concluída com ressalva.
 
 ### P-05 — Sumário com 10 ou mais seções primárias
 
 - **Por que importa:** a coluna fixa de 4 em do sumário é apertada para o indicativo `1.1.1.1.1`; com muitas seções primárias, o indicativo pode encostar no título (ressalva registrada em D-08).
-- **O que falta:** montar um documento de teste com 10 ou mais seções primárias e títulos longos; se houver colisão, rever a largura da coluna ou o recuo do título.
+- **O que foi feito (26/11/2026):** documento de teste com 11 seções primárias, títulos longos e aninhamento até `11.1.1.1.1`, compilado com a v004 em `%TEMP%\opencode\p05\out.pdf`. A colisão existia: o indicativo `11.1.1.1.1` mede 52,72 pt e a coluna do sumário tinha 4em (48 pt), encostando no título. A v005 aumentou a coluna para 5,5em; o mesmo documento recompilou sem avisos e sem colisão (`out-v005b.pdf`), conferido na imagem da página do sumário.
+- **O que falta:** confirmar em um TCC real com muitos capítulos.
+- **Evidência:** teste T-13 (`docs/TESTES.md`); imagens em `%TEMP%\opencode\p05\png\pag-06.png` (v004, com colisão) e `%TEMP%\opencode\p05\png-v005\pag-06.png` (v005, sem colisão).
 - **Responsável:** equipe técnica.
-- **Status:** Pendente.
+- **Status:** Concluída com ressalva.
 
 ### P-06 — Referências: tipos usados pelos alunos
 
@@ -111,9 +115,19 @@ Este documento é uma lista de trabalho, não uma declaração de conformidade. 
 ### P-07 — Citações: conferência das regras do manual
 
 - **Por que importa:** o manual trata citações nas seções 3.1 a 3.5 (pp. 12-20) e a NBR 10520:2023 complementa; o template implementa citação longa e nota, mas não valida o sistema de chamada.
-- **O que falta:** conferir o sistema autor-data no texto, o uso de `et al.`, a supressão com `[...]`, a citação de citação e o formato de nota; verificar se o aluno consegue aplicar cada caso só com os helpers do template.
+- **O que foi feito (26/11/2026):** conferência das seções 3.1 a 3.5 do manual e teste em `%TEMP%\opencode\p07\`. Resultado:
+  - autor-data: `@chave` gera `(Sobrenome, ano)` e `#cite(<chave>, form: "prose")` gera `Sobrenome (ano)`, como o manual pede quando o autor faz parte da frase;
+  - página: o aluno precisa digitar o "p." (`@chave[p. 15]`), porque o gerador imprime só o que for digitado;
+  - autores: dois ou três saem separados por ponto e vírgula; quatro ou mais saem com o primeiro autor e "et al." (3.5.1);
+  - citação longa: `#citacao-longa` aplica recuo de 4 cm, fonte 10, espaço simples e nenhuma aspa (3.2);
+  - citação de citação: o "apud" é escrito no próprio texto, na ordem do manual (3.4);
+  - supressão `[...]`, acréscimo `[texto]` e ênfase são digitados normalmente (3.1);
+  - sistema numérico não é adotado (D-28).
+  Três divergências foram encontradas e corrigidas na v005: (a) o primeiro parágrafo depois de um título não recebia o recuo de 1,25 cm (manual, 2.3); (b) o CSL inseria dois espaços antes da página na citação; (c) a segunda linha da nota não se alinhava sob a primeira palavra (manual, 2.7).
+- **O que falta:** validar em TCC real. A orientação de uso está no `modelo/LEIA-ME.txt` (seção 5.2).
+- **Evidência:** teste T-15 (`docs/TESTES.md`); imagens em `%TEMP%\opencode\p07\png3\pag-01.png` e `%TEMP%\opencode\p07\png-nota5\pag-01.png`.
 - **Responsável:** equipe técnica.
-- **Status:** Parcial.
+- **Status:** Concluída com ressalva.
 
 ### P-08 — Normas IBGE de apresentação tabular
 

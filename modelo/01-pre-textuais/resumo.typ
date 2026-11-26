@@ -3,6 +3,10 @@
 // Escreva o resumo em um único parágrafo, de 150 a 500 palavras
 // (manual, 5.2.9). Informe objetivo, método, resultados e conclusão.
 // Informe também a categoria do trabalho (projeto, estudo de caso etc.).
+//
+// O template conta as palavras e interrompe a compilação, com uma
+// mensagem, quando o texto passa de 500 palavras. O mínimo de 150
+// não é verificado automaticamente.
 #bloco-resumo(
   [RESUMO],
   [

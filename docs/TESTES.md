@@ -40,6 +40,9 @@
 | T-10 | 23/11/2026 | Folha de aprovação e publicação da v002 (P-03, P-19) | Aprovado com ressalva |
 | T-11 | 23/11/2026 | Helpers de referência manual (anais e patente) na v003 (P-06) | Aprovado com ressalva |
 | T-12 | 23/11/2026 | Helpers dos elementos opcionais na v004 (P-20) | Aprovado com ressalva |
+| T-13 | 26/11/2026 | Sumário com 11 seções primárias e indicativo de nível 5 (P-05) | Aprovado com ressalva |
+| T-14 | 26/11/2026 | Contagem de palavras do resumo e do abstract (P-04) | Aprovado |
+| T-15 | 26/11/2026 | Citações e notas conforme o manual (P-07) | Aprovado com ressalva |
 
 ---
 
@@ -231,6 +234,48 @@
 
 ---
 
+### T-13 — Sumário com 11 seções primárias e indicativo de nível 5 (P-05)
+
+- **Data:** 26/11/2026.
+- **Objetivo:** verificar se o indicativo de uma seção de nível 5 (`11.1.1.1.1`) colide com o título no sumário.
+- **Ambiente:** Windows 11; typst 0.15.1; `%TEMP%\opencode\p05\`, com `tcc-v004.typ` e depois `tcc-v005.typ` copiados como `tcc.typ`.
+- **Entradas:** documento com 11 seções primárias de títulos longos e uma seção com aninhamento até o nível 5.
+- **Resultado esperado:** indicativo separado do título, sem sobreposição, em todas as linhas.
+- **Resultado observado:** na v004, o indicativo `11.1.1.1.1` (52,72 pt medidos no Typst) encostava no título porque a coluna tinha 4em (48 pt). Na v005, com coluna de 5,5em, o mesmo documento compilou sem avisos (código 0, 17 páginas) e sem colisão. Conferência visual em `pag-06.png` das duas versões.
+- **Evidência:** `%TEMP%\opencode\p05\out.pdf` (v004) e `out-v005b.pdf` (v005); `png\pag-06.png` e `png-v005\pag-06.png`.
+- **Limitações:** teste em documento sintético; falta conferir em TCC real com muitos capítulos.
+- **Status:** Aprovado com ressalva.
+
+---
+
+### T-14 — Contagem de palavras do resumo e do abstract (P-04)
+
+- **Data:** 26/11/2026.
+- **Objetivo:** verificar se o template interrompe a compilação quando o resumo passa de 500 palavras e se aceita o limite.
+- **Ambiente:** Windows 11; typst 0.15.1; `%TEMP%\opencode\p04\`, com `tcc-v005.typ` como `tcc.typ`.
+- **Entradas:** três documentos com `bloco-resumo` de 499, 500 e 501 palavras.
+- **Resultado esperado:** 499 e 500 compilam; 501 falha com mensagem indicando o total e o limite.
+- **Resultado observado:** 499 e 500 compilaram com código 0; 501 falhou com a mensagem "O texto tem 501 palavras e o manual (5.2.9, item h) limita o resumo a 500. Reduza o texto." Formato do resumo conferido no PDF: parágrafo único, sem recuo, fonte 12, espaçamento 1,5 e "Palavras-chave:" em negrito.
+- **Evidência:** `%TEMP%\opencode\p04\v2-n499.pdf`, `v2-n500.pdf` e a saída de erro de `n501.typ`.
+- **Limitações:** o mínimo de 150 palavras não é verificado; o resumo do modelo tem menos de 150 palavras e serve só de exemplo.
+- **Status:** Aprovado.
+
+---
+
+### T-15 — Citações e notas conforme o manual (P-07)
+
+- **Data:** 26/11/2026.
+- **Objetivo:** conferir autor-data, autores, página, citação longa, citação de citação, nota de rodapé e recuo de parágrafo.
+- **Ambiente:** Windows 11; typst 0.15.1; `%TEMP%\opencode\p07\`, com `tcc-v005.typ` como `tcc.typ`.
+- **Entradas:** documento com citação indireta, direta curta e longa, entradas de 2, 3 e 4 autores, citação de citação e nota de três linhas.
+- **Resultado esperado:** `(Sobrenome, ano)`, `Sobrenome (ano)` com `#cite(form: "prose")`, ponto e vírgula entre 2 e 3 autores, `et al.` a partir de 4, página com "p.", citação longa com 4 cm/fonte 10/sem aspas, nota com fonte 10 e segunda linha alinhada, primeiro parágrafo após título com recuo.
+- **Resultado observado:** todos os formatos conferidos. As divergências encontradas na v004 (recuo do primeiro parágrafo após título, espaço duplo antes da página e alinhamento da segunda linha da nota) foram corrigidas na v005 e reconferidas nas imagens.
+- **Evidência:** `%TEMP%\opencode\p07\out3.pdf`, `png3\pag-01.png` e `png-nota5\pag-01.png`.
+- **Limitações:** o "apud" é digitado pelo aluno, sem formatação automática; validação em TCC real pendente.
+- **Status:** Aprovado com ressalva.
+
+---
+
 ## 5. Testes que faltam (não são testes aprovados)
 
 - Compilação em máquina de aluno (P-10) e em rede/UNC (P-11).
@@ -242,3 +287,4 @@
 |---|---|
 | 23/11/2026 | Criação, com T-01 a T-06 |
 | 23/11/2026 | Inclusão de T-07 a T-10 (dois grupos independentes, comparação visual com as figuras, referências por tipo, folha de aprovação e v002) | Sessão de trabalho autorizada pelo professor |
+| 26/11/2026 | Inclusão de T-13 a T-15 (sumário com 11 seções, contagem de palavras do resumo, citações e notas) e publicação da v005 | Sessão de trabalho autorizada pelo professor |
